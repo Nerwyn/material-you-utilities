@@ -104,6 +104,7 @@ ha-button-menu,
 ha-tab-group {
 	min-height: var(--footer-height);
 	width: calc(100vw - var(--mdc-drawer-width, 0px));
+	inset-inline-start: var(--mdc-drawer-width, 0);
 	margin: 0;
 	margin-inline: 0;
 	pointer-events: all;
