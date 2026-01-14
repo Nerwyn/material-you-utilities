@@ -46,6 +46,7 @@
 
 /* Thumb negative area */
 #thumb {
+	overflow: visible;
 	background: var(--ha-slider-thumb-negative-color);
 	border-radius: 0;
 	transition:
