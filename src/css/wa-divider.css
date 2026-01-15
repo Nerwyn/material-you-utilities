@@ -1,5 +1,0 @@
-/* Change color and margins */
-wa-divider {
-	border-top: solid 1px var(--md-sys-color-outline-variant);
-	margin: 4px 8px;
-}

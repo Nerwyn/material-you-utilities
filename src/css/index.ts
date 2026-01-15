@@ -46,7 +46,6 @@ import huiRoot from './hui-root.css';
 import huiViewHeader from './hui-view-header.css';
 import huiViewVisibilityEditor from './hui-view-visibility-editor.css';
 import waDialog from './wa-dialog.css';
-import waDivider from './wa-divider.css';
 
 /**
  * Home Assistant (and other) custom elements to patch when they are added to DOM
@@ -93,7 +92,6 @@ export const implicitElements: Record<string, string> = {
 	'hui-view-visibility-editor': huiViewVisibilityEditor,
 	'hue-like-light-card': hueLikeLightCard,
 	'wa-dialog': waDialog,
-	'wa-divider': waDivider,
 };
 
 /**
