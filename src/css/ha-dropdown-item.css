@@ -1,0 +1,45 @@
+/* Shape */
+:host {
+	min-height: 44px;
+	padding: 8px 16px;
+}
+
+/* Hover state layer */
+@media (hover: hover) {
+	:host(:hover:not(:where(:state(disabled), :--disabled, [state-disabled]))) {
+		background-color: rgba(from var(--md-sys-color-on-surface) r g b / 0.1);
+	}
+	:host(
+		[variant='danger']:hover:not(
+				:where(:state(disabled), :--disabled, [state-disabled])
+			)
+	) {
+		background-color: rgba(from var(--md-sys-color-on-error) r g b / 0.1);
+	}
+}
+
+/* Icon and label colors and font */
+#icon ::slotted(*),
+#details {
+	color: var(--md-sys-color-on-surface-variant);
+
+	--mdc-icon-size: 20px;
+}
+#details {
+	font-size: var(--md-sys-typescale-label-large-size);
+	font-weight: var(--md-sys-typescale-label-large-weight);
+	line-height: var(--md-sys-typescale-label-large-line-height);
+	letter-spacing: var(--md-sys-typescale-label-large-tracking);
+}
+#label {
+	color: var(--md-sys-color-on-surface);
+	font-size: var(--md-sys-typescale-body-small-size);
+	font-weight: var(--md-sys-typescale-body-small-weight);
+	line-height: var(--md-sys-typescale-body-small-line-height);
+	letter-spacing: var(--md-sys-typescale-body-small-tracking);
+}
+:host([variant='danger']) #icon ::slotted(*),
+:host([variant='danger']) #details,
+:host([variant='danger']) #label {
+	color: var(--md-sys-color-error);
+}

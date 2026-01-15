@@ -10,6 +10,8 @@ import haConfigSectionUpdates from './ha-config-section-updates.css';
 import haDialogHeader from './ha-dialog-header.css';
 import haDialog from './ha-dialog.css';
 import haDrawer from './ha-drawer.css';
+import haDropdownItem from './ha-dropdown-item.css';
+import haDropdown from './ha-dropdown.css';
 import haEntityToggle from './ha-entity-toggle.css';
 import haFab from './ha-fab.css';
 import haGridLayoutSlider from './ha-grid-layout-slider.css';
@@ -44,6 +46,7 @@ import huiRoot from './hui-root.css';
 import huiViewHeader from './hui-view-header.css';
 import huiViewVisibilityEditor from './hui-view-visibility-editor.css';
 import waDialog from './wa-dialog.css';
+import waDivider from './wa-divider.css';
 
 /**
  * Home Assistant (and other) custom elements to patch when they are added to DOM
@@ -57,6 +60,8 @@ export const implicitElements: Record<string, string> = {
 	'ha-wa-dialog': haWaDialog,
 	'ha-md-dialog': haMdDialog,
 	'ha-dialog-header': haDialogHeader,
+	'ha-dropdown': haDropdown,
+	'ha-dropdown-item': haDropdownItem,
 	'ha-entity-toggle': haEntityToggle,
 	'ha-fab': haFab,
 	'ha-grid-layout-slider': haGridLayoutSlider,
@@ -88,6 +93,7 @@ export const implicitElements: Record<string, string> = {
 	'hui-view-visibility-editor': huiViewVisibilityEditor,
 	'hue-like-light-card': hueLikeLightCard,
 	'wa-dialog': waDialog,
+	'wa-divider': waDivider,
 };
 
 /**

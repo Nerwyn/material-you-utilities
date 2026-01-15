@@ -1,0 +1,19 @@
+/* Border, background, shape*/
+#menu {
+	border: none;
+	border-radius: var(--md-sys-shape-corner-medium);
+	background-color: var(--md-sys-color-surface-container-low);
+	box-shadow: var(--md-sys-elevation-level2);
+	padding: 2px 4px;
+	gap: 2px;
+}
+
+/* Change border radii of first and last dropdown items */
+::slotted(ha-dropdown-item:first-of-type) {
+	border-start-start-radius: var(--md-sys-shape-corner-medium);
+	border-start-end-radius: var(--md-sys-shape-corner-medium);
+}
+::slotted(ha-dropdown-item:last-of-type) {
+	border-end-start-radius: var(--md-sys-shape-corner-medium);
+	border-end-end-radius: var(--md-sys-shape-corner-medium);
+}
