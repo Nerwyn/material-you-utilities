@@ -8,7 +8,7 @@
 	color: transparent;
 }
 :host([narrow]) .menu:not(:has(mwc-button, ha-icon-button)) {
-	height: 12px;
+	height: calc(12px + env(safe-area-inset-top));
 }
 
 /* Fix menu button size */
@@ -19,16 +19,14 @@
 	border-width: 0;
 }
 
-/* Fix list heights*/
+/* Fix list heights */
 ha-md-list {
 	height: calc(
-		100% - var(--header-height) - 144px - env(safe-area-inset-bottom)
+		100% - var(--header-height) - 144px - env(safe-area-inset-top)
 	);
 }
 :host([narrow]) ha-md-list {
-	height: calc(
-		100% - var(--header-height) - 92px - env(safe-area-inset-bottom)
-	);
+	height: calc(100% - var(--header-height) - 92px - env(safe-area-inset-top));
 }
 
 /* Remove scrollbar */
