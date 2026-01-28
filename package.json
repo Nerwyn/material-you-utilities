@@ -1,6 +1,6 @@
 {
 	"name": "material-you-utilities",
-	"version": "2.0.30",
+	"version": "2.0.31",
 	"description": "Material You Utilities - Material Design 3 Color Theme Generation and Component Modification",
 	"main": "dist/material-you-utilities.js",
 	"type": "module",
