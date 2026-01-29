@@ -1,7 +1,7 @@
 {
 	"name": "Material You Utilities - Material Design 3 Color Theme Generation and Component Modification",
 	"content_in_root": false,
-	"homeassistant": "2026.1.0",
+	"homeassistant": "2026.2.0b0",
 	"filename": "material-you-utilities.min.js",
 	"render_readme": true,
 	"hide_default_branch": true
