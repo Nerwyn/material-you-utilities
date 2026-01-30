@@ -377,6 +377,10 @@ Extended floating action buttons which appear in legacy views, and the integrati
 
 <img src="https://raw.githubusercontent.com/Nerwyn/material-you-utilities/main/assets/extended-fab.png" width="500"/>
 
+## [Menus](https://m3.material.io/components/menus/overview)
+
+Dropdown menus.
+
 ## [Chips](https://m3.material.io/components/chips/overview)
 
 Small button-like elements that can be used to display information or fire actions.

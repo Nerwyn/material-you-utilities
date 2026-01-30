@@ -25,14 +25,14 @@
 
 	--mdc-icon-size: 20px;
 }
-#details {
+#label {
+	color: var(--md-sys-color-on-surface);
 	font-size: var(--md-sys-typescale-label-large-size);
 	font-weight: var(--md-sys-typescale-label-large-weight);
 	line-height: var(--md-sys-typescale-label-large-line-height);
 	letter-spacing: var(--md-sys-typescale-label-large-tracking);
 }
-#label {
-	color: var(--md-sys-color-on-surface);
+#details {
 	font-size: var(--md-sys-typescale-body-small-size);
 	font-weight: var(--md-sys-typescale-body-small-weight);
 	line-height: var(--md-sys-typescale-body-small-line-height);

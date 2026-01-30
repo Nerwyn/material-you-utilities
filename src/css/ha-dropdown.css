@@ -1,7 +1,7 @@
 /* Border, background, shape*/
 #menu {
 	border: none;
-	border-radius: var(--md-sys-shape-corner-medium);
+	border-radius: var(--md-sys-shape-corner-large);
 	background-color: var(--md-sys-color-surface-container-low);
 	box-shadow: var(--md-sys-elevation-level2);
 	padding: 2px 4px;
