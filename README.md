@@ -441,6 +441,12 @@ Sliders with ID `#position-slider` will receive alternate wavy progress indicato
 
 ## Pop-ups
 
+### [Tooltips](https://m3.material.io/components/tooltips/overview)
+
+Messages that appear when hovering over certain elements. Uses the plain tooltip specification.
+
+<img src="https://raw.githubusercontent.com/Nerwyn/material-you-utilities/main/assets/tooltip.png" width="500"/>
+
 ### [Snackbars](https://m3.material.io/components/snackbar/overview)
 
 Floating messages that appear on the bottom of the screen, also known as toasts.

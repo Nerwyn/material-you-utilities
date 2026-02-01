@@ -1,0 +1,10 @@
+/* Colors and shape */
+.body {
+	background-color: var(--md-sys-color-inverse-surface);
+	color: var(--md-sys-color-inverse-on-surface);
+	min-height: 24px;
+	padding: 0 8px;
+	align-content: center;
+	box-shadow: var(--md-sys-elevation-level2);
+	letter-spacing: var(--md-sys-typescale-body-small-tracking);
+}
