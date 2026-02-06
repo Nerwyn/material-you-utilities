@@ -1,6 +1,10 @@
+/* Footer offset */
+:host {
+	bottom: calc(16px + var(--footer-offset, 0));
+}
+
 /* Decrease border radius, increase height, use primary container colors */
 .mdc-fab {
-	inset-block-end: var(--footer-offset, 0);
 	height: 56px;
 	border-radius: var(--md-sys-shape-corner-large);
 	background-color: var(--md-sys-color-primary-container);

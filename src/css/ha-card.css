@@ -2,6 +2,7 @@
 :host {
 	--ha-slider-thumb-negative-color: var(--ha-card-background);
 	--card-background-color: var(--ha-card-background);
+	--footer-offset: 0px;
 }
 
 /* Elevated cards (default) */
