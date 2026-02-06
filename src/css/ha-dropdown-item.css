@@ -43,3 +43,8 @@
 :host([variant='danger']) #label {
 	color: var(--md-sys-color-error);
 }
+
+/* Fix checkbox margins */
+#check {
+	margin-inline-start: 0;
+}

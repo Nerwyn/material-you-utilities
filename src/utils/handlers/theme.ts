@@ -15,7 +15,6 @@ import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments, InputField } from '../../models/interfaces/Input';
 import { IScheme } from '../../models/interfaces/Scheme';
-import { querySelectorAsync } from '../async';
 import { getEntityIdAndValue, getTargets, getToken } from '../common';
 import { debugToast, mdLog } from '../logging';
 import { harmonize } from './harmonize';
@@ -29,24 +28,10 @@ export async function setTheme(args: IHandlerArguments) {
 	const targets = args.targets ?? (await getTargets());
 
 	try {
-		const html = await querySelectorAsync(document, 'html');
-
 		const themeName = hass?.themes?.theme ?? '';
 		if (themeName.includes(THEME_NAME)) {
-			// Fix explicit html background color
-			html?.style.setProperty(
-				'background-color',
-				'var(--md-sys-color-surface)',
-			);
-
 			// Setup input values
-			const fields = [
-				'base_color',
-				'scheme',
-				'contrast',
-				'spec',
-				'platform',
-			];
+			const fields = ['base_color', 'scheme', 'contrast', 'spec', 'platform'];
 			const values: Partial<Record<InputField, string | number>> = {};
 			for (const field of fields) {
 				values[field as InputField] = getEntityIdAndValue(
@@ -58,8 +43,7 @@ export async function setTheme(args: IHandlerArguments) {
 			// Only update if one of the inputs is set
 			if (fields.some((field) => values[field as InputField] != '')) {
 				for (const field in values) {
-					values[field as InputField] ||=
-						inputs[field as InputField].default;
+					values[field as InputField] ||= inputs[field as InputField].default;
 				}
 
 				// const schemeInfo = getSchemeInfo(values.scheme as string);
@@ -81,20 +65,14 @@ export async function setTheme(args: IHandlerArguments) {
 
 					for (const color of materialDynamicColors) {
 						const hex = hexFromArgb(
-							(
-								MaterialDynamicColors[color] as DynamicColor
-							).getArgb(scheme),
+							(MaterialDynamicColors[color] as DynamicColor).getArgb(scheme),
 						);
 						const token = getToken(color);
 						styles[`--md-sys-color-${token}-${mode}`] = hex;
 					}
 
 					for (const target of targets) {
-						applyStyles(
-							target,
-							STYLE_ID,
-							buildStylesString(styles),
-						);
+						applyStyles(target, STYLE_ID, buildStylesString(styles));
 					}
 				}
 

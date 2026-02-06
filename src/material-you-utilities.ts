@@ -45,10 +45,7 @@ async function main() {
 						haMain.shadowRoot as ShadowRoot,
 						'iframe',
 					)) as HTMLIFrameElement;
-					const contentWindow = await getAsync(
-						iframe,
-						'contentWindow',
-					);
+					const contentWindow = await getAsync(iframe, 'contentWindow');
 					setStyles(contentWindow as typeof globalThis);
 
 					const document = (await getAsync(
@@ -94,6 +91,27 @@ async function main() {
 					for (const handler of handlers) {
 						await handler(args);
 					}
+
+					// Fix html background color
+					const fixBackgroundColor = () => {
+						html.style.setProperty(
+							'background-color',
+							'var(--md-sys-color-surface)',
+						);
+					};
+					fixBackgroundColor();
+					const observe = () => {
+						observer.observe(html, {
+							attributes: true,
+							attributeFilter: ['style'],
+						});
+					};
+					const observer = new MutationObserver(() => {
+						observer.disconnect();
+						fixBackgroundColor();
+						observe();
+					});
+					observe();
 				}
 			},
 			async () => {

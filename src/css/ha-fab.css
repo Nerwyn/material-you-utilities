@@ -1,6 +1,6 @@
 /* Footer offset */
 :host {
-	bottom: calc(16px + var(--footer-offset, 0));
+	bottom: calc(16px + var(--footer-offset, 0px));
 }
 
 /* Decrease border radius, increase height, use primary container colors */
