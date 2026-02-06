@@ -11,7 +11,7 @@
 	height: calc(12px + env(safe-area-inset-top));
 }
 
-/* Modal sidebar panel list height */
+/* Modal sidebar panels list height */
 :host([narrow]) .panels-list {
 	height: calc(100vh - 12px - var(--safe-area-inset-top, 0px));
 }
