@@ -1,11 +1,14 @@
-import { hideAppbar } from '../../utils/handlers/appbar';
-import { setCardType } from '../../utils/handlers/cards';
-import { setCSSFromFile } from '../../utils/handlers/css';
-import { harmonize } from '../../utils/handlers/harmonize';
-import { setBaseColorFromImage } from '../../utils/handlers/image';
-import { hideNavbar } from '../../utils/handlers/navbar';
-import { setTheme } from '../../utils/handlers/theme';
-import { showViewTitle } from '../../utils/handlers/viewTitle';
+import {
+	harmonize,
+	hideAppbar,
+	hideNavbar,
+	hideNavbarLabels,
+	setBaseColorFromImage,
+	setCardType,
+	setCSSFromFile,
+	setTheme,
+	showAppbarTitle,
+} from '../../utils/handlers';
 import { IInputInfo, InputDomain, InputField } from '../interfaces/Input';
 import { schemes } from './colors';
 
@@ -198,10 +201,10 @@ Does not apply to cards that are explicitly set to outlined like in settings.`,
 		},
 		handler: hideAppbar,
 	},
-	view_title: {
+	appbar_title: {
 		domain: 'input_boolean',
 		default: 'off',
-		name: 'Show View Title',
+		name: 'Show Application Bar Title',
 		description:
 			'Show/hide the view title in the application bar at the top of views.',
 		init: {
@@ -215,7 +218,7 @@ Does not apply to cards that are explicitly set to outlined like in settings.`,
 			},
 			tabBarIndex: 1,
 		},
-		handler: showViewTitle,
+		handler: showAppbarTitle,
 	},
 	navbar: {
 		domain: 'input_boolean',
@@ -235,6 +238,25 @@ Does not restore the default Home Assistant view tabs.`,
 			tabBarIndex: 1,
 		},
 		handler: hideNavbar,
+	},
+	navbar_labels: {
+		domain: 'input_boolean',
+		default: 'on',
+		name: 'Show Navigation Bar Labels',
+		description:
+			'Show/hide the view labels in the navigation bar at the bottom of views.',
+		init: {
+			config: {
+				icon: 'mdi:label-multiple',
+			},
+		},
+		card: {
+			config: {
+				boolean: {},
+			},
+			tabBarIndex: 1,
+		},
+		handler: hideNavbarLabels,
 	},
 
 	// Color options

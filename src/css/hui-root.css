@@ -29,7 +29,7 @@ ha-menu-button + .main-title {
 /* App bar view title */
 ha-tab-group-tab[active]::before {
 	content: attr(aria-label);
-	display: var(--show-view-title, none);
+	display: var(--appbar-title-display, none);
 	position: fixed;
 	top: calc(
 		(var(--header-height) - var(--md-sys-typescale-title-large-line-height)) / 2
@@ -180,6 +180,7 @@ ha-tab-group-tab {
 	padding: 6px 0;
 	flex-direction: column;
 	flex: 1;
+	justify-content: center;
 	gap: 4px;
 	height: 100%;
 	box-sizing: border-box;
@@ -290,7 +291,7 @@ ha-tab-group-tab:has(ha-icon)::after {
 	overflow: hidden;
 	height: 100%;
 	color: var(--md-sys-color-on-surface-variant);
-	display: flex;
+	display: var(--navbar-label-display, flex);
 	align-items: flex-start;
 	z-index: 1;
 }
@@ -445,7 +446,7 @@ ha-menu-button {
 	/* Horizontal label, indicator, and state layers */
 	ha-tab-group-tab ha-icon::before,
 	ha-tab-group-tab ha-icon::after {
-		content: attr(title);
+		content: var(--navbar-label-content, attr(title));
 		display: flex;
 		align-items: center;
 		font-weight: var(--md-ref-typeface-weight-medium);
@@ -456,7 +457,7 @@ ha-menu-button {
 		width: fit-content;
 		margin-inline-start: -16px;
 		padding-inline-start: 44px;
-		padding-inline-end: 16px;
+		padding-inline-end: var(--navbar-label-padding-inline-end, 16px);
 		z-index: 0;
 	}
 	ha-tab-group-tab:not([aria-label]) ha-icon::before,

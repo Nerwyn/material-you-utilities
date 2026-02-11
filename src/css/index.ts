@@ -41,9 +41,10 @@ import huiCardChild from './hui-card-child.css';
 import huiEntitiesCardEditor from './hui-entities-card-editor.css';
 import huiEntitiesToggle from './hui-entities-toggle.css';
 import huiGridSection from './hui-grid-section.css';
-import huiRootHideHaTabGroup from './hui-root-hide-ha-tab-group.css';
-import huiRootHideToolbar from './hui-root-hide-toolbar.css';
-import huiRootShowViewTitle from './hui-root-show-view-title.css';
+import huiRootHideAppbar from './hui-root-hide-appbar.css';
+import huiRootHideNavbarLabels from './hui-root-hide-navbar-labels.css';
+import huiRootHideNavbar from './hui-root-hide-navbar.css';
+import huiRootShowAppbarTitle from './hui-root-show-appbar-title.css';
 import huiRoot from './hui-root.css';
 import huiViewHeader from './hui-view-header.css';
 import huiViewVisibilityEditor from './hui-view-visibility-editor.css';
@@ -125,12 +126,15 @@ export const cardTypes: Record<string, string> = {
 };
 
 export {
-	// Hide navigation bar
-	huiRootHideHaTabGroup,
-
 	// Hide application bar
-	huiRootHideToolbar,
+	huiRootHideAppbar,
+
+	// Hide navigation bar
+	huiRootHideNavbar,
+
+	// Hide navigation bar labels
+	huiRootHideNavbarLabels,
 
 	// Show application bar view title
-	huiRootShowViewTitle,
+	huiRootShowAppbarTitle,
 };

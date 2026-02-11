@@ -1,4 +1,4 @@
-import { huiRootShowViewTitle } from '../../css';
+import { huiRootHideNavbarLabels } from '../../css';
 import { inputs } from '../../models/constants/inputs';
 import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
@@ -7,48 +7,46 @@ import { getEntityIdAndValue } from '../common';
 import { debugToast, mdLog } from '../logging';
 import { applyStyles, loadStyles } from './styles';
 
-const STYLE_ID = `${THEME_TOKEN}-view-title`;
+const STYLE_ID = `${THEME_TOKEN}-navbar-labels`;
 
-/** Show the view title */
-export async function showViewTitle(args: IHandlerArguments) {
+/** Hide the navigation bar labels */
+export async function hideNavbarLabels(args: IHandlerArguments) {
 	if (args.targets?.some((target) => target.nodeName.includes('CONFIG-CARD'))) {
 		return;
 	}
 
-	const hass = (document.querySelector('home-assistant') as HassElement)?.hass;
+	const hass = (document.querySelector('home-assistant') as HassElement).hass;
 
 	try {
 		const themeName = hass?.themes?.theme ?? '';
 		if (themeName.includes(THEME_NAME)) {
 			const value =
-				getEntityIdAndValue('view_title', args.id).value ||
-				inputs.view_title.default;
-			const appbar =
-				getEntityIdAndValue('appbar', args.id).value || inputs.appbar.default;
-			if (value == 'off' || appbar == 'off') {
-				hideViewTitle();
+				getEntityIdAndValue('navbar_labels', args.id).value ||
+				inputs.navbar_labels.default;
+			if (value == 'on') {
+				showNavbarLabels();
 				return;
 			}
 
 			const html = document.querySelector('html') as HTMLElement;
-			applyStyles(html, STYLE_ID, loadStyles(huiRootShowViewTitle));
+			applyStyles(html, STYLE_ID, loadStyles(huiRootHideNavbarLabels));
 
-			mdLog(html, 'View title shown.', true);
+			mdLog(html, 'Navigation bar labels hidden.', true);
 		} else {
-			hideViewTitle();
+			showNavbarLabels();
 		}
 	} catch (e) {
 		console.error(e);
 		debugToast(String(e));
-		hideViewTitle();
+		showNavbarLabels();
 	}
 }
 
-async function hideViewTitle() {
+async function showNavbarLabels() {
 	const html = document.querySelector('html') as HTMLElement;
 	const style = html?.querySelector(`#${STYLE_ID}`);
 	if (style) {
 		html?.removeChild(style);
-		mdLog(html, 'View title hidden.', true);
+		mdLog(html, 'Navigation bar labels unhidden.', true);
 	}
 }

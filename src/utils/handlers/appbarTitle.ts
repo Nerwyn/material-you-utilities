@@ -1,4 +1,4 @@
-import { huiRootHideNavbar } from '../../css';
+import { huiRootShowAppbarTitle } from '../../css';
 import { inputs } from '../../models/constants/inputs';
 import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
@@ -7,45 +7,48 @@ import { getEntityIdAndValue } from '../common';
 import { debugToast, mdLog } from '../logging';
 import { applyStyles, loadStyles } from './styles';
 
-const STYLE_ID = `${THEME_TOKEN}-navbar`;
+const STYLE_ID = `${THEME_TOKEN}-view-title`;
 
-/** Hide the navigation bar */
-export async function hideNavbar(args: IHandlerArguments) {
+/** Show the view title */
+export async function showAppbarTitle(args: IHandlerArguments) {
 	if (args.targets?.some((target) => target.nodeName.includes('CONFIG-CARD'))) {
 		return;
 	}
 
-	const hass = (document.querySelector('home-assistant') as HassElement).hass;
+	const hass = (document.querySelector('home-assistant') as HassElement)?.hass;
 
 	try {
 		const themeName = hass?.themes?.theme ?? '';
 		if (themeName.includes(THEME_NAME)) {
 			const value =
-				getEntityIdAndValue('navbar', args.id).value || inputs.navbar.default;
-			if (value == 'on') {
-				showNavbar();
+				getEntityIdAndValue('appbar_title', args.id).value ||
+				inputs.appbar_title.default;
+			const appbar =
+				getEntityIdAndValue('appbar', args.id).value || inputs.appbar.default;
+			if (value == 'off' || appbar == 'off') {
+				hideAppbarTitle();
 				return;
 			}
 
 			const html = document.querySelector('html') as HTMLElement;
-			applyStyles(html, STYLE_ID, loadStyles(huiRootHideNavbar));
+			applyStyles(html, STYLE_ID, loadStyles(huiRootShowAppbarTitle));
 
-			mdLog(html, 'Navigation bar hidden.', true);
+			mdLog(html, 'View title shown.', true);
 		} else {
-			showNavbar();
+			hideAppbarTitle();
 		}
 	} catch (e) {
 		console.error(e);
 		debugToast(String(e));
-		showNavbar();
+		hideAppbarTitle();
 	}
 }
 
-async function showNavbar() {
+async function hideAppbarTitle() {
 	const html = document.querySelector('html') as HTMLElement;
 	const style = html?.querySelector(`#${STYLE_ID}`);
 	if (style) {
 		html?.removeChild(style);
-		mdLog(html, 'Navigation bar unhidden.', true);
+		mdLog(html, 'View title hidden.', true);
 	}
 }

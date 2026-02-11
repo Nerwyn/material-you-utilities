@@ -1,0 +1,6 @@
+/* Hide navigation bar labels */
+html {
+	--navbar-label-content: '';
+	--navbar-label-display: none;
+	--navbar-label-padding-inline-end: 12px;
+}

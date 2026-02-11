@@ -9,14 +9,18 @@ import {
 	handleWhenReady,
 	querySelectorAsync,
 } from './utils/async';
-import { hideAppbar } from './utils/handlers/appbar';
-import { setCardType } from './utils/handlers/cards';
-import { setCSSFromFile } from './utils/handlers/css';
-import { setBaseColorFromImage } from './utils/handlers/image';
-import { hideNavbar } from './utils/handlers/navbar';
-import { setExplicitStyles, setStyles } from './utils/handlers/styles';
-import { setTheme } from './utils/handlers/theme';
-import { showViewTitle } from './utils/handlers/viewTitle';
+import {
+	hideAppbar,
+	hideNavbar,
+	hideNavbarLabels,
+	setBaseColorFromImage,
+	setCardType,
+	setCSSFromFile,
+	setExplicitStyles,
+	setStyles,
+	setTheme,
+	showAppbarTitle,
+} from './utils/handlers';
 import { mdLog } from './utils/logging';
 import { setupSubscriptions } from './utils/subscriptions';
 
@@ -87,8 +91,9 @@ async function main() {
 						setCardType,
 						setCSSFromFile,
 						hideAppbar,
-						showViewTitle,
+						showAppbarTitle,
 						hideNavbar,
+						hideNavbarLabels,
 					];
 					for (const handler of handlers) {
 						await handler(args);

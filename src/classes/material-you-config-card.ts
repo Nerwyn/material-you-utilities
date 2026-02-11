@@ -5,11 +5,14 @@ import { THEME, THEME_NAME, THEME_TOKEN } from '../models/constants/theme';
 import { HomeAssistant } from '../models/interfaces';
 import { InputField } from '../models/interfaces/Input';
 import { getEntityId } from '../utils/common';
-import { applyStyles, buildStylesString } from '../utils/handlers';
-import { setCardType } from '../utils/handlers/cards';
-import { setCSSFromFile } from '../utils/handlers/css';
-import { setBaseColorFromImage } from '../utils/handlers/image';
-import { setTheme } from '../utils/handlers/theme';
+import {
+	applyStyles,
+	buildStylesString,
+	setBaseColorFromImage,
+	setCardType,
+	setCSSFromFile,
+	setTheme,
+} from '../utils/handlers';
 import { showToast } from '../utils/logging';
 import {
 	buildAlertBox,
@@ -465,21 +468,21 @@ export class MaterialYouConfigCard extends LitElement {
 				inputs[field as InputField].card.tabBarIndex == this.tabBarIndex,
 		) as InputField[];
 
-		// Platform field is not available for 2021 spec
-		if (
-			(this.hass.states[getEntityId('spec', this.dataId)]?.state ||
-				inputs.spec.default) != '2025'
-		) {
-			rowNames = rowNames.filter((name) => name != 'platform');
+		const conditionalRows: [InputField, InputField, string | number][] = [
+			['spec', 'platform', '2025'],
+			['appbar', 'appbar_title', 'on'],
+			['navbar', 'navbar_labels', 'on'],
+		];
+		const hiddenRows: InputField[] = [];
+		for (const [field1, field2, value] of conditionalRows) {
+			if (
+				(this.hass.states[getEntityId(field1, this.dataId)]?.state ||
+					inputs[field1].default) != value
+			) {
+				hiddenRows.push(field2);
+			}
 		}
-
-		// View title is always hidden if app bar is hidden
-		if (
-			(this.hass.states[getEntityId('appbar', this.dataId)]?.state ||
-				inputs.appbar.default) != 'on'
-		) {
-			rowNames = rowNames.filter((name) => name != 'view_title');
-		}
+		rowNames = rowNames.filter((name) => !hiddenRows.includes(name));
 
 		const rows: Partial<Record<InputField, TemplateResult | string>> = {};
 		for (const field of rowNames) {

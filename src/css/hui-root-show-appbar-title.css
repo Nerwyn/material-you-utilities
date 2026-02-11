@@ -1,0 +1,4 @@
+/* Show appbar title */
+html {
+	--appbar-title-display: block;
+}

@@ -13,8 +13,9 @@ export type InputField =
 	| 'styles'
 	| 'card_type'
 	| 'appbar'
-	| 'view_title'
+	| 'appbar_title'
 	| 'navbar'
+	| 'navbar_labels'
 	| 'harmonize'
 	| 'image_url'
 	| 'css_file';

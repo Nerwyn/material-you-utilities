@@ -6,8 +6,6 @@ import {
 	MaterialDynamicColors,
 	Platform,
 } from '@material/material-color-utilities';
-
-// import { SpecVersion } from '@material/material-color-utilities/dynamiccolor/color_spec.js';
 import { applyStyles, buildStylesString, unset } from '.';
 import { materialDynamicColors, schemes } from '../../models/constants/colors';
 import { inputs } from '../../models/constants/inputs';
@@ -19,6 +17,9 @@ import { getEntityIdAndValue, getTargets, getToken } from '../common';
 import { debugToast, mdLog } from '../logging';
 import { harmonize } from './harmonize';
 import { setPalette, unsetPalette } from './palettes';
+
+// import { SpecVersion } from '@material/material-color-utilities/dynamiccolor/color_spec.js';
+type SpecVersion = '2021' | '2025';
 
 const STYLE_ID = `${THEME_TOKEN}-theme`;
 
@@ -59,7 +60,7 @@ export async function setTheme(args: IHandlerArguments) {
 						Hct.fromInt(argbFromHex(values.base_color as string)),
 						mode == 'dark',
 						parseFloat(values.contrast as string),
-						values.spec as '2021' | '2025', // as SpecVersion,
+						values.spec as SpecVersion,
 						values.platform as Platform,
 					);
 
