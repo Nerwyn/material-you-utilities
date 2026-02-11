@@ -5,6 +5,7 @@ import {
 } from '@material/material-color-utilities';
 import { applyStyles, buildStylesString, unset } from '.';
 import { paletteColors, semanticColors } from '../../models/constants/colors';
+import { inputs } from '../../models/constants/inputs';
 import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments } from '../../models/interfaces/Input';
@@ -31,7 +32,8 @@ export async function harmonize(args: IHandlerArguments) {
 		const themeName = hass?.themes?.theme ?? '';
 		if (themeName.includes(THEME_NAME)) {
 			const value =
-				getEntityIdAndValue('harmonize', args.id).value || 'off';
+				getEntityIdAndValue('harmonize', args.id).value ||
+				inputs.harmonize.default;
 
 			if (value != 'on') {
 				dissonance(args);
@@ -45,10 +47,7 @@ export async function harmonize(args: IHandlerArguments) {
 			const styles: Record<string, string> = {};
 			for (const color in semanticColors) {
 				const harmonizedColor = hexFromArgb(
-					Blend.harmonize(
-						argbFromHex(semanticColors[color]),
-						baseColor,
-					),
+					Blend.harmonize(argbFromHex(semanticColors[color]), baseColor),
 				);
 
 				const token = getToken(color);

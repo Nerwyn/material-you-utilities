@@ -1,4 +1,5 @@
 import { elements, implicitElements } from '../../css';
+import { inputs } from '../../models/constants/inputs';
 import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import {
@@ -22,7 +23,7 @@ function checkTheme() {
 		if (theme) {
 			shouldSetStyles =
 				theme.includes(THEME_NAME) &&
-				(getEntityIdAndValue('styles').value || 'on') == 'on';
+				(getEntityIdAndValue('styles').value || inputs.styles.default) == 'on';
 		}
 	}
 }
@@ -103,8 +104,7 @@ function applyStylesToShadowRoot(element: HTMLElement) {
 			shadowRoot,
 			THEME_TOKEN,
 			loadStyles(
-				elements[element.nodeName.toLowerCase()] ||
-					elements['hui-card'],
+				elements[element.nodeName.toLowerCase()] || elements['hui-card'],
 			),
 		);
 	}

@@ -1,4 +1,5 @@
 import { huiRootHideToolbar } from '../../css';
+import { inputs } from '../../models/constants/inputs';
 import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments } from '../../models/interfaces/Input';
@@ -10,9 +11,7 @@ const STYLE_ID = `${THEME_TOKEN}-appbar`;
 
 /** Hide the header */
 export async function hideAppbar(args: IHandlerArguments) {
-	if (
-		args.targets?.some((target) => target.nodeName.includes('CONFIG-CARD'))
-	) {
+	if (args.targets?.some((target) => target.nodeName.includes('CONFIG-CARD'))) {
 		return;
 	}
 
@@ -21,7 +20,8 @@ export async function hideAppbar(args: IHandlerArguments) {
 	try {
 		const themeName = hass?.themes?.theme ?? '';
 		if (themeName.includes(THEME_NAME)) {
-			const value = getEntityIdAndValue('appbar', args.id).value || 'on';
+			const value =
+				getEntityIdAndValue('appbar', args.id).value || inputs.appbar.default;
 			if (value == 'on') {
 				showHeader();
 				return;

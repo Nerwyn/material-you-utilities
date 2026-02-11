@@ -220,7 +220,7 @@ Does not restore the default Home Assistant view tabs.`,
 	// Color options
 	harmonize: {
 		domain: 'input_boolean',
-		default: 'off',
+		default: 'on',
 		name: 'Harmonize Semantic Colors',
 		description:
 			'Adjust static/semantic colors to be closer in hue to the theme primary color.',
