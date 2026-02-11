@@ -158,7 +158,7 @@ With the Material Expressive update, Material Design 3 now has new specification
 
 #### Platform
 
-The 2025 color specification has two platform options - `Phone` and `Watch`. While you probably want to keep this at the default `Phone` setting, you have the ability to choose. Note that the `Watch` platform does not work well with light mode.
+The 2025 color specification has two platform options - `Phone` and `Watch`. While you probably want to keep this at the default `Phone` setting, you have the ability to choose. Note that the `Watch` platform does not work well with light mode. If specification version is not set to 2025 then this setting will be hidden from the settings card.
 
 ### Styles
 
@@ -178,11 +178,15 @@ You can choose to hide the application bar shown at the top of views by toggline
 
 #### Show View Title
 
-As an alternative to Home Assistant's markdown view titles, you can choose to display the view title in the center of the application bar instead. If the application bar is hidden this title will be as well.
+As an alternative to Home Assistant's markdown view titles, you can choose to display the view title in the center of the application bar instead. If the application bar is hidden this title will be as well and this setting be hidden in the settings card.
 
 #### Show Navigation Bar
 
 You can choose to hide the navigation bar shown at the bottom of views by toggling this setting off. This is useful if you want to use an alternate view navigation system such as [Navbar Card](https://github.com/joseluis9595/lovelace-navbar-card). Note that this does not disable navigation bar styles or restore the default view tabs, it hides them entirely. Requires style upgrades to be enabled.
+
+#### Show Navigation Bar Labels
+
+You can choose to hide the navigation bar labels shown below and trailing the view tabs at the bottom of views by toggling this setting off. If the navigation bar is hidden this setting does nothing and is hidden in the settings card.
 
 ### Other
 
