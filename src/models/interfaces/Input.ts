@@ -13,6 +13,7 @@ export type InputField =
 	| 'styles'
 	| 'card_type'
 	| 'appbar'
+	| 'view_title'
 	| 'navbar'
 	| 'harmonize'
 	| 'image_url'

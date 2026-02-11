@@ -5,6 +5,7 @@ import { harmonize } from '../../utils/handlers/harmonize';
 import { setBaseColorFromImage } from '../../utils/handlers/image';
 import { hideNavbar } from '../../utils/handlers/navbar';
 import { setTheme } from '../../utils/handlers/theme';
+import { showViewTitle } from '../../utils/handlers/viewTitle';
 import { IInputInfo, InputDomain, InputField } from '../interfaces/Input';
 import { schemes } from './colors';
 
@@ -196,6 +197,25 @@ Does not apply to cards that are explicitly set to outlined like in settings.`,
 			tabBarIndex: 1,
 		},
 		handler: hideAppbar,
+	},
+	view_title: {
+		domain: 'input_boolean',
+		default: 'off',
+		name: 'Show View Title',
+		description:
+			'Show/hide the view title in the application bar at the top of views.',
+		init: {
+			config: {
+				icon: 'mdi:view-headline',
+			},
+		},
+		card: {
+			config: {
+				boolean: {},
+			},
+			tabBarIndex: 1,
+		},
+		handler: showViewTitle,
 	},
 	navbar: {
 		domain: 'input_boolean',

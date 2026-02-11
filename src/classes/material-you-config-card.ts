@@ -94,23 +94,14 @@ export class MaterialYouConfigCard extends LitElement {
 			const entityId = getEntityId(field as InputField, this.dataId);
 			if (!this.hass.states[entityId]) {
 				const id = entityId.split('.')[1];
-				await createInput(
-					this.hass,
-					inputs[field as InputField].domain,
-					{
-						name: id,
-						...inputs[field as InputField].init.config,
-					},
-				);
-				await updateInput(
-					this.hass,
-					inputs[field as InputField].domain,
-					id,
-					{
-						name: `${THEME_NAME} ${inputs[field as InputField].name}${name}`,
-						...inputs[field as InputField].init.config,
-					},
-				);
+				await createInput(this.hass, inputs[field as InputField].domain, {
+					name: id,
+					...inputs[field as InputField].init.config,
+				});
+				await updateInput(this.hass, inputs[field as InputField].domain, id, {
+					name: `${THEME_NAME} ${inputs[field as InputField].name}${name}`,
+					...inputs[field as InputField].init.config,
+				});
 				const domain = inputs[field as InputField].domain;
 				let service = services[domain];
 				const data: Record<string, unknown> = {
@@ -166,10 +157,7 @@ export class MaterialYouConfigCard extends LitElement {
 			<ha-tab-group @wa-tab-show=${handler}>
 				${tabs.map(
 					(tab, i) =>
-						html`<ha-tab-group-tab
-							slot="nav"
-							panel=${tab}
-							.active=${i == index}
+						html`<ha-tab-group-tab slot="nav" panel=${tab} .active=${i == index}
 							>${tab}</ha-tab-group-tab
 						>`,
 				)}
@@ -178,9 +166,7 @@ export class MaterialYouConfigCard extends LitElement {
 	}
 
 	async handleSelectorChange(e: Event) {
-		const field = (e.target as HTMLElement).getAttribute(
-			'field',
-		) as InputField;
+		const field = (e.target as HTMLElement).getAttribute('field') as InputField;
 		const value = e.detail.value;
 
 		const domain = inputs[field].domain;
@@ -351,14 +337,12 @@ export class MaterialYouConfigCard extends LitElement {
 			return '';
 		}
 
-		let value: string | number | boolean =
-			this.hass.states[entityId]?.state;
+		let value: string | number | boolean = this.hass.states[entityId]?.state;
 		if (field == 'base_color') {
 			let timeout: ReturnType<typeof setTimeout>;
 			const handleChange = (e: Event) => {
 				clearTimeout(timeout);
-				const target = e.target as EventTarget &
-					Record<'value', string>;
+				const target = e.target as EventTarget & Record<'value', string>;
 				const value = target.value;
 				timeout = setTimeout(() => {
 					const event = new Event('value-changed');
@@ -381,9 +365,7 @@ export class MaterialYouConfigCard extends LitElement {
 						<div class="label">${inputs[field].name}</div>
 					</div>
 					<div class="row">
-						<div class="label secondary">
-							${value || inputs[field].default}
-						</div>
+						<div class="label secondary">${value || inputs[field].default}</div>
 						${this.buildResetButton(field)}
 					</div>
 				</div>
@@ -474,15 +456,23 @@ export class MaterialYouConfigCard extends LitElement {
 
 		let rowNames = Object.keys(inputs).filter(
 			(field) =>
-				inputs[field as InputField].card.tabBarIndex ==
-				this.tabBarIndex,
+				inputs[field as InputField].card.tabBarIndex == this.tabBarIndex,
 		) as InputField[];
 
 		// Platform field is not available for 2021 spec
 		if (
-			this.hass.states[getEntityId('spec', this.dataId)]?.state != '2025'
+			(this.hass.states[getEntityId('spec', this.dataId)]?.state ||
+				inputs.spec.default) != '2025'
 		) {
 			rowNames = rowNames.filter((name) => name != 'platform');
+		}
+
+		// View title is always hidden if app bar is hidden
+		if (
+			(this.hass.states[getEntityId('appbar', this.dataId)]?.state ||
+				inputs.appbar.default) != 'on'
+		) {
+			rowNames = rowNames.filter((name) => name != 'view_title');
 		}
 
 		const rows: Partial<Record<InputField, TemplateResult | string>> = {};
@@ -501,11 +491,7 @@ export class MaterialYouConfigCard extends LitElement {
 				${this.personEntityId
 					? html`<div class="subtitle">ID: ${this.dataId}</div>`
 					: ''}
-				${this.buildTabBar(
-					this.tabBarIndex,
-					this.handleTabBar,
-					this.tabs,
-				)}
+				${this.buildTabBar(this.tabBarIndex, this.handleTabBar, this.tabs)}
 				<div class="card-content">
 					${Object.keys(rows).length != rowNames.length
 						? buildAlertBox(
@@ -517,9 +503,7 @@ export class MaterialYouConfigCard extends LitElement {
 						: ''}
 					${Object.keys(rows).map(
 						(name) =>
-							html`<div class="row ${name}">
-								${rows[name as InputField]}
-							</div>`,
+							html`<div class="row ${name}">${rows[name as InputField]}</div>`,
 					)}
 				</div>
 				${this.hass.user?.is_admin
@@ -639,14 +623,8 @@ export class MaterialYouConfigCard extends LitElement {
 				color: var(--secondary-text-color);
 				font-size: var(--md-sys-typescale-label-large-size, 14px);
 				font-weight: var(--md-sys-typescale-label-large-weight, 500);
-				line-height: var(
-					--md-sys-typescale-label-large-line-height,
-					20px
-				);
-				letter-spacing: var(
-					--md-sys-typescale-label-large-tracking,
-					0.1px
-				);
+				line-height: var(--md-sys-typescale-label-large-line-height, 20px);
+				letter-spacing: var(--md-sys-typescale-label-large-tracking, 0.1px);
 			}
 
 			ha-tab-group {
@@ -780,20 +758,13 @@ export class MaterialYouConfigCard extends LitElement {
 				height: var(--ha-button-height, 40px);
 				width: 120px;
 				border-radius: var(--ha-button-border-radius);
-				transition: border-radius
-					var(--md-sys-motion-expressive-spatial-fast);
+				transition: border-radius var(--md-sys-motion-expressive-spatial-fast);
 
 				font-family: var(--font-family);
 				font-size: var(--md-sys-typescale-label-large-size, 14px);
 				font-weight: var(--md-sys-typescale-label-large-weight, 500);
-				line-height: var(
-					--md-sys-typescale-label-large-line-height,
-					20px
-				);
-				letter-spacing: var(
-					--md-sys-typescale-label-large-tracking,
-					0.1px
-				);
+				line-height: var(--md-sys-typescale-label-large-line-height, 20px);
+				letter-spacing: var(--md-sys-typescale-label-large-tracking, 0.1px);
 
 				--ha-button-height: 40px;
 			}
@@ -819,10 +790,7 @@ export class MaterialYouConfigCard extends LitElement {
 			.delete:focus-visible,
 			.create:active,
 			.delete:active {
-				--ha-button-border-radius: var(
-					--md-sys-shape-corner-small,
-					8px
-				);
+				--ha-button-border-radius: var(--md-sys-shape-corner-small, 8px);
 			}
 
 			.description {
@@ -835,14 +803,8 @@ export class MaterialYouConfigCard extends LitElement {
 				font-family: var(--font-family);
 				font-size: var(--md-sys-typescale-body-medium-size, 14px);
 				font-weight: var(--md-sys-typescale-body-medium-weight, 400);
-				line-height: var(
-					--md-sys-typescale-body-medium-line-height,
-					20px
-				);
-				letter-spacing: var(
-					--md-sys-typescale-body-medium-tracking,
-					0.25px
-				);
+				line-height: var(--md-sys-typescale-body-medium-line-height, 20px);
+				letter-spacing: var(--md-sys-typescale-body-medium-tracking, 0.25px);
 				padding: 12px 16px 8px;
 				max-width: calc(var(--width) - 64px);
 				white-space: pre-wrap;

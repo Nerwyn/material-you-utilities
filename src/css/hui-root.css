@@ -26,6 +26,27 @@ ha-menu-button + .main-title {
 	letter-spacing: var(--md-sys-typescale-title-large-tracking);
 }
 
+/* App bar view title */
+ha-tab-group-tab[active]::before {
+	content: attr(aria-label);
+	display: var(--show-view-title, none);
+	position: fixed;
+	top: calc(
+		(var(--header-height) - var(--md-sys-typescale-title-large-line-height)) / 2
+	);
+	inset-inline-start: calc(50% + (var(--mdc-drawer-width, 0px) / 2));
+	translate: -50%;
+	transition: translate var(--md-sys-motion-duration-short1)
+		var(--md-sys-motion-easing-standard);
+	font-size: var(--md-sys-typescale-title-large-size);
+	font-weight: var(--md-sys-typescale-title-large-weight);
+	line-height: var(--md-sys-typescale-title-large-line-height);
+	letter-spacing: var(--md-sys-typescale-title-large-tracking);
+}
+:host([scrolled]) ha-tab-group-tab[active]::before {
+	translate: -50% -150%;
+}
+
 /*
  * Move menu and action items buttons to header
  * User different color for header trailing icons
@@ -344,10 +365,7 @@ ha-menu-button {
 }
 #view {
 	padding-top: calc(
-		var(
-				--view-padding-top,
-				var(--kiosk-header-height, var(--header-height))
-			) +
+		var(--view-padding-top, var(--kiosk-header-height, var(--header-height))) +
 			env(safe-area-inset-top)
 	);
 	padding-bottom: calc(

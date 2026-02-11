@@ -43,6 +43,7 @@ import huiEntitiesToggle from './hui-entities-toggle.css';
 import huiGridSection from './hui-grid-section.css';
 import huiRootHideHaTabGroup from './hui-root-hide-ha-tab-group.css';
 import huiRootHideToolbar from './hui-root-hide-toolbar.css';
+import huiRootShowViewTitle from './hui-root-show-view-title.css';
 import huiRoot from './hui-root.css';
 import huiViewHeader from './hui-view-header.css';
 import huiViewVisibilityEditor from './hui-view-visibility-editor.css';
@@ -129,4 +130,7 @@ export {
 
 	// Hide application bar
 	huiRootHideToolbar,
+
+	// Show application bar view title
+	huiRootShowViewTitle,
 };

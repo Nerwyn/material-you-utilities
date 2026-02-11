@@ -16,6 +16,7 @@ import { setBaseColorFromImage } from './utils/handlers/image';
 import { hideNavbar } from './utils/handlers/navbar';
 import { setExplicitStyles, setStyles } from './utils/handlers/styles';
 import { setTheme } from './utils/handlers/theme';
+import { showViewTitle } from './utils/handlers/viewTitle';
 import { mdLog } from './utils/logging';
 import { setupSubscriptions } from './utils/subscriptions';
 
@@ -86,6 +87,7 @@ async function main() {
 						setCardType,
 						setCSSFromFile,
 						hideAppbar,
+						showViewTitle,
 						hideNavbar,
 					];
 					for (const handler of handlers) {
