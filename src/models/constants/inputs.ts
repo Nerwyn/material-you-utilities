@@ -85,7 +85,7 @@ It usually does not appear in the theme itself.`,
 	},
 	spec: {
 		domain: 'input_select',
-		default: '2021',
+		default: '2025',
 		name: 'Specification',
 		description: `The palette rules to use for the scheme.
 2021 is the original Material You palettes.
