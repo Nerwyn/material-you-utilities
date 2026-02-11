@@ -57,10 +57,7 @@ export class MaterialYouPanel extends LitElement {
 			<ha-tab-group @wa-tab-show=${handler}>
 				${tabs.map(
 					(tab, i) =>
-						html`<ha-tab-group-tab
-							slot="nav"
-							panel=${tab}
-							.active=${i == index}
+						html`<ha-tab-group-tab slot="nav" panel=${tab} .active=${i == index}
 							>${tab}</ha-tab-group-tab
 						>`,
 				)}
@@ -114,15 +111,14 @@ export class MaterialYouPanel extends LitElement {
 				(entity) =>
 					entity.startsWith('person.') &&
 					this.hass.states[entity].attributes.user_id &&
-					this.hass.states[entity].attributes.user_id !=
-						this.hass.user?.id,
+					this.hass.states[entity].attributes.user_id != this.hass.user?.id,
 			);
 		}
 
 		if (!this.devices.length) {
-			this.devices = Object.keys(
-				window.browser_mod?.browsers ?? {},
-			).filter((browserId) => browserId != window.browser_mod?.browserID);
+			this.devices = Object.keys(window.browser_mod?.browsers ?? {}).filter(
+				(browserId) => browserId != window.browser_mod?.browserID,
+			);
 		}
 	}
 
@@ -189,14 +185,16 @@ export class MaterialYouPanel extends LitElement {
 									'Other Devices',
 									'Other devices registered with Browser Mod.',
 								)}
-								${this.devices.map(
-									(id) => html`
-										<material-you-config-card
-											.hass=${this.hass}
-											.dataId=${id}
-										></material-you-config-card>
-									`,
-								)}`
+								<div class="section">
+									${this.devices.map(
+										(id) => html`
+											<material-you-config-card
+												.hass=${this.hass}
+												.dataId=${id}
+											></material-you-config-card>
+										`,
+									)}
+								</div>`
 						: buildAlertBox(
 								'Device settings requires Browser Mod, which can be installed using HACS.',
 								'error',
@@ -216,15 +214,16 @@ export class MaterialYouPanel extends LitElement {
 						'Everyone Else',
 						'Other users on this Home Assistant instance.',
 					)}
-					${this.people.map(
-						(id) => html`
-							<material-you-config-card
-								.hass=${this.hass}
-								.dataId=${this.hass.states[id].attributes
-									.user_id}
-							></material-you-config-card>
-						`,
-					)}
+					<div class="section">
+						${this.people.map(
+							(id) => html`
+								<material-you-config-card
+									.hass=${this.hass}
+									.dataId=${this.hass.states[id].attributes.user_id}
+								></material-you-config-card>
+							`,
+						)}
+					</div>
 				`;
 				break;
 			case 0:
@@ -258,11 +257,7 @@ export class MaterialYouPanel extends LitElement {
 			${this.buildHeader()}
 			<div class="content">
 				${this.hass.user?.is_admin
-					? this.buildTabBar(
-							this.tabBarIndex,
-							this.handleTabBar,
-							this.tabs,
-						)
+					? this.buildTabBar(this.tabBarIndex, this.handleTabBar, this.tabs)
 					: ''}
 				${warnings}
 				<div class="page-header">
@@ -314,14 +309,8 @@ export class MaterialYouPanel extends LitElement {
 				color: var(--secondary-text-color);
 				font-size: var(--md-sys-typescale-label-medium-size, 12px);
 				font-weight: var(--md-sys-typescale-label-medium-weight, 500);
-				line-height: var(
-					--md-sys-typescale-label-medium-line-height,
-					16px
-				);
-				letter-spacing: var(
-					--md-sys-typescale-label-medium-tracking,
-					0.5px
-				);
+				line-height: var(--md-sys-typescale-label-medium-line-height, 16px);
+				letter-spacing: var(--md-sys-typescale-label-medium-tracking, 0.5px);
 			}
 			.version {
 				width: 100%;
@@ -337,27 +326,15 @@ export class MaterialYouPanel extends LitElement {
 			.page-header .title {
 				font-size: var(--md-sys-typescale-display-small-size, 36px);
 				font-weight: var(--md-sys-typescale-display-small-weight, 400);
-				line-height: var(
-					--md-sys-typescale-display-small-line-height,
-					44px
-				);
-				letter-spacing: var(
-					--md-sys-typescale-display-small-tracking,
-					0
-				);
+				line-height: var(--md-sys-typescale-display-small-line-height, 44px);
+				letter-spacing: var(--md-sys-typescale-display-small-tracking, 0);
 			}
 			.page-header .description {
 				color: var(--secondary-text-color);
 				font-size: var(--md-sys-typescale-title-medium-size, 16px);
 				font-weight: var(--md-sys-typescale-title-medium-weight, 500);
-				line-height: var(
-					--md-sys-typescale-title-medium-line-height,
-					24px
-				);
-				letter-spacing: var(
-					--md-sys-typescale-title-medium-tracking,
-					0.15px
-				);
+				line-height: var(--md-sys-typescale-title-medium-line-height, 24px);
+				letter-spacing: var(--md-sys-typescale-title-medium-tracking, 0.15px);
 			}
 
 			.content {
@@ -388,33 +365,28 @@ export class MaterialYouPanel extends LitElement {
 			.section-header {
 				width: var(--width);
 				padding: 0 16px;
-				margin-bottom: -12px;
 				box-sizing: border-box;
 			}
 			.section-header .title {
-				line-height: var(
-					--md-sys-typescale-headline-large-line-height,
-					40px
-				);
+				line-height: var(--md-sys-typescale-headline-large-line-height, 40px);
 				font-size: var(--md-sys-typescale-headline-large-size, 32px);
 				font-weight: var(--md-sys-typescale-headline-large-weight, 400);
-				letter-spacing: var(
-					--md-sys-typescale-headline-large-tracking,
-					0
-				);
+				letter-spacing: var(--md-sys-typescale-headline-large-tracking, 0);
 			}
 			.section-header .description {
 				color: var(--secondary-text-color);
-				line-height: var(
-					--md-sys-typescale-body-large-line-height,
-					24px
-				);
+				line-height: var(--md-sys-typescale-body-large-line-height, 24px);
 				font-size: var(--md-sys-typescale-body-large-size, 16px);
 				font-weight: var(--md-sys-typescale-body-large-weight, 400);
-				letter-spacing: var(
-					--md-sys-typescale-body-large-tracking,
-					0.5px
-				);
+				letter-spacing: var(--md-sys-typescale-body-large-tracking, 0.5px);
+			}
+			.section {
+				width: 100%;
+				display: grid;
+				justify-content: center;
+				justify-items: center;
+				gap: 24px;
+				grid-template-columns: repeat(auto-fit, var(--width));
 			}
 
 			.theme-mode-fab {
@@ -429,12 +401,8 @@ export class MaterialYouPanel extends LitElement {
 				border-radius: var(--md-sys-shape-corner-large, 16px);
 				background: var(--md-sys-color-tertiary-container, #5b3d57);
 				color: var(--md-sys-color-on-tertiary-container, #ffd7f6);
-				box-shadow: var(
-					--md-sys-elevation-level3,
-					var(--mdc-fab-box-shadow)
-				);
-				transition: box-shadow
-					var(--md-sys-motion-expressive-effects-slow);
+				box-shadow: var(--md-sys-elevation-level3, var(--mdc-fab-box-shadow));
+				transition: box-shadow var(--md-sys-motion-expressive-effects-slow);
 			}
 			.theme-mode-fab::after {
 				content: '';
@@ -445,15 +413,11 @@ export class MaterialYouPanel extends LitElement {
 				border-radius: var(--md-sys-shape-corner-large, 16px);
 				background: var(--md-sys-color-on-tertiary-container, #5b3d57);
 				opacity: 0;
-				transition: opacity
-					var(--md-sys-motion-expressive-effects-default);
+				transition: opacity var(--md-sys-motion-expressive-effects-default);
 			}
 			@media (hover: hover) {
 				.theme-mode-fab:hover {
-					box-shadow: var(
-						--md-sys-elevation-level4,
-						var(--mdc-fab-box-shadow)
-					);
+					box-shadow: var(--md-sys-elevation-level4, var(--mdc-fab-box-shadow));
 				}
 				.theme-mode-fab:hover::after {
 					opacity: 0.08;
