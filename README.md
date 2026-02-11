@@ -188,6 +188,10 @@ You can choose to hide the navigation bar shown at the bottom of views by toggli
 
 You can choose to hide the navigation bar labels shown below and trailing the view tabs at the bottom of views by toggling this setting off. If the navigation bar is hidden this setting does nothing and is hidden in the settings card.
 
+#### Show Navigation Rail Labels
+
+You can choose to hide the navigation rail item labels shown on the leading side of the screen below their icons when the navigation rail is not expanded by toggling this setting off. This does not affect the expanded navigation rail which always shows the item labels.
+
 ### Other
 
 #### Harmonize Semantic Colors

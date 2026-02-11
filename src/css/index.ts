@@ -25,6 +25,7 @@ import haMenuButton from './ha-menu-button.css';
 import haSelectBox from './ha-select-box.css';
 import haSelect from './ha-select.css';
 import haSettingsRow from './ha-settings-row.css';
+import haSidebarHideNavrailLabels from './ha-sidebar-hide-navrail-labels.css';
 import haSidebar from './ha-sidebar.css';
 import haSlider from './ha-slider.css';
 import haSwitch from './ha-switch.css';
@@ -126,6 +127,9 @@ export const cardTypes: Record<string, string> = {
 };
 
 export {
+	// Hide navigation rail labels
+	haSidebarHideNavrailLabels,
+
 	// Hide application bar
 	huiRootHideAppbar,
 

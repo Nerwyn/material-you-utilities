@@ -3,6 +3,7 @@ import {
 	hideAppbar,
 	hideNavbar,
 	hideNavbarLabels,
+	hideNavrailLabels,
 	setBaseColorFromImage,
 	setCardType,
 	setCSSFromFile,
@@ -20,7 +21,7 @@ export const services: Record<InputDomain, string> = {
 };
 
 export const inputs: Record<InputField, IInputInfo> = {
-	// Theme options
+	// Theme
 	base_color: {
 		domain: 'input_text',
 		default: '#4C5C92',
@@ -135,7 +136,7 @@ Not available for the 2021 specification.`,
 		handler: setTheme,
 	},
 
-	// Style options
+	// Style
 	styles: {
 		domain: 'input_boolean',
 		default: 'on',
@@ -258,8 +259,27 @@ Does not restore the default Home Assistant view tabs.`,
 		},
 		handler: hideNavbarLabels,
 	},
+	navrail_labels: {
+		domain: 'input_boolean',
+		default: 'on',
+		name: 'Show Navigation Rail Labels',
+		description: `Show/hide the destination rail item labels in the navigation rail on the leading side of the screen.
+Does not affect the expanded navigation rail.`,
+		init: {
+			config: {
+				icon: 'mdi:page-layout-sidebar-left',
+			},
+		},
+		card: {
+			config: {
+				boolean: {},
+			},
+			tabBarIndex: 1,
+		},
+		handler: hideNavrailLabels,
+	},
 
-	// Color options
+	// Other
 	harmonize: {
 		domain: 'input_boolean',
 		default: 'on',

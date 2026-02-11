@@ -94,6 +94,7 @@ ha-md-list-item.selected {
 
 /* Display label when not expanded */
 :host(:not([expanded])) ha-md-list-item .item-text {
+	display: var(--navigation-rail-label-display, block);
 	width: var(--mdc-drawer-width);
 	text-align: center;
 	white-space: initial;

@@ -1,0 +1,4 @@
+/* Hide sidebar label */
+html {
+	--navigation-rail-label-display: none;
+}

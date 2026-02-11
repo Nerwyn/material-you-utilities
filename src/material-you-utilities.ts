@@ -21,6 +21,7 @@ import {
 	setTheme,
 	showAppbarTitle,
 } from './utils/handlers';
+import { hideNavrailLabels } from './utils/handlers/navrailLabels';
 import { mdLog } from './utils/logging';
 import { setupSubscriptions } from './utils/subscriptions';
 
@@ -94,6 +95,7 @@ async function main() {
 						showAppbarTitle,
 						hideNavbar,
 						hideNavbarLabels,
+						hideNavrailLabels,
 					];
 					for (const handler of handlers) {
 						await handler(args);

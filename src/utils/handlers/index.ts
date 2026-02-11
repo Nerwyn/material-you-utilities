@@ -10,6 +10,7 @@ export * from './harmonize';
 export * from './image';
 export * from './navbar';
 export * from './navbarLabels';
+export * from './navrailLabels';
 export * from './styles';
 export * from './theme';
 

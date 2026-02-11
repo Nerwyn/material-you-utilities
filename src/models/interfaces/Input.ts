@@ -16,6 +16,7 @@ export type InputField =
 	| 'appbar_title'
 	| 'navbar'
 	| 'navbar_labels'
+	| 'navrail_labels'
 	| 'harmonize'
 	| 'image_url'
 	| 'css_file';
