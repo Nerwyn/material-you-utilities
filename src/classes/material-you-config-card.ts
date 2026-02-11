@@ -404,9 +404,15 @@ export class MaterialYouConfigCard extends LitElement {
 
 		const config = inputs[field].card.config;
 		if (inputs[field].domain == 'input_number') {
-			config.min = this.hass.states[entityId]?.attributes?.min ?? -1;
-			config.max = this.hass.states[entityId]?.attributes?.max ?? 1;
-			config.step = this.hass.states[entityId]?.attributes?.step ?? 0.01;
+			config.min =
+				this.hass.states[entityId]?.attributes?.min ??
+				inputs[field].card.config.min;
+			config.max =
+				this.hass.states[entityId]?.attributes?.max ??
+				inputs[field].card.config.max;
+			config.step =
+				this.hass.states[entityId]?.attributes?.step ??
+				inputs[field].card.config.step;
 		} else if (inputs[field].domain == 'input_boolean') {
 			value = value == 'on';
 		}
@@ -598,8 +604,12 @@ export class MaterialYouConfigCard extends LitElement {
 		super.disconnectedCallback();
 
 		// Unsubscribe from theme update subscriptions
-		this.unsubscribers.forEach(async (unsubscriber) => {
-			unsubscriber();
+		this.unsubscribers.forEach((unsubscriber) => {
+			try {
+				unsubscriber();
+			} catch {
+				// Ignore
+			}
 		});
 	}
 
