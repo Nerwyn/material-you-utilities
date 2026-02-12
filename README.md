@@ -176,9 +176,9 @@ Some cards, like those found in the configuration pages, already have the attrib
 
 You can choose to hide the application bar shown at the top of views by toggline this setting off. This is useful for smaller tablet displays that do not need the application bar buttons. The menu button to open the sidebar is still clickable despite being hidden to prevent users from being locked into a view.
 
-#### Show View Title
+#### Show Application Bar Title
 
-As an alternative to Home Assistant's markdown view titles, you can choose to display the view title in the center of the application bar instead. If the application bar is hidden this title will be as well and this setting be hidden in the settings card.
+As an alternative to Home Assistant's markdown titles, you can choose to display the view name in the center of the application bar instead. If the application bar is hidden this title will be as well and this setting be hidden in the settings card.
 
 #### Show Navigation Bar
 
