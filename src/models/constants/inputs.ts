@@ -165,7 +165,13 @@ Does not apply to cards that are explicitly set to outlined like in settings.`,
 		init: {
 			config: {
 				icon: 'mdi:card',
-				options: ['elevated', 'filled', 'outlined', 'transparent'],
+				options: [
+					'elevated',
+					'filled',
+					'outlined',
+					'transparent',
+					'translucent',
+				],
 			},
 		},
 		card: {
@@ -177,6 +183,7 @@ Does not apply to cards that are explicitly set to outlined like in settings.`,
 						{ value: 'filled', label: 'Filled' },
 						{ value: 'outlined', label: 'Outlined' },
 						{ value: 'transparent', label: 'Transparent' },
+						{ value: 'translucent', label: 'Translucent' },
 					],
 				},
 			},

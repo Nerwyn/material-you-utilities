@@ -3,6 +3,7 @@ import haButton from './ha-button.css';
 import haCardElevated from './ha-card-elevated.css';
 import haCardFilled from './ha-card-filled.css';
 import haCardOutlined from './ha-card-outlined.css';
+import haCardTranslucent from './ha-card-translucent.css';
 import haCardTransparent from './ha-card-transparent.css';
 import haCard from './ha-card.css';
 import haConfigInfo from './ha-config-info.css';
@@ -124,6 +125,7 @@ export const cardTypes: Record<string, string> = {
 	filled: haCardFilled,
 	outlined: haCardOutlined,
 	transparent: haCardTransparent,
+	translucent: haCardTranslucent,
 };
 
 export {

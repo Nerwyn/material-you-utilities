@@ -5,4 +5,5 @@ body {
 	--ha-card-box-shadow: var(--md-sys-elevation-level1);
 	--ha-card-border-width: 0;
 	--ha-card-border-color: transparent;
+	--ha-card-backdrop-filter: none;
 }

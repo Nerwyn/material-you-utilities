@@ -1,0 +1,13 @@
+/* Transparent cards */
+:host,
+body {
+	--ha-card-background: rgba(
+		from var(--md-sys-color-surface-container-low) r g b / 0.15
+	);
+	--ha-card-box-shadow:
+		var(--md-sys-elevation-level1),
+		inset 0 4px 20px rgba(from var(--md-sys-color-inverse-surface) r g b / 0.1);
+	--ha-card-border-width: 0px;
+	--ha-card-border-color: transparent;
+	--ha-card-backdrop-filter: blur(6px);
+}

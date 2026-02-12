@@ -168,7 +168,7 @@ If you want to disable the Material Design 3 component upgrades, toggle Style Up
 
 #### Card Type
 
-The Material Design 3 specification has [three different card type style variations](https://m3.material.io/components/cards/overview#ccabd69f-a01a-4b55-868f-9428f244c4bd). You can choose which one will be used as the default card style here. You can also choose to make cards transparent.
+The Material Design 3 specification has [three different card type style variations](https://m3.material.io/components/cards/overview#ccabd69f-a01a-4b55-868f-9428f244c4bd) which can be set as the default style for almost all cards in Home Assistant. This module also adds transparent and translucent (like iOS Liquid Glass) card variants.
 
 Some cards, like those found in the configuration pages, already have the attribute `outlined`. This attribute will supersede the default `elevated` card style or user chosen card type.
 
