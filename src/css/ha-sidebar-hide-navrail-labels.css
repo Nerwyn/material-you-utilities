@@ -1,4 +1,9 @@
 /* Hide sidebar label */
 html {
 	--navigation-rail-label-display: none;
+	--navigation-rail-icon-top: 15px;
+	--navigation-rail-indicator-width: 54px;
+	--navigation-rail-indicator-height: 54px;
+	--navigation-rail-indicator-top: -15px;
+	--navigation-rail-indicator-left: -15px;
 }

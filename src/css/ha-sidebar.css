@@ -111,7 +111,7 @@ ha-md-list-item.selected {
 :host(:not([expanded])) ha-md-list-item ha-svg-icon,
 :host(:not([expanded])) ha-md-list-item ha-icon {
 	position: relative;
-	top: 4px;
+	top: var(--navigation-rail-icon-top, 4px);
 }
 
 /* Change background of current destination icon and add scale transition */
@@ -142,17 +142,19 @@ ha-md-list-item.selected {
 :host(:not([expanded])) ha-user-badge::after {
 	content: '';
 	position: absolute;
-	top: -4px;
-	left: -16px;
 	display: block;
-	height: 32px;
-	width: 56px;
+	top: var(--navigation-rail-indicator-top, -4px);
+	left: var(--navigation-rail-indicator-top, -16px);
+	height: var(--navigation-rail-indicator-height, 32px);
+	width: var(--navigation-rail-indicator-width, 56px);
 	border-radius: var(--sidebar-item-state-layer-shape);
 	z-index: -1;
 }
 :host(:not([expanded])) .notifications ha-svg-icon::after {
-	height: 56px;
-	top: -16px;
+	height: 54px;
+	width: 54px;
+	top: -14px;
+	left: -15px;
 }
 :host(:not([expanded])) ha-user-badge::after {
 	height: 56px;
