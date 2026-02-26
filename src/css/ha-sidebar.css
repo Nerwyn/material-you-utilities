@@ -63,7 +63,8 @@ ha-md-list-item {
 
 /* Modal sidebar item width */
 :host([narrow]) ha-md-list-item {
-	min-width: fit-content;
+	width: fit-content;
+	max-width: 256px;
 }
 
 /* Fix collapsed rail selected text color */
