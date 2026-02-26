@@ -373,6 +373,12 @@ A group of buttons used as a selector. Uses the filled button variant.
 
 <img src="https://raw.githubusercontent.com/Nerwyn/material-you-utilities/main/assets/button-group.png" width="200"/>
 
+### [Icon Buttons](https://m3.material.io/components/icon-buttons/overview)
+
+Small icon only buttons. Uses the small size variant. Colors are the same as regular buttons except for standard buttons, which uses on surface variant colors for the icon.
+
+<img src="https://raw.githubusercontent.com/Nerwyn/material-you-utilities/main/assets/icon-button.png" width="200"/>
+
 ### [FAB](https://m3.material.io/components/floating-action-button/overview)
 
 Floating action button with just an icon.
