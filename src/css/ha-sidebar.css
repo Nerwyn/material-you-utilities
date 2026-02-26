@@ -19,8 +19,8 @@
 /* Fix menu button size */
 .menu {
 	width: min-content;
+	margin-inline-start: 28px;
 	padding: 0;
-	margin: 0 24px;
 	border-width: 0;
 
 	--inherited-text-color: var(--md-sys-color-on-surface-variant);
