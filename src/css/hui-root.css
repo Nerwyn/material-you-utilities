@@ -78,7 +78,8 @@ ha-menu-button,
 		background var(--md-sys-motion-expressive-effects-default),
 		color var(--md-sys-motion-expressive-effects-default);
 
-	--mdc-icon-button-size: 40px;
+	--inherited-text-color: var(--md-sys-color-on-surface);
+	--mdc-icon-button-size: 24px;
 }
 .action-items > ha-dropdown > ha-icon-button,
 .action-items > ha-icon-button {
@@ -93,7 +94,8 @@ ha-menu-button,
 :host([scrolled]) .action-items > ha-dropdown > ha-icon-button,
 :host([scrolled]) .action-items > ha-icon-button {
 	background: var(--md-sys-color-secondary-container);
-	color: var(--md-sys-color-on-secondary-container);
+
+	--inherited-text-color: var(--md-sys-color-on-secondary-container);
 }
 
 /* Remove background from subview header buttons on scroll */
@@ -324,15 +326,16 @@ ha-tab-group-tab[active]::after {
 	);
 	inset-inline-end: calc(16px + env(safe-area-inset-right));
 	border-radius: var(--md-sys-shape-corner-large);
-	background-color: var(--md-sys-color-primary-container);
-	color: var(--md-sys-color-on-primary-container);
 	height: 56px;
 	width: 56px;
 	justify-content: center;
 	overflow: hidden;
 	box-shadow: var(--mdc-fab-box-shadow);
+	background-color: var(--md-sys-color-primary-container);
 
-	--mdc-icon-button-size: 64px;
+	--inherited-text-color: var(--md-sys-color-on-primary-container);
+	--mdc-icon-button-size: 24px;
+	--ha-icon-button-size: 56px;
 }
 
 /* Restore main title margin in edit mode */
@@ -376,6 +379,7 @@ ha-menu-button {
 			) +
 			env(safe-area-inset-bottom)
 	);
+	margin-top: 0px;
 
 	--footer-offset: calc(var(--footer-height) + env(safe-area-inset-bottom));
 }

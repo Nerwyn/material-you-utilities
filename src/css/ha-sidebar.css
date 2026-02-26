@@ -22,6 +22,9 @@
 	padding: 0;
 	margin: 0 24px;
 	border-width: 0;
+
+	--inherited-text-color: var(--md-sys-color-on-surface-variant);
+	--mdc-icon-button-size: 24px;
 }
 
 /* Remove scrollbar */
@@ -96,6 +99,8 @@ ha-md-list-item.selected {
 :host(:not([expanded])) ha-md-list-item .item-text {
 	display: var(--navigation-rail-label-display, block);
 	width: var(--mdc-drawer-width);
+	max-width: var(--mdc-drawer-width);
+	opacity: 1;
 	text-align: center;
 	white-space: initial;
 	box-sizing: border-box;

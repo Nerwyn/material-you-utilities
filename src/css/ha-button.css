@@ -32,7 +32,7 @@
 		background-color var(--md-sys-motion-expressive-effects-fast);
 	-webkit-tap-highlight-color: transparent;
 
-	--mdc-icon-size: 20px;
+	--mdc-icon-size: var(--mdc-icon-button-size, 20px);
 }
 slot {
 	color: var(--inherited-text-color, var(--ha-button-text-color));
