@@ -79,7 +79,7 @@ ha-menu-button,
 		color var(--md-sys-motion-expressive-effects-default);
 
 	--inherited-text-color: var(--md-sys-color-on-surface);
-	--mdc-icon-button-size: 24px;
+	--ha-button-mdc-icon-size: 24px;
 }
 .action-items > ha-dropdown > ha-icon-button,
 .action-items > ha-icon-button {
@@ -316,6 +316,8 @@ ha-tab-group-tab[active]::after {
 /* Style add view button to look like a FAB */
 .edit-mode:has(hui-sections-view) {
 	--add-view-fab-bottom: 16px;
+	--add-view-fab-size: 56px;
+	--footer-card-bottom: var(--footer-height);
 }
 #add-view {
 	position: fixed;
@@ -326,15 +328,15 @@ ha-tab-group-tab[active]::after {
 	);
 	inset-inline-end: calc(16px + env(safe-area-inset-right));
 	border-radius: var(--md-sys-shape-corner-large);
-	height: 56px;
-	width: 56px;
+	height: var(--add-view-fab-size);
+	width: var(--add-view-fab-size);
 	justify-content: center;
 	overflow: hidden;
 	box-shadow: var(--mdc-fab-box-shadow);
 	background-color: var(--md-sys-color-primary-container);
 
 	--inherited-text-color: var(--md-sys-color-on-primary-container);
-	--mdc-icon-button-size: 24px;
+	--ha-button-mdc-icon-size: 24px;
 	--ha-icon-button-size: 56px;
 }
 
@@ -372,7 +374,7 @@ ha-menu-button {
 		var(--view-padding-top, var(--kiosk-header-height, var(--header-height))) +
 			env(safe-area-inset-top)
 	);
-	padding-bottom: calc(
+	margin-bottom: calc(
 		var(
 				--view-padding-bottom,
 				var(--kiosk-header-height, var(--footer-height))
