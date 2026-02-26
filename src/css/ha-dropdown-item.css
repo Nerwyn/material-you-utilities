@@ -56,7 +56,7 @@
 :host([variant='danger']) #label {
 	color: var(--md-sys-color-error);
 
-	--icon-primary-color: var(--md-sys-color-on-tertiary-container);
+	--icon-primary-color: var(--md-sys-color-error);
 }
 
 /* Fix checkbox margins */
