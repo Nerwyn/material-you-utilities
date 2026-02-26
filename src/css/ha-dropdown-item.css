@@ -31,6 +31,8 @@
 	font-weight: var(--md-sys-typescale-label-large-weight);
 	line-height: var(--md-sys-typescale-label-large-line-height);
 	letter-spacing: var(--md-sys-typescale-label-large-tracking);
+
+	--ha-color-text-secondary: var(--md-sys-color-on-surface-variant);
 }
 #details {
 	font-size: var(--md-sys-typescale-body-small-size);
@@ -47,6 +49,7 @@
 	color: var(--md-sys-color-on-tertiary-container);
 
 	--icon-primary-color: var(--md-sys-color-on-tertiary-container);
+	--ha-color-text-secondary: var(--md-sys-color-on-tertiary-container);
 }
 :host([variant='danger']) #icon ::slotted(*),
 :host([variant='danger']) #details,
