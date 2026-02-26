@@ -1,7 +1,5 @@
 /* Fix view footer card position */
 hui-view-footer {
-	/* TODO why is this inconsistent after leaving edit mode? */
-	position: relative;
-	bottom: var(--footer-card-bottom, 0px);
+	bottom: var(--view-footer-card-bottom, 72px);
 	max-width: calc(100% - var(--add-view-fab-size, 0px));
 }
