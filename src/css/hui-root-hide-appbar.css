@@ -1,6 +1,6 @@
-/* Hide toolbar */
+/* Hide application bar */
 html {
 	--ha-menu-button-opacity: 0;
 	--toolbar-display: none;
-	--view-padding-top: 0px;
+	--view-container-padding-override-top: 0px;
 }

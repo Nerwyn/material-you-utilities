@@ -167,7 +167,11 @@ ha-tab-group::after {
 
 /* Option to hide navigation bar when not in edit mode */
 :not(.edit-mode) > .header ha-tab-group {
-	display: var(--navbar-display, initial);
+	height: var(--view-container-padding-override-bottom, min-content);
+	min-height: var(
+		--view-container-padding-override-bottom,
+		var(--footer-height)
+	);
 }
 
 /* Make tabs full width and remove bottom border */
@@ -317,7 +321,7 @@ ha-tab-group-tab[active]::after {
 .edit-mode:has(hui-sections-view) {
 	--add-view-fab-bottom: 16px;
 	--add-view-fab-size: 56px;
-	--footer-card-bottom: var(--footer-height);
+	--footer-card-bottom: 48px;
 }
 #add-view {
 	position: fixed;
@@ -364,22 +368,37 @@ ha-menu-button {
 	display: var(--toolbar-display, flex);
 }
 .header:not(:has(ha-tab-group)) + #view {
-	--view-padding-bottom: 0px;
+	--view-container-padding-override-bottom: 0px;
 }
 .edit-mode #view {
-	--view-padding-bottom: var(--kiosk-header-height, var(--footer-height));
+	--view-container-padding-override-bottom: var(
+		--kiosk-header-height,
+		calc(
+			var(--footer-height) + env(safe-area-inset-bottom) +
+				var(--view-container-padding-bottom)
+		)
+	);
 }
 #view {
-	padding-top: calc(
-		var(--view-padding-top, var(--kiosk-header-height, var(--header-height))) +
-			env(safe-area-inset-top)
-	);
-	margin-bottom: calc(
+	padding-top: var(
+		--view-container-padding-override-top,
 		var(
-				--view-padding-bottom,
-				var(--kiosk-header-height, var(--footer-height))
-			) +
-			env(safe-area-inset-bottom)
+			--kiosk-header-height,
+			calc(
+				var(--header-height) + env(safe-area-inset-top) +
+					var(--view-container-padding-top, 0px)
+			)
+		)
+	);
+	padding-bottom: var(
+		--view-container-padding-override-bottom,
+		var(
+			--kiosk-header-height,
+			calc(
+				var(--footer-height) + env(safe-area-inset-bottom) +
+					var(--view-container-padding-bottom, 0px)
+			)
+		)
 	);
 	margin-top: 0px;
 
@@ -388,11 +407,11 @@ ha-menu-button {
 
 /* View bottom padding with period selector */
 :host(.has-period-selector) #view {
-	padding-bottom: calc(
+	/* padding-bottom: calc(
 		var(--view-container-padding-bottom, 0px) +
 			var(--kiosk-header-height, var(--footer-height, 0px)) +
 			var(--ha-space-4, 16px) + env(safe-area-inset-bottom)
-	);
+	); */
 }
 
 /* Fix edit mode view top padding and buttons */
