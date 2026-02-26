@@ -379,7 +379,7 @@ Small icon only buttons. Uses the small size variant. Colors are the same as reg
 
 <img src="https://raw.githubusercontent.com/Nerwyn/material-you-utilities/main/assets/icon-button.png" width="200"/>
 
-### [FAB](https://m3.material.io/components/floating-action-button/overview)
+### [FABs](https://m3.material.io/components/floating-action-button/overview)
 
 Floating action button with just an icon.
 
@@ -389,7 +389,7 @@ Floating action button with just an icon.
 
 <img src="https://raw.githubusercontent.com/Nerwyn/material-you-utilities/main/assets/fab.png" width="500"/>
 
-### [Extended FAB](https://m3.material.io/components/extended-fab/overview)
+### [Extended FABs](https://m3.material.io/components/extended-fab/overview)
 
 Extended floating action buttons which appear in legacy views, and the integrations, devices, and helpers pages.
 
