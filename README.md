@@ -496,6 +496,12 @@ Background color changes on scroll and updated font.
 - Home Assistant has a more modern dialog used for confirmations and similar messages. This dialog mostly follows the Material Design 3 specification, but does not turn into a full-screen dialog on smaller displays.
 - Dialogs have been updated with an expressive opening animation.
 
+### [Bottom Sheets](https://m3.material.io/components/bottom-sheets/overview)
+
+Windows that appear to display information from the bottom of the screen, like mobile more-info dialogs. Have altered colors, handle size, and animations.
+
+<img src="https://raw.githubusercontent.com/Nerwyn/material-you-utilities/main/assets/bottom-sheet.png" width="500"/>
+
 # Developing, Modifying, and Building
 
 This repository requires npm and Node.js to develop. The JavaScript module is a minified file compiled using rspack. The source files are all written using TypeScript. After forking the repository and cloning to your machine, run the command `npm run setup` to setup the pre-commit hooks and install dependencies.
