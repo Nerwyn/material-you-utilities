@@ -1,4 +1,5 @@
 import haAssistChip from './ha-assist-chip.css';
+import haBottomSheet from './ha-bottom-sheet.css';
 import haButton from './ha-button.css';
 import haCardElevated from './ha-card-elevated.css';
 import haCardFilled from './ha-card-filled.css';
@@ -52,6 +53,7 @@ import huiSectionsView from './hui-sections-view.css';
 import huiViewHeader from './hui-view-header.css';
 import huiViewVisibilityEditor from './hui-view-visibility-editor.css';
 import waDialog from './wa-dialog.css';
+import waDrawer from './wa-drawer.css';
 
 /**
  * Home Assistant (and other) custom elements to patch when they are added to DOM
@@ -59,6 +61,7 @@ import waDialog from './wa-dialog.css';
 export const implicitElements: Record<string, string> = {
 	'ha-assist-chip': haAssistChip,
 	'ha-button': haButton,
+	'ha-bottom-sheet': haBottomSheet,
 	'ha-card': haCard,
 	'ha-config-info': haConfigInfo,
 	'ha-dialog': haDialog,
@@ -100,6 +103,7 @@ export const implicitElements: Record<string, string> = {
 	'hui-view-visibility-editor': huiViewVisibilityEditor,
 	'hue-like-light-card': hueLikeLightCard,
 	'wa-dialog': waDialog,
+	'wa-drawer': waDrawer,
 };
 
 /**

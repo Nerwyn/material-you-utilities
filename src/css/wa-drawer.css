@@ -1,0 +1,9 @@
+/* Expressive animations */
+.drawer.show.bottom {
+	animation: show-drawer-from-bottom
+		var(--md-sys-motion-expressive-spatial-default);
+}
+.drawer.hide.bottom {
+	animation: show-drawer-from-bottom
+		var(--md-sys-motion-expressive-spatial-fast) reverse;
+}
