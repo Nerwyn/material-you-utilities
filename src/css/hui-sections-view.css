@@ -1,5 +1,8 @@
 /* Fix view footer card position */
 hui-view-footer {
-	bottom: var(--view-footer-card-bottom, 72px);
+	bottom: calc(
+		var(--view-footer-card-bottom, var(--footer-height, 0px)) +
+			env(safe-area-inset-bottom) + var(--view-container-padding-bottom, 0px)
+	);
 	max-width: calc(100% - var(--add-view-fab-size, 0px));
 }

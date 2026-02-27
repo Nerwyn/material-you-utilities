@@ -321,7 +321,7 @@ ha-tab-group-tab[active]::after {
 .edit-mode:has(hui-sections-view) {
 	--add-view-fab-bottom: 16px;
 	--add-view-fab-size: 56px;
-	--view-footer-card-bottom: 72px;
+	--view-footer-card-bottom: var(--footer-height);
 }
 #add-view {
 	position: fixed;
