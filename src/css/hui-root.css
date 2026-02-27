@@ -405,15 +405,6 @@ ha-menu-button {
 	--footer-offset: calc(var(--footer-height) + env(safe-area-inset-bottom));
 }
 
-/* View bottom padding with period selector */
-:host(.has-period-selector) #view {
-	/* padding-bottom: calc(
-		var(--view-container-padding-bottom, 0px) +
-			var(--kiosk-header-height, var(--footer-height, 0px)) +
-			var(--ha-space-4, 16px) + env(safe-area-inset-bottom)
-	); */
-}
-
 /* Fix edit mode view top padding and buttons */
 .edit-mode ha-menu-button {
 	opacity: 1;
