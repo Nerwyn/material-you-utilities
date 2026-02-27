@@ -36,7 +36,6 @@ import haToast from './ha-toast.css';
 import haTooltip from './ha-tooltip.css';
 import haTopAppBarFixed from './ha-top-app-bar-fixed.css';
 import haUserBadge from './ha-user-badge.css';
-import haWaDialog from './ha-wa-dialog.css';
 import homeAssistantMain from './home-assistant-main.css';
 import homeAssistant from './home-assistant.css';
 import hueLikeLightCard from './hue-like-light-card.css';
@@ -63,7 +62,6 @@ export const implicitElements: Record<string, string> = {
 	'ha-card': haCard,
 	'ha-config-info': haConfigInfo,
 	'ha-dialog': haDialog,
-	'ha-wa-dialog': haWaDialog,
 	'ha-md-dialog': haMdDialog,
 	'ha-dialog-header': haDialogHeader,
 	'ha-dropdown': haDropdown,

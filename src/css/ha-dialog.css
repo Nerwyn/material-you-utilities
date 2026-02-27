@@ -1,28 +1,32 @@
-/* Fix slider thumb background color */
-#content {
-	--ha-slider-thumb-negative-color: var(--ha-dialog-surface-background);
+/* Fix background color, elevation, and background transition */
+:host {
+	--md-list-container-color: transparent;
 }
-
-/* Add elevation and color transition */
-.mdc-dialog__surface {
+wa-dialog::part(dialog) {
+	background-color: var(--md-sys-color-surface-container-high);
 	box-shadow: var(--md-sys-elevation-level3);
-	transition: background var(--md-sys-motion-expressive-effects-slow);
+	transition:
+		background-color var(--md-sys-motion-expressive-effects-slow),
+		width var(--md-sys-motion-expressive-spatial-fast),
+		min-width var(--md-sys-motion-expressive-spatial-fast),
+		max-width var(--md-sys-motion-expressive-spatial-fast);
 }
 
-/* Expressive transition on dialog open */
-.mdc-dialog__container {
-	transition: all var(--md-sys-motion-expressive-spatial-fast);
+/* Fix slider thumb background color */
+wa-dialog::part(body) {
+	--ha-slider-thumb-negative-color: var(--ha-dialog-surface-background);
 }
 
 /* Apply full-screen dialog styles */
 @media (max-width: 450px), (max-height: 500px) {
-	:host {
-		--ha-dialog-surface-background: var(--md-sys-color-surface);
+	:host([type='standard']) wa-dialog::part(dialog) {
+		background-color: var(--md-sys-color-surface);
 	}
-	:host([scrolled]) {
-		--ha-dialog-surface-background: var(--md-sys-color-surface-container);
+	:host([type='standard'])
+		wa-dialog:has(ha-dialog-header[show-border])::part(dialog) {
+		background-color: var(--md-sys-color-surface-container);
 	}
-	:host ::slotted(ha-dialog-header) {
+	:host([type='standard']) ha-dialog-header {
 		background: var(--md-sys-color-surface);
 	}
 }
