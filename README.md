@@ -313,15 +313,15 @@ An outlined card with the same background color as the view and no elevation.
 
 - Cards will default to `elevated` unless they have a class or attribute that says otherwise.
 - Some cards such as those found in the settings pages already have the attribute `outlined`, which will supersede the default `elevated` style.
-- In order to use card styles other than elevated, you have to modify the class of the card using card-mod or set an alternate card type using the configuration panel [as described above](#card-type). The options are:
+- In order to use card styles other than elevated, you have to modify the class of the card using [UI eXtension](https://github.com/Lint-Free-Technology/uix) or set an alternate card type using the configuration panel [as described above](#card-type). The options are:
   - elevated
   - filled
   - outlined
   - transparent
-- Card type classes set with card-mod will supersede card types set using the configuration panel. This way you can set an overall default card type but still modify the card types of individual cards.
+- Card type classes set with UI eXtension will supersede card types set using the configuration panel. This way you can set an overall default card type but still modify the card types of individual cards.
 
 ```yaml
-card_mod:
+uix:
   class: 'filled'
 ```
 
