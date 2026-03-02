@@ -15,7 +15,7 @@
 
 /* Hide single tab view dashboard title */
 ha-menu-button + .main-title {
-	display: none;
+	display: var(--appbar-title-display, none);
 }
 
 /* Subview title font */
@@ -70,9 +70,12 @@ ha-menu-button,
 }
 
 /* Add background to header buttons on scroll */
-ha-menu-button,
-.action-items > ha-dropdown > ha-icon-button,
-.action-items > ha-icon-button {
+:not(:has(ha-icon-button-arrow-prev)) > ha-menu-button,
+:not(:has(ha-icon-button-arrow-prev))
+	> .action-items
+	> ha-dropdown
+	> ha-icon-button,
+:not(:has(ha-icon-button-arrow-prev)) > .action-items > ha-icon-button {
 	border-radius: var(--md-sys-shape-corner-full);
 	transition:
 		background var(--md-sys-motion-expressive-effects-default),
@@ -81,36 +84,31 @@ ha-menu-button,
 	--inherited-text-color: var(--md-sys-color-on-surface);
 	--ha-button-mdc-icon-size: 24px;
 }
-.action-items > ha-dropdown > ha-icon-button,
-.action-items > ha-icon-button {
+:not(:has(ha-icon-button-arrow-prev))
+	> .action-items
+	> ha-dropdown
+	> ha-icon-button,
+:not(:has(ha-icon-button-arrow-prev)) > .action-items > ha-icon-button {
 	display: flex;
 	justify-content: center;
 	width: 32px;
 	margin: 0 4px;
 }
-:host([scrolled]) ha-menu-button {
+:host([scrolled]) :not(:has(ha-icon-button-arrow-prev)) ha-menu-button {
 	background: var(--md-sys-color-surface-container);
 }
-:host([scrolled]) .action-items > ha-dropdown > ha-icon-button,
-:host([scrolled]) .action-items > ha-icon-button {
+:host([scrolled])
+	:not(:has(ha-icon-button-arrow-prev))
+	> .action-items
+	> ha-dropdown
+	> ha-icon-button,
+:host([scrolled])
+	:not(:has(ha-icon-button-arrow-prev))
+	> .action-items
+	> ha-icon-button {
 	background: var(--md-sys-color-secondary-container);
 
 	--inherited-text-color: var(--md-sys-color-on-secondary-container);
-}
-
-/* Remove background from subview header buttons on scroll */
-:host([scrolled])
-	ha-icon-button-arrow-prev
-	~ .main-title
-	~ .action-items
-	ha-button-menu,
-:host([scrolled])
-	ha-icon-button-arrow-prev
-	~ .main-title
-	~ .action-items
-	> ha-icon-button {
-	background: unset;
-	color: var(--md-sys-color-on-surface-variant);
 }
 
 /* Remove toolbar padding */
