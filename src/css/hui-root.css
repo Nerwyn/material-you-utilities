@@ -43,8 +43,16 @@ ha-tab-group-tab[active]::before {
 	);
 }
 :host([scrolled]) :not(:has(ha-icon-button-arrow-prev)) > .main-title,
-:host([scrolled]) ha-tab-group-tab[active]::before {
+:host([scrolled]) :not(.edit-mode) ha-tab-group-tab[active]::before {
 	translate: -50% -150%;
+}
+.edit-mode .main-title,
+:host([scrolled]) .edit-mode .main-title {
+	position: static;
+	translate: none;
+}
+.edit-mode ha-tab-group-tab::before {
+	display: none;
 }
 
 /*
@@ -346,7 +354,7 @@ ha-tab-group-tab[active]::after {
 .edit-mode .main-title {
 	display: flex;
 	align-items: center;
-	margin: 0 24px;
+	padding: 0 24px;
 }
 
 /* Fix edit mode menu link color */
