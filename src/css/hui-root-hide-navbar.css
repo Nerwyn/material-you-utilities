@@ -2,4 +2,5 @@
 html {
 	--view-container-padding-override-bottom: 0px;
 	--view-footer-card-bottom: 0px;
+	--navigation-bar-visibility: hidden;
 }

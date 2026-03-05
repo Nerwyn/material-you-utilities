@@ -38,6 +38,7 @@ ha-tab-group-tab[active]::before {
 ha-tab-group-tab[active]::before {
 	content: attr(aria-label);
 	display: var(--appbar-title-display, none);
+	visibility: visible;
 	top: calc(
 		(var(--header-height) - var(--md-sys-typescale-title-large-line-height)) / 2
 	);
@@ -173,11 +174,9 @@ ha-tab-group::after {
 
 /* Option to hide navigation bar when not in edit mode */
 :not(.edit-mode) > .header ha-tab-group {
-	height: var(--view-container-padding-override-bottom, min-content);
-	min-height: var(
-		--view-container-padding-override-bottom,
-		var(--footer-height)
-	);
+	height: min-content;
+	min-height: var(--footer-height);
+	visibility: var(--navigation-bar-visibility, visible);
 }
 
 /* Make tabs full width and remove bottom border */
