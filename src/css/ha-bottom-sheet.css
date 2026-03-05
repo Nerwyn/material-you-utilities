@@ -9,8 +9,9 @@
 	);
 }
 
-/* Elevation */
+/* Elevation and height */
 wa-drawer::part(dialog) {
+	height: fit-content;
 	box-shadow: var(--md-sys-elevation-level1);
 }
 

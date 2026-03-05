@@ -498,7 +498,7 @@ Background color changes on scroll and updated font.
 
 ### [Bottom Sheets](https://m3.material.io/components/bottom-sheets/overview)
 
-Windows that appear to display information from the bottom of the screen, like mobile more-info dialogs. Have altered colors, handle size, and animations.
+Windows that appear to display information from the bottom of the screen, like mobile more-info dialogs. Have altered height, colors, handle size, and animations.
 
 <img src="https://raw.githubusercontent.com/Nerwyn/material-you-utilities/main/assets/bottom-sheet.png" width="500"/>
 
