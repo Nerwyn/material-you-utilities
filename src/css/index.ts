@@ -64,6 +64,7 @@ export const implicitElements: Record<string, string> = {
 	'ha-bottom-sheet': haBottomSheet,
 	'ha-card': haCard,
 	'ha-config-info': haConfigInfo,
+	'ha-config-section-updates': haConfigSectionUpdates,
 	'ha-dialog': haDialog,
 	'ha-md-dialog': haMdDialog,
 	'ha-dialog-header': haDialogHeader,
@@ -92,7 +93,6 @@ export const implicitElements: Record<string, string> = {
 	'ha-toast': haToast,
 	'ha-tooltip': haTooltip,
 	'ha-user-badge': haUserBadge,
-	'ha-config-section-updates': haConfigSectionUpdates,
 	'hui-card': huiCardChild, // applied to child hui-*-card
 	'hui-entities-toggle': huiEntitiesToggle,
 	'hui-entities-card-editor': huiEntitiesCardEditor,

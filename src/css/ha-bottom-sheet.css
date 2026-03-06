@@ -4,14 +4,19 @@
 		--md-sys-color-surface-container-low
 	);
 	--ha-bottom-sheet-border-radius: var(--md-sys-shape-corner-extra-large);
-	--ha-bottom-sheet-height: calc(
+	--ha-bottom-sheet-height: fit-content;
+	--ha-bottom-sheet-max-height: calc(
 		100dvh - max(var(--safe-area-inset-top), 72px)
 	);
 }
 
-/* Elevation and height */
+/* Fix search combo box height */
+::slotted(ha-picker-combo-box) {
+	min-height: calc(var(--ha-bottom-sheet-max-height) - 76px);
+}
+
+/* Elevation */
 wa-drawer::part(dialog) {
-	height: fit-content;
 	box-shadow: var(--md-sys-elevation-level1);
 }
 
