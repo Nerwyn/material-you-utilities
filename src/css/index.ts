@@ -52,6 +52,7 @@ import huiRoot from './hui-root.css';
 import huiSectionsView from './hui-sections-view.css';
 import huiViewHeader from './hui-view-header.css';
 import huiViewVisibilityEditor from './hui-view-visibility-editor.css';
+import manualAutomationEditor from './manual-automation-editor.css';
 import waDialog from './wa-dialog.css';
 import waDrawer from './wa-drawer.css';
 
@@ -102,6 +103,7 @@ export const implicitElements: Record<string, string> = {
 	'hui-view-header': huiViewHeader,
 	'hui-view-visibility-editor': huiViewVisibilityEditor,
 	'hue-like-light-card': hueLikeLightCard,
+	'manual-automation-editor': manualAutomationEditor,
 	'wa-dialog': waDialog,
 	'wa-drawer': waDrawer,
 };

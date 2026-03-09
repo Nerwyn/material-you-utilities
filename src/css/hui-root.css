@@ -323,9 +323,11 @@ ha-tab-group-tab[active]::after {
 }
 
 /* Style add view button to look like a FAB */
+.edit-mode {
+	--add-view-fab-size: 56px;
+}
 .edit-mode:has(hui-sections-view) {
 	--add-view-fab-bottom: 16px;
-	--add-view-fab-size: 56px;
 	--view-footer-card-bottom: var(--footer-height);
 }
 #add-view {
@@ -407,7 +409,7 @@ ha-menu-button {
 	);
 	margin-top: 0px;
 
-	--footer-offset: calc(var(--footer-height) + env(safe-area-inset-bottom));
+	--fab-offset: calc(var(--footer-height) + env(safe-area-inset-bottom));
 }
 
 /* Fix edit mode view top padding and buttons */

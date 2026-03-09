@@ -3,6 +3,7 @@
 	--ha-bottom-sheet-surface-background: var(
 		--md-sys-color-surface-container-low
 	);
+	--ha-slider-thumb-negative-color: var(--ha-bottom-sheet-surface-background);
 	--ha-bottom-sheet-border-radius: var(--md-sys-shape-corner-extra-large);
 	--ha-bottom-sheet-height: fit-content;
 	--ha-bottom-sheet-max-height: calc(
