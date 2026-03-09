@@ -1,7 +1,0 @@
-/* Fix FAB position */
-ha-fab {
-	--fab-offset: -96px;
-}
-ha-fab.dirty {
-	--fab-offset: 0px;
-}

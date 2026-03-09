@@ -44,6 +44,7 @@ import huiCardChild from './hui-card-child.css';
 import huiEntitiesCardEditor from './hui-entities-card-editor.css';
 import huiEntitiesToggle from './hui-entities-toggle.css';
 import huiGridSection from './hui-grid-section.css';
+import huiLegacyView from './hui-legacy-view.css';
 import huiRootHideAppbar from './hui-root-hide-appbar.css';
 import huiRootHideNavbarLabels from './hui-root-hide-navbar-labels.css';
 import huiRootHideNavbar from './hui-root-hide-navbar.css';
@@ -52,7 +53,6 @@ import huiRoot from './hui-root.css';
 import huiSectionsView from './hui-sections-view.css';
 import huiViewHeader from './hui-view-header.css';
 import huiViewVisibilityEditor from './hui-view-visibility-editor.css';
-import manualAutomationEditor from './manual-automation-editor.css';
 import waDialog from './wa-dialog.css';
 import waDrawer from './wa-drawer.css';
 
@@ -100,10 +100,16 @@ export const implicitElements: Record<string, string> = {
 	'hui-grid-section': huiGridSection,
 	'hui-root': huiRoot,
 	'hui-sections-view': huiSectionsView,
+	'hui-masonry-view': huiLegacyView,
+	'hui-sidebar-view': huiLegacyView,
+	'hui-panel-view': huiLegacyView,
+	'masonry-layout': huiLegacyView,
+	'horizontal-layout': huiLegacyView,
+	'vertical-layout': huiLegacyView,
+	'grid-layout': huiLegacyView,
 	'hui-view-header': huiViewHeader,
 	'hui-view-visibility-editor': huiViewVisibilityEditor,
 	'hue-like-light-card': hueLikeLightCard,
-	'manual-automation-editor': manualAutomationEditor,
 	'wa-dialog': waDialog,
 	'wa-drawer': waDrawer,
 };

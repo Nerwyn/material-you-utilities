@@ -1,8 +1,3 @@
-/* Footer offset */
-:host {
-	bottom: calc(16px + var(--fab-offset, 0px));
-}
-
 /* Decrease border radius, increase height, use primary container colors */
 .mdc-fab {
 	height: 56px;

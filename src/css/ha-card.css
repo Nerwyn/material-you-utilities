@@ -2,7 +2,6 @@
 :host {
 	--ha-slider-thumb-negative-color: var(--ha-card-background);
 	--card-background-color: var(--ha-card-background);
-	--fab-offset: 0px;
 }
 
 /* Energy period selector bottom position */
