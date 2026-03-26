@@ -1,16 +1,21 @@
 /* Move toast above footer */
-.mdc-snackbar {
+#toast-anchor {
 	bottom: calc(8px + var(--footer-height) + env(safe-area-inset-bottom));
 }
 
-/* Use theme colors */
-.mdc-snackbar__surface {
+/* Use theme colors and fix paddings/gaps*/
+.toast {
+	color: var(--md-sys-color-inverse-on-surface);
 	background-color: var(--md-sys-color-inverse-surface);
+	padding: 4px 12px 4px 16px;
+	gap: 12px;
 
 	--inherited-background-color: transparent;
 	--inherited-text-color: var(--md-sys-color-inverse-primary);
 }
-.mdc-snackbar__label {
+
+/* Font */
+.message {
 	color: var(--md-sys-color-inverse-on-surface);
 	font-size: var(--md-sys-typescale-label-large-size);
 	line-height: var(--md-sys-typescale-label-large-line-height);
