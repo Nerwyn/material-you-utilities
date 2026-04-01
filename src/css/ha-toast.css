@@ -1,17 +1,20 @@
-/* Move toast above footer */
-#toast-anchor {
-	bottom: calc(8px + var(--footer-height) + env(safe-area-inset-bottom));
-}
-
-/* Use theme colors and fix paddings/gaps*/
+/* Use theme colors and fix paddings/gaps and move above footer */
 .toast {
 	color: var(--md-sys-color-inverse-on-surface);
 	background-color: var(--md-sys-color-inverse-surface);
+	box-shadow: var(--md-sys-elevation-level3);
 	padding: 4px 12px 4px 16px;
 	gap: 12px;
+	border-radius: var(--md-sys-shape-corner-extra-small);
+	inset-block-end: calc(
+		8px + var(--footer-height) + env(safe-area-inset-bottom)
+	);
 
 	--inherited-background-color: transparent;
 	--inherited-text-color: var(--md-sys-color-inverse-primary);
+	--safe-width: calc(
+		100vw - var(--safe-area-inset-left) - var(--safe-area-inset-right) - 48px
+	);
 }
 
 /* Font */
