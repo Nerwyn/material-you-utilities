@@ -7,3 +7,11 @@
 notification-drawer {
 	--divider-color: transparent;
 }
+
+/* Override bottom sheet height to full when needed */
+ha-quick-bar,
+add-automation-element-dialog {
+	--ha-bottom-sheet-height-override: calc(
+		100dvh - max(var(--safe-area-inset-top), 72px)
+	);
+}

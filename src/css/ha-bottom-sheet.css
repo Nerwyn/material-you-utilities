@@ -18,6 +18,7 @@
 
 /* Elevation */
 wa-drawer::part(dialog) {
+	height: var(--ha-bottom-sheet-height-override, var(--size));
 	box-shadow: var(--md-sys-elevation-level1);
 }
 
