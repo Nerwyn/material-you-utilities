@@ -2,6 +2,7 @@
 :host {
 	min-height: 44px;
 	padding: 8px 16px;
+	margin: 0;
 }
 
 /* Hover state layer */
