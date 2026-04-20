@@ -96,12 +96,7 @@ export async function setTheme(args: IHandlerArguments) {
 	}
 
 	// Update companion app app and navigation bar colors
-	const msg = { type: 'theme-update' };
-	if (window.externalApp) {
-		window.externalApp.externalBus(JSON.stringify(msg));
-	} else if (window.webkit) {
-		window.webkit.messageHandlers.externalBus.postMessage(msg);
-	}
+	hass.auth.external?.fireMessage({ type: 'theme-update' });
 }
 
 /* Remove theme colors */

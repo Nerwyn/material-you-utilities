@@ -4,16 +4,6 @@ export {};
 
 declare global {
 	interface Window {
-		externalApp?: {
-			externalBus: (msg: string) => void;
-		};
-		webkit?: {
-			messageHandlers: {
-				externalBus: {
-					postMessage: (msg: unknown) => void;
-				};
-			};
-		};
 		MaterialYouInit?: boolean;
 		browser_mod?: {
 			browserID?: string;

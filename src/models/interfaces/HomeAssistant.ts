@@ -11,7 +11,7 @@ import {
 } from 'home-assistant-js-websocket';
 
 export interface HomeAssistant {
-	auth: Auth; // & { external?: ExternalMessaging };
+	auth: Auth & { external?: ExternalMessaging };
 	connection: Connection;
 	connected: boolean;
 	states: HassEntities;
@@ -80,6 +80,10 @@ export interface HomeAssistant {
 		value?: any,
 	): string;
 	formatEntityAttributeName(stateObj: HassEntity, attribute: string): string;
+}
+
+export interface ExternalMessaging {
+	fireMessage(msg: object): void;
 }
 
 type EntityCategory = 'config' | 'diagnostic';
