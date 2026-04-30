@@ -195,4 +195,35 @@ slot {
 	height: 56px;
 	border-radius: var(--md-sys-shape-corner-large);
 	padding: 0 16px;
+	box-shadow: var(--md-sys-elevation-level3);
+}
+@media (hover: hover) {
+	.button:hover {
+		box-shadow: var(--md-sys-elevation-level4);
+	}
+}
+
+/* FAB Accent -> Tonal Secondary */
+:host([slot='fab'][appearance~='accent']) {
+	--ha-button-background-color: var(--md-sys-color-secondary-container);
+	--ha-button-text-color: var(--md-sys-color-on-secondary-container);
+	--state-layer-color: var(--md-sys-color-on-secondary-container);
+}
+
+/* FAB Filled -> Tonal Primary */
+:host([slot='fab'][appearance~='filled']) {
+	--ha-button-background-color: var(--md-sys-color-primary-container);
+	--ha-button-text-color: var(--md-sys-color-on-primary-container);
+	--state-layer-color: var(--md-sys-color-on-primary-container);
+}
+
+/* FAB Outlined -> Tonal Tertiary */
+:host([slot='fab'][appearance~='outlined']) {
+	--ha-button-background-color: var(--md-sys-color-tertiary-container);
+	--ha-button-text-color: var(--md-sys-color-on-tertiary-container);
+	--state-layer-color: var(--md-sys-color-on-tertiary-container);
+}
+:host([slot='fab'][appearance~='outlined']) .button {
+	border-color: transparent;
+	border-width: 0px;
 }
