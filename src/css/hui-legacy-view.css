@@ -1,4 +1,20 @@
 /* Fix Add card FAB position */
-ha-fab {
+:host > ha-button {
 	bottom: calc(16px + var(--fab-offset, 0px));
+}
+
+:host > ha-button::part(base) {
+	height: 56px;
+	padding: 0 16px;
+	box-shadow: var(--md-sys-elevation-level3);
+
+	--ha-button-background-color: var(--md-sys-color-secondary-container);
+	--ha-button-text-color: var(--md-sys-color-on-secondary-container);
+	--state-layer-color: var(--md-sys-color-on-secondary-container);
+	--ha-button-border-radius: var(--md-sys-shape-corner-large);
+}
+@media (hover: hover) {
+	:host > ha-button::part(base):hover {
+		box-shadow: var(--md-sys-elevation-level4);
+	}
 }

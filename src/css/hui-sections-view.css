@@ -6,8 +6,3 @@ hui-view-footer {
 	);
 	max-width: calc(100% - var(--add-view-fab-size, 0px));
 }
-
-/* Fix Add card FAB position */
-ha-fab {
-	bottom: calc(16px + var(--fab-offset, 0px));
-}
