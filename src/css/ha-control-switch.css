@@ -1,0 +1,103 @@
+/* Size */
+:host(:not([vertical])) {
+	height: var(--ha-switch-size);
+	width: var(--ha-switch-width);
+}
+
+/* Fix button alignment */
+:host(:not([vertical])) .switch {
+	align-items: center;
+	border-radius: var(--ha-switch-size);
+}
+
+/* Track */
+:host(:not([vertical])) .background {
+	border-radius: var(--ha-switch-size);
+	height: calc(100% - 4px);
+	width: calc(100% - 4px);
+	background-color: var(--ha-switch-background-color);
+	border-color: var(--ha-switch-border-color);
+	border-width: 2px;
+	border-style: solid;
+	opacity: 1;
+}
+:host(:not([vertical])) .switch[checked] .background {
+	background-color: var(--ha-switch-checked-background-color);
+	border-color: var(--ha-switch-checked-border-color);
+}
+
+/* Thumb */
+:host(:not([vertical])) .button {
+	height: 16px;
+	width: 16px;
+	border-radius: 32px;
+	background-color: var(--ha-switch-thumb-background-color);
+	position: relative;
+	inset-inline-start: 4px;
+	scale: 1;
+	transform: none;
+	transition:
+		translate var(--md-sys-motion-expressive-spatial-fast),
+		scale var(--md-sys-motion-expressive-spatial-fast),
+		background-color var(--md-sys-motion-expressive-effects-fast);
+}
+:host(:not([vertical])) .switch[checked] .button {
+	background-color: var(--ha-switch-checked-thumb-background-color);
+	translate: 20px;
+	scale: 1.5;
+}
+:host(:not([vertical])) .switch:active .button {
+	scale: 1.75;
+}
+:host(:not([vertical])) .switch:active .button,
+:host(:not([vertical])) .switch:focus-visible .button {
+	background-color: var(--ha-switch-button-state-layer);
+}
+:host(:not([vertical])) .switch[checked]:active .button,
+:host(:not([vertical])) .switch[checked]:focus-visible .button {
+	background-color: var(--ha-switch-checked-button-state-layer);
+}
+@media (hover: hover) {
+	:host(:not([vertical])) .switch:hover .button {
+		background-color: var(--ha-switch-button-state-layer);
+	}
+	:host(:not([vertical])) .switch[checked]:hover .button {
+		background-color: var(--ha-switch-checked-button-state-layer);
+	}
+}
+
+/* Track state layer */
+.background::after {
+	content: '';
+	position: absolute;
+	height: var(--ha-switch-size);
+	width: var(--ha-switch-width);
+	border-radius: var(--ha-switch-size);
+	pointer-events: none;
+	top: 0;
+	left: 0;
+	background: var(--ha-switch-track-state-layer);
+	opacity: 0;
+	transition: opacity var(--md-sys-motion-expressive-effects-default);
+}
+@media (hover: hover) {
+	:host(:not([vertical])) .switch:hover .background::after {
+		opacity: 0.08;
+	}
+}
+:host(:not([vertical])) .switch:focus-visible .background::after {
+	opacity: 0.18;
+}
+:host(:not([vertical])) .switch[checked]:focus-visible .background::after {
+	background: var(--ha-switch-track-state-layer-checked);
+}
+
+/* Focus ring */
+:host(:not([vertical]):focus-visible) {
+	outline: none;
+}
+:host(:not([vertical])) .switch:focus-visible {
+	box-shadow: none;
+	outline: solid 3px var(--md-sys-color-secondary);
+	outline-offset: 2px;
+}

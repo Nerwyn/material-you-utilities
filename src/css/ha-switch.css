@@ -37,7 +37,7 @@
 	}
 }
 
-/* Track state layers */
+/* Track state layer */
 .switch::after {
 	content: '';
 	position: absolute;
@@ -50,6 +50,11 @@
 	background: var(--ha-switch-track-state-layer);
 	opacity: 0;
 	transition: opacity var(--md-sys-motion-expressive-effects-default);
+}
+@media (hover: hover) {
+	.switch:hover::after {
+		opacity: 0.08;
+	}
 }
 input:focus-visible ~ .switch::after {
 	opacity: 0.18;
