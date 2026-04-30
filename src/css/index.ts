@@ -52,7 +52,6 @@ import huiRootShowAppbarTitle from './hui-root-show-appbar-title.css';
 import huiRoot from './hui-root.css';
 import huiSectionsView from './hui-sections-view.css';
 import huiViewHeader from './hui-view-header.css';
-import huiViewVisibilityEditor from './hui-view-visibility-editor.css';
 import waDialog from './wa-dialog.css';
 import waDrawer from './wa-drawer.css';
 
@@ -108,7 +107,6 @@ export const implicitElements: Record<string, string> = {
 	'vertical-layout': huiLegacyView,
 	'grid-layout': huiLegacyView,
 	'hui-view-header': huiViewHeader,
-	'hui-view-visibility-editor': huiViewVisibilityEditor,
 	'hue-like-light-card': hueLikeLightCard,
 	'wa-dialog': waDialog,
 	'wa-drawer': waDrawer,

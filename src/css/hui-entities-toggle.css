@@ -3,8 +3,3 @@
 	height: 32px;
 	width: 52px;
 }
-
-/* Fix margins */
-ha-switch {
-	margin: 0;
-}
