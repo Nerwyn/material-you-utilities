@@ -9,6 +9,7 @@ import haCardTransparent from './ha-card-transparent.css';
 import haCard from './ha-card.css';
 import haConfigInfo from './ha-config-info.css';
 import haConfigSectionUpdates from './ha-config-section-updates.css';
+import haControlSwitch from './ha-control-switch.css';
 import haDialogHeader from './ha-dialog-header.css';
 import haDialog from './ha-dialog.css';
 import haDrawer from './ha-drawer.css';
@@ -65,6 +66,7 @@ export const implicitElements: Record<string, string> = {
 	'ha-card': haCard,
 	'ha-config-info': haConfigInfo,
 	'ha-config-section-updates': haConfigSectionUpdates,
+	'ha-control-switch': haControlSwitch,
 	'ha-dialog': haDialog,
 	'ha-md-dialog': haMdDialog,
 	'ha-dialog-header': haDialogHeader,
