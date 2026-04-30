@@ -22,18 +22,18 @@
 }
 :has(input:active) .thumb,
 :has(input:focus-visible) .thumb {
-	background-color: var(--ha-switch-button-state-layer);
+	background-color: var(--ha-switch-thumb-background-color-hover);
 }
 .checked:has(input:active) .thumb,
 .checked:has(input:focus-visible) .thumb {
-	background-color: var(--ha-switch-checked-button-state-layer);
+	background-color: var(--ha-switch-checked-thumb-background-color-hover);
 }
 @media (hover: hover) {
 	.switch:hover .thumb {
-		background-color: var(--ha-switch-button-state-layer);
+		background-color: var(--ha-switch-thumb-background-color-hover);
 	}
 	.checked:hover .thumb {
-		background-color: var(--ha-switch-checked-button-state-layer);
+		background-color: var(--ha-switch-checked-thumb-background-color-hover);
 	}
 }
 
@@ -47,7 +47,7 @@
 	pointer-events: none;
 	top: 0;
 	left: 0;
-	background: var(--ha-switch-track-state-layer);
+	background: var(--ha-switch-background-color-hover);
 	opacity: 0;
 	transition: opacity var(--md-sys-motion-expressive-effects-default);
 }
@@ -60,7 +60,7 @@ input:focus-visible ~ .switch::after {
 	opacity: 0.18;
 }
 .checked .switch::after {
-	background: var(--ha-switch-checked-track-state-layer);
+	background: var(--ha-switch-checked-background-color-hover);
 }
 
 /* Focus ring */

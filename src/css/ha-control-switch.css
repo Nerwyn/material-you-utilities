@@ -51,18 +51,18 @@
 }
 :host(:not([vertical])) .switch:active .button,
 :host(:not([vertical])) .switch:focus-visible .button {
-	background-color: var(--ha-switch-button-state-layer);
+	background-color: var(--ha-switch-thumb-background-color-hover);
 }
 :host(:not([vertical])) .switch[checked]:active .button,
 :host(:not([vertical])) .switch[checked]:focus-visible .button {
-	background-color: var(--ha-switch-checked-button-state-layer);
+	background-color: var(--ha-switch-checked-thumb-background-color-hover);
 }
 @media (hover: hover) {
 	:host(:not([vertical])) .switch:hover .button {
-		background-color: var(--ha-switch-button-state-layer);
+		background-color: var(--ha-switch-thumb-background-color-hover);
 	}
 	:host(:not([vertical])) .switch[checked]:hover .button {
-		background-color: var(--ha-switch-checked-button-state-layer);
+		background-color: var(--ha-switch-checked-thumb-background-color-hover);
 	}
 }
 
@@ -89,7 +89,7 @@
 	opacity: 0.18;
 }
 :host(:not([vertical])) .switch[checked]:focus-visible .background::after {
-	background: var(--ha-switch-track-state-layer-checked);
+	background: var(--ha-switch-checked-track-state-layer);
 }
 
 /* Focus ring */
