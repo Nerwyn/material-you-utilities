@@ -1,4 +1,5 @@
 /* Label */
+:host,
 .label {
 	font-family: var(--font-family);
 	font-size: var(--md-sys-typescale-label-large-size);
@@ -187,4 +188,11 @@ slot {
 :host(.wa-button-group__button-last) .button:active {
 	border-start-start-radius: var(--md-sys-shape-corner-extra-small);
 	border-end-start-radius: var(--md-sys-shape-corner-extra-small);
+}
+
+/* FAB buttons */
+:host([slot='fab']) .button {
+	height: 56px;
+	border-radius: var(--md-sys-shape-corner-large);
+	padding: 0 16px;
 }
