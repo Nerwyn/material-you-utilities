@@ -443,7 +443,7 @@ Toggle switches for setting boolean values.
 #### Notes
 
 - As of 2026.5 the `ha-switch` component has become much more theme friendly, and most of this styling is done through the theme itself. The module still adds thumb size scaling, transitions, and a state layer.
-- As of 2026.5 the non-vertical variant of `ha-control-switch` is used instead of `ha-switch` in some locations such as the entities card. This module styles it to be virtually identical to the `ha-switch`, but they will not look the same without styles enabled.
+- As of 2026.5 the non-vertical variant of `ha-control-switch` is used instead of `ha-switch` in some locations such as the entities card. This module styles it to be virtually identical to the `ha-switch`, but they will not look the same without styles enabled. Non-vertical `ha-control-switch`es are also used as tile features, but should not be styled by this module.
 
 ### [Sliders](https://m3.material.io/components/sliders/overview)
 
