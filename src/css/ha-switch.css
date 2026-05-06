@@ -3,10 +3,14 @@
 	border-width: 2px;
 }
 
-/* Thumb transitions and sizes */
+/* Enforce thumb size and dimensions */
 :host {
+	--ha-switch-size: 32px;
+	--ha-switch-width: 52px;
 	--ha-switch-thumb-size: 16px;
 }
+
+/* Thumb transition */
 .thumb {
 	scale: 1;
 	transition:
