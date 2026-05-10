@@ -9,6 +9,9 @@
 }
 
 /* Change border radii of first and last dropdown items */
+ha-dropdown-item {
+	border-radius: var(--md-sys-shape-corner-extra-small);
+}
 ::slotted(ha-dropdown-item:first-of-type) {
 	border-start-start-radius: var(--md-sys-shape-corner-medium);
 	border-start-end-radius: var(--md-sys-shape-corner-medium);
