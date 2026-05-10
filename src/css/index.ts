@@ -30,7 +30,6 @@ import haSidebarHideNavrailLabels from './ha-sidebar-hide-navrail-labels.css';
 import haSidebar from './ha-sidebar.css';
 import haSlider from './ha-slider.css';
 import haSwitch from './ha-switch.css';
-import haTextfield from './ha-textfield.css';
 import haToast from './ha-toast.css';
 import haTooltip from './ha-tooltip.css';
 import haTopAppBarFixed from './ha-top-app-bar-fixed.css';
@@ -85,7 +84,6 @@ export const implicitElements: Record<string, string> = {
 	'md-slider': haSlider,
 	'ha-switch': haSwitch,
 	'ha-top-app-bar-fixed': haTopAppBarFixed,
-	'ha-textfield': haTextfield,
 	'ha-toast': haToast,
 	'ha-tooltip': haTooltip,
 	'ha-user-badge': haUserBadge,
