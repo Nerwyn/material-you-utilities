@@ -19,7 +19,7 @@ This module generates color themes using [Material Color Utilities](https://gith
 
 # Installation
 
-First time setup and installation of this module is a multistep process as this module **must** be configured in `configuration.yaml`.
+First time setup and installation of this module is a multistep process as this module must be configured in `configuration.yaml` to use use all features.
 
 ## Install the Module From HACS
 
@@ -29,9 +29,7 @@ First time setup and installation of this module is a multistep process as this 
 
 ## Add the Module as a Frontend Module and Custom Panel
 
-**This is not optional**.
-
-The component design upgrades performed by this module are very time sensitive, and must be run as soon as possible. Because of this you must install it as a frontend module in your `configuration.yaml` file.
+The component design upgrades performed by this module are very time sensitive, and must be run as soon as possible. Because of this it is recommended that you install it as a frontend module in your `configuration.yaml` file. If you do not do this, the module will attempt to inject styles on a later custom element lifecycle hook. Adding the module as a custom panel in your `configuration.yaml` file is required to use the configuration panel.
 
 1. Open your `configuration.yaml`.
    - Your `configuration.yaml` file is found in the `config` folder. More information can be found [here](https://www.home-assistant.io/docs/configuration/).
