@@ -47,6 +47,7 @@
 
 	--icon-primary-color: var(--md-sys-color-on-tertiary-container);
 	--ha-ripple-color: var(--md-sys-color-on-tertiary-container);
+	--md-list-item-label-text-color: var(--md-sys-color-on-tertiary-container);
 }
 .combo-box-row.current-value span {
 	color: var(--md-sys-color-on-tertiary-container);
