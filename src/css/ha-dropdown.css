@@ -25,3 +25,21 @@ ha-dropdown-item {
 ::slotted(wa-divider) {
 	margin: 4px 8px;
 }
+
+/* Animation */
+#menu.show {
+	animation: expressive-show var(--md-sys-motion-expressive-spatial-fast);
+}
+#menu.hide {
+	animation: none;
+}
+@keyframes expressive-show {
+	from {
+		opacity: 1;
+		scale: 1 0;
+	}
+	to {
+		opacity: 1;
+		scale: 1 1;
+	}
+}
