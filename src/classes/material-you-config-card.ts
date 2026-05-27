@@ -1,9 +1,11 @@
 import { css, html, LitElement, TemplateResult } from 'lit';
 import { property, state } from 'lit/decorators.js';
+import { schemes } from '../models/constants/colors';
 import { inputs, services } from '../models/constants/inputs';
 import { THEME, THEME_NAME, THEME_TOKEN } from '../models/constants/theme';
 import { HomeAssistant } from '../models/interfaces';
 import { InputField } from '../models/interfaces/Input';
+import { SpecVersion } from '../models/interfaces/Scheme';
 import { getEntityId } from '../utils/common';
 import {
 	applyStyles,
@@ -65,7 +67,7 @@ export class MaterialYouConfigCard extends LitElement {
 
 		let message = 'Global input entities cleared';
 		if (this.dataId) {
-			let name = '';
+			let name: string;
 			if (this.dataId == this.hass.user?.id) {
 				name = this.hass.user?.name ?? '';
 			} else {
@@ -341,70 +343,6 @@ export class MaterialYouConfigCard extends LitElement {
 		}
 
 		let value: string | number | boolean = this.hass.states[entityId]?.state;
-		if (field == 'base_color') {
-			let timeout: ReturnType<typeof setTimeout>;
-			const handleChange = (e: Event) => {
-				clearTimeout(timeout);
-				const target = e.target as EventTarget & Record<'value', string>;
-				const value = target.value;
-				timeout = setTimeout(() => {
-					const event = new Event('value-changed');
-					event.detail = { value };
-					target.dispatchEvent(event);
-				}, 100);
-			};
-
-			return html`<div class="column">
-				<disk-color-picker
-					field="${field}"
-					value="${value}"
-					@change=${handleChange}
-					@keyup=${handleChange}
-					@value-changed=${this.handleSelectorChange}
-				></disk-color-picker>
-				<div class="subrow">
-					<div class="row">
-						${this.buildMoreInfoButton(field)}
-						<div class="label">${inputs[field].name}</div>
-					</div>
-					<div class="row">
-						<div class="label secondary">${value || inputs[field].default}</div>
-						${this.buildResetButton(field)}
-					</div>
-				</div>
-			</div>`;
-		}
-
-		let extra: TemplateResult | string = '';
-		if (field == 'harmonize') {
-			extra = html`<div class="row semantic-colors">
-				${[
-					'pink',
-					'red',
-					'deep-orange',
-					'orange',
-					'amber',
-					'yellow',
-					'lime',
-					'light-green',
-					'green',
-					'teal',
-					'cyan',
-					'light-blue',
-					'blue',
-					'indigo',
-					'deep-purple',
-					'purple',
-				].map(
-					(color) =>
-						html`<div
-							class="semantic-color"
-							style="background: var(--${color}-color)"
-						></div>`,
-				)}
-			</div>`;
-		}
-
 		const config = inputs[field].card.config;
 		if (inputs[field].domain == 'input_number') {
 			config.min =
@@ -418,6 +356,95 @@ export class MaterialYouConfigCard extends LitElement {
 				inputs[field].card.config.step;
 		} else if (inputs[field].domain == 'input_boolean') {
 			value = value == 'on';
+		}
+		let extra: TemplateResult | string = '';
+
+		switch (field) {
+			case 'base_color': {
+				let timeout: ReturnType<typeof setTimeout>;
+				const handleChange = (e: Event) => {
+					clearTimeout(timeout);
+					const target = e.target as EventTarget & Record<'value', string>;
+					const value = target.value;
+					timeout = setTimeout(() => {
+						const event = new Event('value-changed');
+						event.detail = { value };
+						target.dispatchEvent(event);
+					}, 100);
+				};
+
+				return html`<div class="column">
+					<disk-color-picker
+						field="${field}"
+						value="${value}"
+						@change=${handleChange}
+						@keyup=${handleChange}
+						@value-changed=${this.handleSelectorChange}
+					></disk-color-picker>
+					<div class="subrow">
+						<div class="row">
+							${this.buildMoreInfoButton(field)}
+							<div class="label">${inputs[field].name}</div>
+						</div>
+						<div class="row">
+							<div class="label secondary">
+								${value || inputs[field].default}
+							</div>
+							${this.buildResetButton(field)}
+						</div>
+					</div>
+				</div>`;
+			}
+			case 'harmonize':
+				extra = html`<div class="row semantic-colors">
+					${[
+						'pink',
+						'red',
+						'deep-orange',
+						'orange',
+						'amber',
+						'yellow',
+						'lime',
+						'light-green',
+						'green',
+						'teal',
+						'cyan',
+						'light-blue',
+						'blue',
+						'indigo',
+						'deep-purple',
+						'purple',
+					].map(
+						(color) =>
+							html`<div
+								class="semantic-color"
+								style="background: var(--${color}-color)"
+							></div>`,
+					)}
+				</div>`;
+				break;
+			case 'spec': {
+				const schemeEntityId = getEntityId('scheme', this.dataId);
+				const scheme =
+					this.hass.states[schemeEntityId]?.state || inputs.scheme.default;
+				const options = schemes.find((s) => s.value == scheme)
+					?.spec_versions || ['2021'];
+				(config.button_toggle as Record<string, string[]>).options = options;
+
+				const specEntityId = getEntityId('spec', this.dataId);
+				const spec =
+					(this.hass.states[specEntityId]?.state as SpecVersion) ||
+					inputs.spec.default;
+				if (!options.includes(spec)) {
+					this.hass.callService('input_select', 'select_option', {
+						entity_id: specEntityId,
+						option: options[0],
+					});
+				}
+				break;
+			}
+			default:
+				break;
 		}
 
 		return html`${this.buildMoreInfoButton(field)}

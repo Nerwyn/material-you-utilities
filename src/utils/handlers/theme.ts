@@ -12,14 +12,11 @@ import { inputs } from '../../models/constants/inputs';
 import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments, InputField } from '../../models/interfaces/Input';
-import { IScheme } from '../../models/interfaces/Scheme';
+import { IScheme, SpecVersion } from '../../models/interfaces/Scheme';
 import { getEntityIdAndValue, getTargets, getToken } from '../common';
 import { debugToast, mdLog } from '../logging';
 import { harmonize } from './harmonize';
 import { setPalette, unsetPalette } from './palettes';
-
-// import { SpecVersion } from '@material/material-color-utilities/dynamiccolor/color_spec.js';
-type SpecVersion = '2021' | '2025';
 
 const STYLE_ID = `${THEME_TOKEN}-theme`;
 
@@ -54,13 +51,23 @@ export async function setTheme(args: IHandlerArguments) {
 						(scheme) => scheme.value == inputs.scheme.default,
 					) as IScheme);
 
+				const baseColors = (values.base_color as string)
+					.split(',')
+					.map((c) => Hct.fromInt(argbFromHex(c)));
+
+				const spec = schemeInfo.spec_versions.includes(
+					values.spec as SpecVersion,
+				)
+					? (values.spec as SpecVersion)
+					: schemeInfo.spec_versions[0];
+
 				const styles: Record<string, string> = {};
 				for (const mode of ['light', 'dark']) {
 					const scheme = new schemeInfo.class(
-						Hct.fromInt(argbFromHex(values.base_color as string)),
+						baseColors,
 						mode == 'dark',
 						parseFloat(values.contrast as string),
-						values.spec as SpecVersion,
+						spec,
 						values.platform as Platform,
 					);
 

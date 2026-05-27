@@ -32,7 +32,7 @@ It usually does not appear in the theme itself.`,
 			config: {
 				icon: 'mdi:palette',
 				min: 3,
-				max: 9,
+				max: 255,
 			},
 		},
 		card: { config: {}, tabBarIndex: 0, resetButton: true },
@@ -92,18 +92,19 @@ It usually does not appear in the theme itself.`,
 		default: '2025',
 		name: 'Specification',
 		description: `The palette rules to use for the scheme.
-2021 is the original Material You palettes.
-2025 is the Material Expressive palettes.`,
+2021 - Material You.
+2025 - Material Expressive.
+2026 - For CMF Scheme.`,
 		init: {
 			config: {
 				icon: 'mdi:calendar-multiple',
-				options: ['2021', '2025'],
+				options: ['2021', '2025', '2026'],
 			},
 		},
 		card: {
 			config: {
 				button_toggle: {
-					options: ['2021', '2025'],
+					options: ['2021', '2025', '2026'],
 				},
 			},
 			tabBarIndex: 0,

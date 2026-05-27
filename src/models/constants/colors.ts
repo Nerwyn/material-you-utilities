@@ -1,5 +1,6 @@
 import {
 	MaterialDynamicColors,
+	SchemeCmf,
 	SchemeContent,
 	SchemeExpressive,
 	SchemeFidelity,
@@ -112,48 +113,73 @@ export const paletteColors: string[] = [
 
 export const schemes: IScheme[] = [
 	{
-		value: 'tonalspot',
-		label: 'Tonal Spot',
-		class: SchemeTonalSpot,
-	},
-	{
 		value: 'content',
 		label: 'Content',
+		secondary: 'Places the source color in the primary container',
 		class: SchemeContent,
+		spec_versions: ['2021'],
 	},
 	{
 		value: 'fidelity',
 		label: 'Fidelity',
 		class: SchemeFidelity,
-	},
-	{
-		value: 'expressive',
-		label: 'Expressive',
-		class: SchemeExpressive,
+		secondary: 'Places the source color in the primary container',
+		spec_versions: ['2021'],
 	},
 	{
 		value: 'fruitsalad',
 		label: 'Fruit Salad',
 		class: SchemeFruitSalad,
+		secondary: 'Playfully does not use the source color hue.',
+		spec_versions: ['2021'],
 	},
 	{
 		value: 'rainbow',
 		label: 'Rainbow',
 		class: SchemeRainbow,
-	},
-	{
-		value: 'vibrant',
-		label: 'Vibrant',
-		class: SchemeVibrant,
-	},
-	{
-		value: 'neutral',
-		label: 'Neutral',
-		class: SchemeNeutral,
+		secondary: 'Playfully does not use the source color hue.',
+		spec_versions: ['2021'],
 	},
 	{
 		value: 'monochrome',
 		label: 'Monochrome',
 		class: SchemeMonochrome,
+		secondary: 'Grayscale.',
+		spec_versions: ['2021'],
+	},
+	{
+		value: 'tonalspot',
+		label: 'Tonal Spot',
+		class: SchemeTonalSpot,
+		secondary: 'Mid-low colorfulness with a hue related to the source color.',
+		spec_versions: ['2021', '2025'],
+	},
+	{
+		value: 'expressive',
+		label: 'Expressive',
+		secondary: 'Intentionally detached from the source color.',
+		class: SchemeExpressive,
+		spec_versions: ['2021', '2025'],
+	},
+	{
+		value: 'vibrant',
+		label: 'Vibrant',
+		secondary: 'Maxes out colorfulness in the primary palette.',
+		class: SchemeVibrant,
+		spec_versions: ['2021', '2025'],
+	},
+	{
+		value: 'neutral',
+		label: 'Neutral',
+		secondary: 'Near grayscale.',
+		class: SchemeNeutral,
+		spec_versions: ['2021', '2025'],
+	},
+	{
+		value: 'cmf',
+		label: 'CMF',
+		secondary: 'Uses two source colors.',
+		class: SchemeCmf,
+		spec_versions: ['2026'],
 	},
 ];
