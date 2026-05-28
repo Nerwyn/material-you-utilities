@@ -44,12 +44,6 @@ ha-list-item-button {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	overflow: hidden;
-
-	--sidebar-item-state-layer-shape: var(--md-sys-shape-corner-full);
-	--md-list-item-leading-space: 16px;
-	--md-list-item-trailing-space: 16px;
-	--md-focus-ring-color: transparent;
 }
 
 /* Expanded rail indicator should fit content width */
@@ -82,18 +76,22 @@ ha-list-item-button.selected {
 }
 
 /* Make expanded sidebar clickable area full height and width */
-:host([expanded]) ha-list-item-button {
-	/* min-width: 220px; */
-}
 :host([expanded]) ha-list-item-button::part(base) {
 	height: 100%;
-	width: calc(var(--ha-sidebar-width) - env(safe-area-inset-left));
 	width: min-content;
 	max-width: 360px;
 	padding-inline: 16px;
 }
 :host([expanded]) ha-list-item-button::part(content) {
 	max-width: min-content;
+}
+:host([expanded]) ha-list-item-button::part(base)::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: calc(var(--ha-sidebar-width) - env(safe-area-inset-left) - 20px);
 }
 
 /* Make collapsed navigation rail items vertical */
@@ -105,9 +103,14 @@ ha-list-item-button.selected {
 	gap: 8px;
 }
 
-/* Hide rail default ripple */
+/* Hide collapsed rail default ripple */
 :host(:not([expanded])) ha-list-item-button::part(ripple) {
 	display: none;
+}
+
+/* Hide expanded rail ripple overflow */
+:host([expanded]) ha-list-item-button::part(ripple) {
+	border-radius: var(--md-sys-shape-corner-full);
 }
 
 /* Display label when not expanded */
@@ -138,7 +141,7 @@ ha-list-item-button.selected {
 :host([expanded]) ha-list-item-button::before,
 :host(:not([expanded])) .user::before {
 	content: '';
-	border-radius: var(--sidebar-item-state-layer-shape);
+	border-radius: var(--md-sys-shape-corner-full);
 	background-color: var(--sidebar-selected-background);
 	opacity: 1;
 	transition: transform var(--md-sys-motion-expressive-spatial-fast);
@@ -167,7 +170,7 @@ ha-list-item-button.selected {
 	left: var(--navigation-rail-indicator-top, -16px);
 	height: var(--navigation-rail-indicator-height, 32px);
 	width: var(--navigation-rail-indicator-width, 56px);
-	border-radius: var(--sidebar-item-state-layer-shape);
+	border-radius: var(--md-sys-shape-corner-full);
 	z-index: -1;
 }
 :host(:not([expanded])) .notifications ha-svg-icon::after {
