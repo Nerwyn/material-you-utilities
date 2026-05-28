@@ -134,7 +134,7 @@ ha-list-item-button.selected {
 :host(:not([expanded])) ha-list-item-button ha-svg-icon,
 :host(:not([expanded])) ha-list-item-button ha-icon {
 	position: relative;
-	top: var(--navigation-rail-icon-top, 4px);
+	top: 4px;
 }
 
 /* Change background of current destination icon and add scale transition */
