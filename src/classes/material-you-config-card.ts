@@ -65,7 +65,7 @@ export class MaterialYouConfigCard extends LitElement {
 
 		let message = 'Global input entities cleared';
 		if (this.dataId) {
-			let name = '';
+			let name: string;
 			if (this.dataId == this.hass.user?.id) {
 				name = this.hass.user?.name ?? '';
 			} else {

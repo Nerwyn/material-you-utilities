@@ -1,6 +1,6 @@
 {
 	"name": "material-you-utilities",
-	"version": "2.1.12",
+	"version": "2.1.13",
 	"description": "Material You Utilities - Material Design 3 Color Theme Generation and Component Modification",
 	"main": "dist/material-you-utilities.js",
 	"type": "module",
@@ -33,6 +33,7 @@
 		"@eslint/js": "latest",
 		"@rspack/cli": "latest",
 		"@rspack/core": "latest",
+		"@types/node": "latest",
 		"@typescript-eslint/eslint-plugin": "latest",
 		"@typescript-eslint/parser": "latest",
 		"css-loader": "latest",

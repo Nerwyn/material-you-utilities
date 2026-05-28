@@ -40,7 +40,7 @@ export async function setupSubscriptions(
 			const unsubscribers = [];
 			for (const subscription of subscriptions) {
 				// User inputs
-				let entities: string[] = [];
+				let entities: string[];
 				if (args.id) {
 					entities = [
 						...subscription.inputs.map((input) => getEntityId(input, args.id)),
