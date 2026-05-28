@@ -59,8 +59,6 @@ ha-list-item-button {
 	max-width: fit-content;
 	margin: 0 20px;
 	border-radius: var(--md-sys-shape-corner-full);
-
-	--sidebar-item-display: block;
 }
 
 /* Modal sidebar item width */
@@ -92,6 +90,7 @@ ha-list-item-button.selected {
 	width: calc(var(--ha-sidebar-width) - env(safe-area-inset-left));
 	width: min-content;
 	max-width: 360px;
+	padding-inline: 16px;
 }
 :host([expanded]) ha-list-item-button::part(content) {
 	max-width: min-content;
@@ -179,8 +178,8 @@ ha-list-item-button.selected {
 }
 :host(:not([expanded])) ha-user-badge::after {
 	height: 56px;
-	top: -8px;
-	left: -8px;
+	top: 0px;
+	left: 20px;
 	z-index: 0;
 }
 :host(:not([expanded])) ha-svg-icon::before,
@@ -261,24 +260,18 @@ ha-list-item-button ha-icon {
 }
 
 /* Fix user badge position */
-ha-user-badge {
-	margin-left: -8px;
+:host(:not([expanded])) ha-user-badge {
+	margin-inline-start: -3px;
+	margin-block-start: 4px;
+}
+:host([expanded]) ha-user-badge {
+	margin-inline-start: -8px;
 }
 
-/* Fix notifications and user badge size and position */
+/* Fix notifications and user badge size */
 :host(:not([expanded])) .notifications,
 :host(:not([expanded])) .user {
 	height: 56px;
-
-	--md-item-overflow: visible;
-}
-:host(:not([expanded])) .notifications ha-svg-icon {
-	position: relative;
-	top: 12px;
-}
-:host(:not([expanded])) .user ha-user-badge {
-	position: relative;
-	top: 6px;
 }
 
 /* Do not use label for bottom section*/
