@@ -1,22 +1,28 @@
 /* Remove border, fix border radius, make width dynamic, add transition */
-.mdc-drawer {
+.sidebar-shell {
 	border-width: 0;
 	border-radius: 0;
-	width: calc(var(--mdc-drawer-width) + 64px);
-	transition: var(--drawer-transition);
+	width: calc(var(--ha-sidebar-width) + 64px);
+	transition: var(--sidebar-transition);
 	padding-inline-start: 64px;
 	translate: -64px 0;
 }
-.mdc-drawer:dir(rtl) {
+.sidebar-shell:dir(rtl) {
 	translate: 64px 0;
 }
 
 /* Add border radius and variable width to modal and fix elevation */
-.mdc-drawer--modal {
+wa-drawer::part(dialog) {
+	background-color: var(--md-sys-color-surface-container);
 	border-top-right-radius: var(--mdc-shape-large);
 	border-bottom-right-radius: var(--mdc-shape-large);
 	min-width: 220px;
 	width: fit-content;
 	max-width: 360px;
 	box-shadow: var(--md-sys-elevation-level2);
+	padding-inline-start: 64px;
+	transform: translate(-64px, 0);
+}
+wa-drawer::part(dialog):dir(rtl) {
+	transform: translate(64px, 0);
 }

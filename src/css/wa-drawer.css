@@ -1,4 +1,4 @@
-/* Expressive animations */
+/* Bottom sheet animations */
 .drawer.show.bottom {
 	animation: show-drawer-from-bottom
 		var(--md-sys-motion-expressive-spatial-default);
@@ -6,4 +6,20 @@
 .drawer.hide.bottom {
 	animation: show-drawer-from-bottom
 		var(--md-sys-motion-expressive-spatial-fast) reverse;
+}
+
+/* Sidebar animations */
+.drawer.show.start {
+	animation: show-drawer-from-start var(--md-sys-motion-expressive-spatial-fast);
+}
+.drawer.hide.start {
+	animation: show-drawer-from-start var(--md-sys-motion-expressive-spatial-fast)
+		reverse;
+}
+.drawer.show.start:dir(rtl) {
+	animation: show-drawer-from-end var(--md-sys-motion-expressive-spatial-fast);
+}
+.drawer.hide.start:dir(rtl) {
+	animation: show-drawer-from-end var(--md-sys-motion-expressive-spatial-fast)
+		reverse;
 }

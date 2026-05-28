@@ -1,21 +1,3 @@
-/* Add flex-direction option to set on parent */
-md-item {
-	flex-direction: var(--md-list-item-flex-direction, row);
-}
-
-/* Make expanded sidebar clickable area full width */
-#item::after {
-	content: '';
-	display: var(--sidebar-item-display, none);
-	position: absolute;
-	height: 100%;
-	width: calc(var(--mdc-drawer-width) - env(safe-area-inset-left));
-	min-width: 220px;
-	max-width: 360px;
-	inset-inline-start: -20px;
-	padding-inline-end: 20px;
-}
-
 /* Focus state layer */
 md-item:has(md-focus-ring[visible]) {
 	--state-layer-opacity: 0.18;

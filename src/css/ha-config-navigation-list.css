@@ -1,0 +1,15 @@
+/* Fonts */
+span[slot='headline'] {
+	color: var(--md-sys-color-on-surface);
+	font-size: var(--md-sys-typescale-body-large-size);
+	font-weight: var(--md-sys-typescale-body-large-weight);
+	line-height: var(--md-sys-typescale-body-large-line-height);
+	letter-spacing: var(--md-sys-typescale-body-large-tracking);
+}
+span[slot='supporting-text'] {
+	color: var(--md-sys-color-on-surface-variant);
+	font-size: var(--md-sys-typescale-body-medium-size);
+	font-weight: var(--md-sys-typescale-body-medium-weight);
+	line-height: var(--md-sys-typescale-body-medium-line-height);
+	letter-spacing: var(--md-sys-typescale-body-medium-tracking);
+}

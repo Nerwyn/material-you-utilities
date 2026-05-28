@@ -1,9 +1,15 @@
 /* Add left padding and translate to header to help hide rail transition */
-.mdc-top-app-bar {
-	width: calc(var(--mdc-top-app-bar-width, 100%) + 128px);
+.top-app-bar {
+	width: calc(var(--ha-top-app-bar-width, 100%) + 128px);
 	padding-inline-start: 128px;
 	translate: -128px 0;
+	inset-inline-end: -128px;
 }
-.mdc-top-app-bar:dir(rtl) {
+.top-app-bar:dir(rtl) {
 	translate: 128px 0;
+}
+
+/* Remove bottom border */
+.row {
+	border-bottom: none;
 }

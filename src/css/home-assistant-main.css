@@ -1,13 +1,13 @@
-/* Change drawer width */
+/* Change sidebar width and transition */
 :host {
-	--mdc-drawer-width: var(--kiosk-sidebar-width, 96px);
-	--drawer-transition: all var(--md-sys-motion-expressive-spatial-default);
+	--ha-sidebar-width: var(--kiosk-sidebar-width, 96px);
+	--sidebar-transition: all var(--md-sys-motion-expressive-spatial-default);
 }
 :host([expanded]) {
-	--mdc-drawer-width: var(--kiosk-sidebar-width, 256px);
-	--drawer-transition: all var(--md-sys-motion-expressive-spatial-fast);
+	--ha-sidebar-width: var(--kiosk-sidebar-width, 256px);
+	--sidebar-transition: all var(--md-sys-motion-expressive-spatial-fast);
 }
 :host([modal]) {
-	--mdc-drawer-width: var(--kiosk-sidebar-width, 0px);
-	--drawer-transition: all var(--md-sys-motion-expressive-spatial-fast);
+	--ha-sidebar-width: var(--kiosk-sidebar-width, 0px);
+	--sidebar-transition: all var(--md-sys-motion-expressive-spatial-fast);
 }

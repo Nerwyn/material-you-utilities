@@ -36,39 +36,33 @@
 }
 
 /* Modify sidebar item size and animate background when expanding/retracting */
-ha-md-list-item {
+ha-list-item-button {
 	height: 64px;
-	width: var(--mdc-drawer-width);
+	width: var(--ha-sidebar-width);
 	transition: all var(--md-sys-motion-expressive-spatial-default);
 	margin: 0;
+	display: flex;
 	flex-direction: column;
 	justify-content: center;
-
-	--sidebar-item-state-layer-shape: var(--md-sys-shape-corner-full);
-	--md-list-item-leading-space: 16px;
-	--md-list-item-trailing-space: 16px;
-	--md-focus-ring-color: transparent;
 }
 
 /* Expanded rail indicator should fit content width */
-:host([expanded]) ha-md-list-item {
+:host([expanded]) ha-list-item-button {
 	height: 56px;
-	width: calc(var(--mdc-drawer-width) - 40px - env(safe-area-inset-left));
+	width: calc(var(--ha-sidebar-width) - 40px - env(safe-area-inset-left));
 	max-width: fit-content;
 	margin: 0 20px;
 	border-radius: var(--md-sys-shape-corner-full);
-
-	--sidebar-item-display: block;
 }
 
 /* Modal sidebar item width */
-:host([narrow]) ha-md-list-item {
+:host([narrow]) ha-list-item-button {
 	width: fit-content;
 	max-width: 256px;
 }
 
 /* Fix collapsed rail selected text color */
-ha-md-list-item.selected {
+ha-list-item-button.selected {
 	--md-list-item-label-text-color: var(--sidebar-selected-text-color);
 }
 
@@ -81,26 +75,50 @@ ha-md-list-item.selected {
 	letter-spacing: var(--md-sys-typescale-label-large-tracking);
 }
 
+/* Make expanded sidebar clickable area full height and width */
+:host([expanded]) ha-list-item-button::part(base) {
+	height: 100%;
+	width: min-content;
+	max-width: 360px;
+	border-radius: var(--md-sys-shape-corner-full);
+	padding-inline: 16px;
+}
+:host([expanded]) ha-list-item-button::part(content) {
+	max-width: min-content;
+}
+:host([expanded]) ha-list-item-button::part(base)::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: calc(var(--ha-sidebar-width) - env(safe-area-inset-left) - 20px);
+}
+
 /* Make collapsed navigation rail items vertical */
-:host(:not([expanded])) ha-md-list-item {
+:host(:not([expanded])) ha-list-item-button::part(base) {
 	border-radius: 0;
 	padding-top: 4px;
 	padding-bottom: 6px;
-
-	--md-list-item-flex-direction: column;
-	--ha-md-list-item-gap: 10px;
+	flex-direction: column;
+	gap: 8px;
 }
 
-/* Hide rail default ripple */
-:host(:not([expanded])) ha-md-list-item::part(ripple) {
+/* Hide collapsed rail default ripple */
+:host(:not([expanded])) ha-list-item-button::part(ripple) {
 	display: none;
 }
 
+/* Hide expanded rail ripple overflow */
+:host([expanded]) ha-list-item-button::part(ripple) {
+	border-radius: var(--md-sys-shape-corner-full);
+}
+
 /* Display label when not expanded */
-:host(:not([expanded])) ha-md-list-item .item-text {
+:host(:not([expanded])) ha-list-item-button .item-text {
 	display: var(--navigation-rail-label-display, block);
-	width: var(--mdc-drawer-width);
-	max-width: var(--mdc-drawer-width);
+	width: var(--ha-sidebar-width);
+	max-width: var(--ha-sidebar-width);
 	opacity: 1;
 	text-align: center;
 	white-space: initial;
@@ -114,31 +132,31 @@ ha-md-list-item.selected {
 	letter-spacing: var(--md-sys-typescale-label-small-tracking);
 }
 
-:host(:not([expanded])) ha-md-list-item ha-svg-icon,
-:host(:not([expanded])) ha-md-list-item ha-icon {
+:host(:not([expanded])) ha-list-item-button ha-svg-icon,
+:host(:not([expanded])) ha-list-item-button ha-icon {
 	position: relative;
-	top: var(--navigation-rail-icon-top, 4px);
+	top: 4px;
 }
 
 /* Change background of current destination icon and add scale transition */
-:host([expanded]) ha-md-list-item::before,
+:host([expanded]) ha-list-item-button::before,
 :host(:not([expanded])) .user::before {
 	content: '';
-	border-radius: var(--sidebar-item-state-layer-shape);
+	border-radius: var(--md-sys-shape-corner-full);
 	background-color: var(--sidebar-selected-background);
 	opacity: 1;
 	transition: transform var(--md-sys-motion-expressive-spatial-fast);
 	transform: scaleX(0);
 }
-:host([expanded]) ha-md-list-item.selected::before,
+:host([expanded]) ha-list-item-button.selected::before,
 :host(:not([expanded])) .user.selected::before {
 	transform: scaleX(1);
 }
 :host(:not([expanded])) .user.selected::before {
 	width: 56px;
-	margin-inline-start: 20px;
+	margin-inline-start: 21px;
 }
-:host(:not([expanded])) ha-md-list-item:not(.user)::before {
+:host(:not([expanded])) ha-list-item-button:not(.user)::before {
 	display: none;
 }
 :host(:not([expanded])) ha-svg-icon::before,
@@ -153,7 +171,7 @@ ha-md-list-item.selected {
 	left: var(--navigation-rail-indicator-top, -16px);
 	height: var(--navigation-rail-indicator-height, 32px);
 	width: var(--navigation-rail-indicator-width, 56px);
-	border-radius: var(--sidebar-item-state-layer-shape);
+	border-radius: var(--md-sys-shape-corner-full);
 	z-index: -1;
 }
 :host(:not([expanded])) .notifications ha-svg-icon::after {
@@ -164,8 +182,8 @@ ha-md-list-item.selected {
 }
 :host(:not([expanded])) ha-user-badge::after {
 	height: 56px;
-	top: -8px;
-	left: -8px;
+	top: 0px;
+	left: 22px;
 	z-index: 0;
 }
 :host(:not([expanded])) ha-svg-icon::before,
@@ -175,8 +193,8 @@ ha-md-list-item.selected {
 	transform: scaleX(0);
 	transition: transform var(--md-sys-motion-expressive-spatial-fast);
 }
-:host(:not([expanded])) ha-md-list-item.selected ha-svg-icon::before,
-:host(:not([expanded])) ha-md-list-item.selected ha-icon::before {
+:host(:not([expanded])) ha-list-item-button.selected ha-svg-icon::before,
+:host(:not([expanded])) ha-list-item-button.selected ha-icon::before {
 	transform: scaleX(1);
 }
 
@@ -189,21 +207,21 @@ ha-md-list-item.selected {
 	transition: opacity var(--md-sys-motion-expressive-effects-default);
 }
 @media (hover: hover) {
-	:host(:not([expanded])) ha-md-list-item:hover ha-svg-icon::after,
-	:host(:not([expanded])) ha-md-list-item:hover ha-icon::after,
-	:host(:not([expanded])) ha-md-list-item:hover ha-user-badge::after {
+	:host(:not([expanded])) ha-list-item-button:hover ha-svg-icon::after,
+	:host(:not([expanded])) ha-list-item-button:hover ha-icon::after,
+	:host(:not([expanded])) ha-list-item-button:hover ha-user-badge::after {
 		opacity: 0.08;
 	}
 }
-:host(:not([expanded])) ha-md-list-item:active ha-svg-icon::after,
-:host(:not([expanded])) ha-md-list-item:active ha-icon::after,
-:host(:not([expanded])) ha-md-list-item:active ha-user-badge::after {
+:host(:not([expanded])) ha-list-item-button:active ha-svg-icon::after,
+:host(:not([expanded])) ha-list-item-button:active ha-icon::after,
+:host(:not([expanded])) ha-list-item-button:active ha-user-badge::after {
 	opacity: 0.18;
 }
 
 /* Fix navigation rail item icon z-index */
-ha-md-list-item ha-svg-icon,
-ha-md-list-item ha-icon {
+ha-list-item-button ha-svg-icon,
+ha-list-item-button ha-icon {
 	z-index: 0;
 }
 
@@ -246,28 +264,37 @@ ha-md-list-item ha-icon {
 }
 
 /* Fix user badge position */
-ha-user-badge {
-	margin-left: -8px;
+:host(:not([expanded])) ha-user-badge {
+	margin-inline-start: -3px;
+	margin-block-start: 4px;
+}
+:host([expanded]) ha-user-badge {
+	margin-inline-start: -8px;
 }
 
-/* Fix notifications and user badge size and position */
+/* Fix notifications and user badge size */
 :host(:not([expanded])) .notifications,
 :host(:not([expanded])) .user {
 	height: 56px;
-
-	--md-item-overflow: visible;
-}
-:host(:not([expanded])) .notifications ha-svg-icon {
-	position: relative;
-	top: 12px;
-}
-:host(:not([expanded])) .user ha-user-badge {
-	position: relative;
-	top: 6px;
 }
 
 /* Do not use label for bottom section*/
 :host(:not([expanded])) .notifications .item-text,
 :host(:not([expanded])) .user .item-text {
 	display: none;
+}
+
+/* Focus styles */
+ha-list-item-button:focus-visible::part(base) {
+	outline-color: transparent;
+	animation: none;
+	background-color: transparent;
+}
+:host([expanded]) ha-list-item-button:focus-visible::part(base) {
+	background-color: rgba(
+		from var(--md-sys-color-on-secondary-container) r g b / 0.1
+	);
+}
+:host(:not([expanded])) ha-list-item-button:focus-visible {
+	--state-layer-opacity: 0.1;
 }
