@@ -25,6 +25,7 @@ import haMdListItem from './ha-md-list-item.css';
 import haMdMenuItem from './ha-md-menu-item.css';
 import haMenuButton from './ha-menu-button.css';
 import haPickerComboBox from './ha-picker-combo-box.css';
+import haRadioOption from './ha-radio-option.css';
 import haSelectBox from './ha-select-box.css';
 import haSelect from './ha-select.css';
 import haSettingsRow from './ha-settings-row.css';
@@ -79,6 +80,7 @@ export const implicitElements: Record<string, string> = {
 	'ha-md-menu-item': haMdMenuItem,
 	'ha-menu-button': haMenuButton,
 	'ha-picker-combo-box': haPickerComboBox,
+	'ha-radio-option': haRadioOption,
 	'ha-select': haSelect,
 	'ha-select-box': haSelectBox,
 	'ha-settings-row': haSettingsRow,

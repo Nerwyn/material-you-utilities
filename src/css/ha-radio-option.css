@@ -1,0 +1,47 @@
+/* Selected colors */
+:host([aria-checked='true']) .control {
+	color: var(--md-sys-color-primary);
+	border-color: var(--md-sys-color-primary);
+}
+
+/* State layer */
+.control::after {
+	content: '';
+	position: absolute;
+	height: 40px;
+	width: 40px;
+	border-radius: 40px;
+	background-color: var(--state-layer-color);
+	opacity: var(--state-layer-opacity, 0);
+	transition:
+		opacity var(--md-sys-motion-expressive-effects-fast),
+		background-color var(--md-sys-motion-expressive-effects-fast);
+}
+@media (hover: hover) {
+	:host(:hover) {
+		--state-layer-color: var(--md-sys-color-primary);
+		--state-layer-opacity: 0.08;
+	}
+	:host([aria-checked='true']:hover) {
+		--state-layer-color: var(--md-sys-color-on-surface);
+	}
+}
+:host(:focus-visible) {
+	--state-layer-opacity: 0.1;
+}
+:host(:active) {
+	--state-layer-opacity: 0.18;
+}
+:host(:focus-visible),
+:host(:active) {
+	--state-layer-color: var(--md-sys-color-primary);
+}
+:host([aria-checked='true']:focus-visible),
+:host([aria-checked='true']:active) {
+	--state-layer-color: var(--md-sys-color-on-surface);
+}
+
+/* Remove old focus ring */
+:host(:focus-visible) .control {
+	outline: none;
+}
