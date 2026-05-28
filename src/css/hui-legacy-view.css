@@ -1,5 +1,6 @@
 /* Fix Add card FAB position */
-:host > ha-button {
+:host > ha-button,
+:host > ha-fab {
 	bottom: calc(16px + var(--fab-offset, 0px));
 }
 
