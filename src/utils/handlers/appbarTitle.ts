@@ -5,7 +5,7 @@ import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments } from '../../models/interfaces/Input';
 import { getEntityIdAndValue } from '../common';
 import { debugToast, mdLog } from '../logging';
-import { applyStyles, loadStyles } from './styles';
+import { applyStyleTag, loadStyles } from './styles';
 
 const STYLE_ID = `${THEME_TOKEN}-view-title`;
 
@@ -31,7 +31,7 @@ export async function showAppbarTitle(args: IHandlerArguments) {
 			}
 
 			const html = document.querySelector('html') as HTMLElement;
-			applyStyles(html, STYLE_ID, loadStyles(huiRootShowAppbarTitle));
+			applyStyleTag(html, STYLE_ID, loadStyles(huiRootShowAppbarTitle));
 
 			mdLog(html, 'View title shown.', true);
 		} else {

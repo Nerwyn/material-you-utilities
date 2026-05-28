@@ -5,7 +5,7 @@ import { IHandlerArguments } from '../../models/interfaces/Input';
 import { getEntityIdAndValue, getTargets } from '../common';
 import { debugToast } from '../logging';
 import { harmonize } from './harmonize';
-import { applyStyles, loadStyles } from './styles';
+import { applyStyleTag, loadStyles } from './styles';
 
 const STYLE_ID = `${THEME_TOKEN}-user-styles`;
 
@@ -17,8 +17,7 @@ export async function setCSSFromFile(args: IHandlerArguments) {
 		const themeName = hass?.themes?.theme ?? '';
 		if (themeName.includes(THEME_NAME)) {
 			// Do not fetch if no path/url is set
-			const url = getEntityIdAndValue('css_file', args.id)
-				.value as string;
+			const url = getEntityIdAndValue('css_file', args.id).value as string;
 			if (!url) {
 				unsetCSSFromFile(args);
 				return;
@@ -38,7 +37,7 @@ export async function setCSSFromFile(args: IHandlerArguments) {
 
 			// Add style link to targets
 			for (const target of targets) {
-				applyStyles(target, STYLE_ID, styles);
+				applyStyleTag(target, STYLE_ID, styles);
 			}
 
 			// Harmonize if styles includes changes to primary color

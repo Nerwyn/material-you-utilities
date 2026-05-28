@@ -29,12 +29,14 @@ function checkTheme() {
 }
 
 /**
- * Check if styles exist, returning them if they do
+ * Check if styles exist
  * @param {HTMLElement} element
- * @returns {HTMLStyleElement}
+ * @returns {boolean}
  */
-function hasStyles(element: HTMLElement): HTMLStyleElement {
-	return element.shadowRoot?.getElementById(THEME_TOKEN) as HTMLStyleElement;
+function hasStyles(element: HTMLElement): boolean {
+	return !!element.shadowRoot?.adoptedStyleSheets.some(
+		(s) => s.title == THEME_TOKEN,
+	);
 }
 
 /**
@@ -47,7 +49,8 @@ export function loadStyles(styles: string): string {
 	let importantStyles = styles
 		.toString()
 		.replace(/ !important/g, '')
-		.replace(/;\n/g, ' !important;\n');
+		.replace(/;(\n|$)/g, ' !important;\n')
+		.trim();
 
 	// Remove !important from keyframes
 	// Initial check to avoid expensive regex for most user styles
@@ -85,11 +88,11 @@ export function loadStyles(styles: string): string {
  * @returns {string}
  */
 export function buildStylesString(styles: Record<string, string>): string {
-	return `:host,html,body,ha-card{${loadStyles(
+	return `:host, html, body, ha-card {\n${loadStyles(
 		Object.entries(styles)
 			.map(([key, value]) => `${key}: ${value};`)
 			.join('\n'),
-	)}}`;
+	)}\n}`;
 }
 
 /**
@@ -98,19 +101,18 @@ export function buildStylesString(styles: Record<string, string>): string {
  */
 function applyStylesToShadowRoot(element: HTMLElement) {
 	checkTheme();
-	const shadowRoot = element.shadowRoot;
-	if (shouldSetStyles && shadowRoot && !hasStyles(element)) {
-		applyStyles(
-			shadowRoot,
-			THEME_TOKEN,
-			loadStyles(
-				elements[element.nodeName.toLowerCase()] || elements['hui-card'],
-			),
+	if (shouldSetStyles && element.shadowRoot) {
+		const sheet = new CSSStyleSheet();
+		const styles = loadStyles(
+			elements[element.nodeName.toLowerCase()] || elements['hui-card'],
 		);
+		sheet.replaceSync(styles);
+		Object.defineProperty(sheet, 'title', { value: THEME_TOKEN });
+		element.shadowRoot.adoptedStyleSheets.push(sheet);
 	}
 }
 
-export function applyStyles(
+export function applyStyleTag(
 	target: HTMLElement | ShadowRoot,
 	id: string,
 	styles: string,
@@ -138,7 +140,7 @@ const HUI_CARD_CHILD_REGEX = /^HUI-.*-CARD$/;
  * Apply styles to custom elements when a mutation is observed and the shadow-root is present
  * @param {HTMLElement} element
  */
-function observeThenApplyStyles(element: HTMLElement) {
+function observeThenapplyStyleTag(element: HTMLElement) {
 	const onObserve = (el: HTMLElement) => {
 		// No need to continue observing
 		if (hasStyles(el)) {
@@ -147,15 +149,9 @@ function observeThenApplyStyles(element: HTMLElement) {
 		}
 
 		if (el.shadowRoot) {
-			// Shadow-root exists and is populated, apply styles
-			if (el.shadowRoot.children.length) {
-				applyStylesToShadowRoot(el);
-				observer.disconnect();
-				return;
-			}
-
-			// Shadow-root exists but is empty, observe it
-			observer.observe(el.shadowRoot, observeAll);
+			applyStylesToShadowRoot(el);
+			observer.disconnect();
+			return;
 		}
 	};
 
@@ -211,7 +207,7 @@ export async function setStyles(target: typeof globalThis) {
 					super(...args);
 
 					// Most efficient
-					observeThenApplyStyles(this);
+					observeThenapplyStyleTag(this);
 
 					// Most coverage
 					applyStylesOnTimeout(this);
@@ -236,7 +232,7 @@ export async function setStyles(target: typeof globalThis) {
 
 						if (this.shadowRoot && !hasStyles(this)) {
 							// Most efficient
-							observeThenApplyStyles(this);
+							observeThenapplyStyleTag(this);
 
 							// Most coverage
 							applyStylesOnTimeout(this);
