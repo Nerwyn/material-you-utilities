@@ -38,7 +38,7 @@
 /* Modify sidebar item size and animate background when expanding/retracting */
 ha-md-list-item {
 	height: 64px;
-	width: var(--mdc-drawer-width);
+	width: var(--ha-sidebar-width);
 	transition: all var(--md-sys-motion-expressive-spatial-default);
 	margin: 0;
 	flex-direction: column;
@@ -53,7 +53,7 @@ ha-md-list-item {
 /* Expanded rail indicator should fit content width */
 :host([expanded]) ha-md-list-item {
 	height: 56px;
-	width: calc(var(--mdc-drawer-width) - 40px - env(safe-area-inset-left));
+	width: calc(var(--ha-sidebar-width) - 40px - env(safe-area-inset-left));
 	max-width: fit-content;
 	margin: 0 20px;
 	border-radius: var(--md-sys-shape-corner-full);
@@ -99,8 +99,8 @@ ha-md-list-item.selected {
 /* Display label when not expanded */
 :host(:not([expanded])) ha-md-list-item .item-text {
 	display: var(--navigation-rail-label-display, block);
-	width: var(--mdc-drawer-width);
-	max-width: var(--mdc-drawer-width);
+	width: var(--ha-sidebar-width);
+	max-width: var(--ha-sidebar-width);
 	opacity: 1;
 	text-align: center;
 	white-space: initial;

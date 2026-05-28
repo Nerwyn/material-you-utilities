@@ -30,7 +30,7 @@ ha-tab-group-tab[active]::before {
 ha-tab-group-tab[active]::before {
 	position: fixed;
 	margin: auto;
-	inset-inline-start: calc(50% + (var(--mdc-drawer-width, 0px) / 2));
+	inset-inline-start: calc(50% + (var(--ha-sidebar-width, 0px) / 2));
 	translate: -50%;
 	transition: translate var(--md-sys-motion-duration-short1)
 		var(--md-sys-motion-easing-standard);
@@ -133,8 +133,8 @@ ha-menu-button,
 /* Turn view tabs into a separate footer */
 ha-tab-group {
 	min-height: var(--footer-height);
-	width: calc(100% - var(--mdc-drawer-width, 0px));
-	inset-inline-start: var(--mdc-drawer-width, 0);
+	width: calc(100% - var(--ha-sidebar-width, 0px));
+	inset-inline-start: var(--ha-sidebar-width, 0);
 	margin: 0;
 	margin-inline: 0;
 	pointer-events: all;
@@ -145,7 +145,7 @@ ha-tab-group {
 	top: unset;
 	bottom: 0;
 	height: min-content;
-	width: calc(100% - var(--mdc-drawer-width, 0px));
+	width: calc(100% - var(--ha-sidebar-width, 0px));
 	background: var(--navbar-background);
 	box-shadow: var(--md-sys-elevation-level2);
 	padding-bottom: env(safe-area-inset-bottom);

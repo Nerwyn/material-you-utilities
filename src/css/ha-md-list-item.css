@@ -9,7 +9,7 @@ md-item {
 	display: var(--sidebar-item-display, none);
 	position: absolute;
 	height: 100%;
-	width: calc(var(--mdc-drawer-width) - env(safe-area-inset-left));
+	width: calc(var(--ha-sidebar-width) - env(safe-area-inset-left));
 	min-width: 220px;
 	max-width: 360px;
 	inset-inline-start: -20px;
