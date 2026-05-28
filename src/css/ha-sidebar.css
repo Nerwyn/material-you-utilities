@@ -36,13 +36,15 @@
 }
 
 /* Modify sidebar item size and animate background when expanding/retracting */
-ha-md-list-item {
+ha-list-item-button {
 	height: 64px;
 	width: var(--ha-sidebar-width);
 	transition: all var(--md-sys-motion-expressive-spatial-default);
 	margin: 0;
+	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	overflow: hidden;
 
 	--sidebar-item-state-layer-shape: var(--md-sys-shape-corner-full);
 	--md-list-item-leading-space: 16px;
@@ -51,7 +53,7 @@ ha-md-list-item {
 }
 
 /* Expanded rail indicator should fit content width */
-:host([expanded]) ha-md-list-item {
+:host([expanded]) ha-list-item-button {
 	height: 56px;
 	width: calc(var(--ha-sidebar-width) - 40px - env(safe-area-inset-left));
 	max-width: fit-content;
@@ -62,13 +64,13 @@ ha-md-list-item {
 }
 
 /* Modal sidebar item width */
-:host([narrow]) ha-md-list-item {
+:host([narrow]) ha-list-item-button {
 	width: fit-content;
 	max-width: 256px;
 }
 
 /* Fix collapsed rail selected text color */
-ha-md-list-item.selected {
+ha-list-item-button.selected {
 	--md-list-item-label-text-color: var(--sidebar-selected-text-color);
 }
 
@@ -81,23 +83,36 @@ ha-md-list-item.selected {
 	letter-spacing: var(--md-sys-typescale-label-large-tracking);
 }
 
+/* Make expanded sidebar clickable area full height and width */
+:host([expanded]) ha-list-item-button {
+	/* min-width: 220px; */
+}
+:host([expanded]) ha-list-item-button::part(base) {
+	height: 100%;
+	width: calc(var(--ha-sidebar-width) - env(safe-area-inset-left));
+	width: min-content;
+	max-width: 360px;
+}
+:host([expanded]) ha-list-item-button::part(content) {
+	max-width: min-content;
+}
+
 /* Make collapsed navigation rail items vertical */
-:host(:not([expanded])) ha-md-list-item {
+:host(:not([expanded])) ha-list-item-button::part(base) {
 	border-radius: 0;
 	padding-top: 4px;
 	padding-bottom: 6px;
-
-	--md-list-item-flex-direction: column;
-	--ha-md-list-item-gap: 10px;
+	flex-direction: column;
+	gap: 8px;
 }
 
 /* Hide rail default ripple */
-:host(:not([expanded])) ha-md-list-item::part(ripple) {
+:host(:not([expanded])) ha-list-item-button::part(ripple) {
 	display: none;
 }
 
 /* Display label when not expanded */
-:host(:not([expanded])) ha-md-list-item .item-text {
+:host(:not([expanded])) ha-list-item-button .item-text {
 	display: var(--navigation-rail-label-display, block);
 	width: var(--ha-sidebar-width);
 	max-width: var(--ha-sidebar-width);
@@ -114,14 +129,14 @@ ha-md-list-item.selected {
 	letter-spacing: var(--md-sys-typescale-label-small-tracking);
 }
 
-:host(:not([expanded])) ha-md-list-item ha-svg-icon,
-:host(:not([expanded])) ha-md-list-item ha-icon {
+:host(:not([expanded])) ha-list-item-button ha-svg-icon,
+:host(:not([expanded])) ha-list-item-button ha-icon {
 	position: relative;
 	top: var(--navigation-rail-icon-top, 4px);
 }
 
 /* Change background of current destination icon and add scale transition */
-:host([expanded]) ha-md-list-item::before,
+:host([expanded]) ha-list-item-button::before,
 :host(:not([expanded])) .user::before {
 	content: '';
 	border-radius: var(--sidebar-item-state-layer-shape);
@@ -130,7 +145,7 @@ ha-md-list-item.selected {
 	transition: transform var(--md-sys-motion-expressive-spatial-fast);
 	transform: scaleX(0);
 }
-:host([expanded]) ha-md-list-item.selected::before,
+:host([expanded]) ha-list-item-button.selected::before,
 :host(:not([expanded])) .user.selected::before {
 	transform: scaleX(1);
 }
@@ -138,7 +153,7 @@ ha-md-list-item.selected {
 	width: 56px;
 	margin-inline-start: 20px;
 }
-:host(:not([expanded])) ha-md-list-item:not(.user)::before {
+:host(:not([expanded])) ha-list-item-button:not(.user)::before {
 	display: none;
 }
 :host(:not([expanded])) ha-svg-icon::before,
@@ -175,8 +190,8 @@ ha-md-list-item.selected {
 	transform: scaleX(0);
 	transition: transform var(--md-sys-motion-expressive-spatial-fast);
 }
-:host(:not([expanded])) ha-md-list-item.selected ha-svg-icon::before,
-:host(:not([expanded])) ha-md-list-item.selected ha-icon::before {
+:host(:not([expanded])) ha-list-item-button.selected ha-svg-icon::before,
+:host(:not([expanded])) ha-list-item-button.selected ha-icon::before {
 	transform: scaleX(1);
 }
 
@@ -189,21 +204,21 @@ ha-md-list-item.selected {
 	transition: opacity var(--md-sys-motion-expressive-effects-default);
 }
 @media (hover: hover) {
-	:host(:not([expanded])) ha-md-list-item:hover ha-svg-icon::after,
-	:host(:not([expanded])) ha-md-list-item:hover ha-icon::after,
-	:host(:not([expanded])) ha-md-list-item:hover ha-user-badge::after {
+	:host(:not([expanded])) ha-list-item-button:hover ha-svg-icon::after,
+	:host(:not([expanded])) ha-list-item-button:hover ha-icon::after,
+	:host(:not([expanded])) ha-list-item-button:hover ha-user-badge::after {
 		opacity: 0.08;
 	}
 }
-:host(:not([expanded])) ha-md-list-item:active ha-svg-icon::after,
-:host(:not([expanded])) ha-md-list-item:active ha-icon::after,
-:host(:not([expanded])) ha-md-list-item:active ha-user-badge::after {
+:host(:not([expanded])) ha-list-item-button:active ha-svg-icon::after,
+:host(:not([expanded])) ha-list-item-button:active ha-icon::after,
+:host(:not([expanded])) ha-list-item-button:active ha-user-badge::after {
 	opacity: 0.18;
 }
 
 /* Fix navigation rail item icon z-index */
-ha-md-list-item ha-svg-icon,
-ha-md-list-item ha-icon {
+ha-list-item-button ha-svg-icon,
+ha-list-item-button ha-icon {
 	z-index: 0;
 }
 
