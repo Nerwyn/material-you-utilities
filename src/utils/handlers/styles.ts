@@ -99,10 +99,13 @@ export function buildStylesString(styles: Record<string, string>): string {
  * Apply styles to custom elements
  * @param {HTMLElement} element
  */
-function applyStylesToShadowRoot(element: HTMLElement) {
+function applyStylesToShadowRoot(
+	target: typeof globalThis,
+	element: HTMLElement,
+) {
 	checkTheme();
 	if (shouldSetStyles && element.shadowRoot) {
-		const sheet = new CSSStyleSheet();
+		const sheet = new target.CSSStyleSheet();
 		const styles = loadStyles(
 			elements[element.nodeName.toLowerCase()] || elements['hui-card'],
 		);
@@ -141,7 +144,10 @@ const HUI_CARD_CHILD_REGEX = /^HUI-.*-CARD$/;
  * Apply styles to custom elements when a mutation is observed and the shadow-root is present
  * @param {HTMLElement} element
  */
-function observeThenApplyStyles(element: HTMLElement) {
+function observeThenApplyStyles(
+	target: typeof globalThis,
+	element: HTMLElement,
+) {
 	const onObserve = (el: HTMLElement) => {
 		// No need to continue observing
 		if (hasStyles(el)) {
@@ -150,7 +156,7 @@ function observeThenApplyStyles(element: HTMLElement) {
 		}
 
 		if (el.shadowRoot) {
-			applyStylesToShadowRoot(el);
+			applyStylesToShadowRoot(target, el);
 			observer.disconnect();
 			return;
 		}
@@ -178,10 +184,10 @@ function observeThenApplyStyles(element: HTMLElement) {
  * Apply styles to custom elements on a timeout
  * @param {HTMLElement} element
  */
-function applyStylesOnTimeout(element: HTMLElement) {
+function applyStylesOnTimeout(target: typeof globalThis, element: HTMLElement) {
 	handleWhenReady(
 		() => {
-			applyStylesToShadowRoot(element);
+			applyStylesToShadowRoot(target, element);
 		},
 		() => Boolean(element.shadowRoot),
 	);
@@ -208,10 +214,10 @@ export async function setStyles(target: typeof globalThis) {
 					super(...args);
 
 					// Most efficient
-					observeThenApplyStyles(this);
+					observeThenApplyStyles(target, this);
 
 					// Most coverage
-					applyStylesOnTimeout(this);
+					applyStylesOnTimeout(target, this);
 				}
 			}
 
@@ -233,10 +239,10 @@ export async function setStyles(target: typeof globalThis) {
 
 						if (!hasStyles(this)) {
 							// Most efficient
-							observeThenApplyStyles(this);
+							observeThenApplyStyles(target, this);
 
 							// Most coverage
-							applyStylesOnTimeout(this);
+							applyStylesOnTimeout(target, this);
 						}
 					}
 				}
@@ -260,9 +266,9 @@ export async function setExplicitStyles() {
 					haMain.shadowRoot as ShadowRoot,
 					'ha-drawer',
 				);
-				applyStylesToShadowRoot(ha);
-				applyStylesToShadowRoot(haMain);
-				applyStylesToShadowRoot(haDrawer);
+				applyStylesToShadowRoot(window, ha);
+				applyStylesToShadowRoot(window, haMain);
+				applyStylesToShadowRoot(window, haDrawer);
 			}
 		},
 		() => {

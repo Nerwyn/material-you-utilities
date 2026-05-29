@@ -1,5 +1,6 @@
 /* Remove border, fix border radius, make width dynamic, add transition */
-.sidebar-shell {
+.sidebar-shell,
+.type-notification-drawer {
 	border-width: 0;
 	border-radius: 0;
 	width: calc(var(--ha-sidebar-width) + 64px);
@@ -7,7 +8,8 @@
 	padding-inline-start: 64px;
 	translate: -64px 0;
 }
-.sidebar-shell:dir(rtl) {
+.sidebar-shell:dir(rtl),
+.type-notification-drawer:dir(rtl) {
 	translate: 64px 0;
 }
 
