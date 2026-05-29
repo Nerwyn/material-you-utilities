@@ -34,7 +34,7 @@ function checkTheme() {
  * @returns {boolean}
  */
 function hasStyles(element: HTMLElement): boolean {
-	return !!element.shadowRoot?.adoptedStyleSheets.some(
+	return !!element.shadowRoot?.adoptedStyleSheets?.some(
 		(s) => s.title == THEME_TOKEN,
 	);
 }
@@ -108,6 +108,7 @@ function applyStylesToShadowRoot(element: HTMLElement) {
 		);
 		sheet.replaceSync(styles);
 		Object.defineProperty(sheet, 'title', { value: THEME_TOKEN });
+		element.shadowRoot.adoptedStyleSheets ||= [];
 		element.shadowRoot.adoptedStyleSheets.push(sheet);
 	}
 }
@@ -140,7 +141,7 @@ const HUI_CARD_CHILD_REGEX = /^HUI-.*-CARD$/;
  * Apply styles to custom elements when a mutation is observed and the shadow-root is present
  * @param {HTMLElement} element
  */
-function observeThenapplyStyleTag(element: HTMLElement) {
+function observeThenApplyStyles(element: HTMLElement) {
 	const onObserve = (el: HTMLElement) => {
 		// No need to continue observing
 		if (hasStyles(el)) {
@@ -182,7 +183,7 @@ function applyStylesOnTimeout(element: HTMLElement) {
 		() => {
 			applyStylesToShadowRoot(element);
 		},
-		() => Boolean(element.shadowRoot?.children.length),
+		() => Boolean(element.shadowRoot),
 	);
 }
 
@@ -207,7 +208,7 @@ export async function setStyles(target: typeof globalThis) {
 					super(...args);
 
 					// Most efficient
-					observeThenapplyStyleTag(this);
+					observeThenApplyStyles(this);
 
 					// Most coverage
 					applyStylesOnTimeout(this);
@@ -230,9 +231,9 @@ export async function setStyles(target: typeof globalThis) {
 					updated(args: unknown) {
 						updated?.call(this, args);
 
-						if (this.shadowRoot && !hasStyles(this)) {
+						if (!hasStyles(this)) {
 							// Most efficient
-							observeThenapplyStyleTag(this);
+							observeThenApplyStyles(this);
 
 							// Most coverage
 							applyStylesOnTimeout(this);

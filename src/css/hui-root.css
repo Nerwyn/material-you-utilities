@@ -9,6 +9,9 @@
 	background-color: var(--md-sys-color-surface);
 	transition: background-color var(--md-sys-motion-expressive-effects-fast);
 }
+:host([scrolled]) .header {
+	box-shadow: none;
+}
 :host([scrolled]) .header:has(ha-icon-button-arrow-prev ~ .main-title) {
 	background-color: var(--md-sys-color-surface-container);
 }
