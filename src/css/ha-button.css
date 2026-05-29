@@ -23,7 +23,22 @@
 		--inherited-background-color,
 		var(--ha-button-background-color)
 	);
-	border-radius: var(--ha-button-border-radius);
+	border-start-start-radius: var(
+		--ha-button-start-border-radius,
+		var(--ha-button-border-radius)
+	);
+	border-end-start-radius: var(
+		--ha-button-start-border-radius,
+		var(--ha-button-border-radius)
+	);
+	border-start-end-radius: var(
+		--ha-button-end-border-radius,
+		var(--ha-button-border-radius)
+	);
+	border-end-end-radius: var(
+		--ha-button-end-border-radius,
+		var(--ha-button-border-radius)
+	);
 	transition:
 		border-radius var(--md-sys-motion-expressive-spatial-fast),
 		border-start-start-radius var(--md-sys-motion-expressive-spatial-fast),
@@ -62,8 +77,8 @@ slot {
 		opacity: 0.08;
 	}
 }
-:host(:not(.wa-button-group__button)) .button:focus-visible,
-:host(:not(.wa-button-group__button)) .button:active {
+.button:focus-visible,
+.button:active {
 	--ha-button-border-radius: var(--md-sys-shape-corner-small);
 }
 .button:focus-visible::after,
@@ -139,55 +154,6 @@ slot {
 	--ha-button-background-color: var(--error-color);
 	--ha-button-text-color: var(--on-error-color);
 	--state-layer-color: var(--on-error-color);
-}
-
-/* Toggle button groups */
-
-/* Change styles of unselected buttons */
-:host(.wa-button-group__button) .button {
-	--ha-button-background-color: var(--md-sys-color-surface-container);
-	--ha-button-text-color: var(--md-sys-color-on-surface-variant);
-	--state-layer-color: var(--md-sys-color-on-surface-variant);
-}
-:host(.wa-button-group__button-inner) .button {
-	border-radius: var(--md-sys-shape-corner-small);
-}
-:host(.wa-button-group__button-first) .button {
-	border-start-end-radius: var(--md-sys-shape-corner-small);
-	border-end-end-radius: var(--md-sys-shape-corner-small);
-	border-start-start-radius: calc(var(--ha-button-border-radius) / 2);
-	border-end-start-radius: calc(var(--ha-button-border-radius) / 2);
-}
-:host(.wa-button-group__button-last) .button {
-	border-start-start-radius: var(--md-sys-shape-corner-small);
-	border-end-start-radius: var(--md-sys-shape-corner-small);
-	border-start-end-radius: calc(var(--ha-button-border-radius) / 2);
-	border-end-end-radius: calc(var(--ha-button-border-radius) / 2);
-}
-
-/* Change styles of selected button */
-:host([appearance~='accent'].wa-button-group__button) .button {
-	border-radius: var(--ha-button-border-radius);
-
-	--ha-button-background-color: var(--md-sys-color-primary);
-	--ha-button-text-color: var(--md-sys-color-on-primary);
-	--state-layer-color: var(--md-sys-color-on-primary);
-}
-
-/* Change styles when pressed */
-:host(.wa-button-group__button-inner) .button:focus-visible,
-:host(.wa-button-group__button-inner) .button:active {
-	border-radius: var(--md-sys-shape-corner-extra-small);
-}
-:host(.wa-button-group__button-first) .button:focus-visible,
-:host(.wa-button-group__button-first) .button:active {
-	border-start-end-radius: var(--md-sys-shape-corner-extra-small);
-	border-end-end-radius: var(--md-sys-shape-corner-extra-small);
-}
-:host(.wa-button-group__button-last) .button:focus-visible,
-:host(.wa-button-group__button-last) .button:active {
-	border-start-start-radius: var(--md-sys-shape-corner-extra-small);
-	border-end-start-radius: var(--md-sys-shape-corner-extra-small);
 }
 
 /* FAB buttons */

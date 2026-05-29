@@ -1,0 +1,47 @@
+/* Gap between buttons */
+wa-button-group::part(base) {
+	gap: 2px;
+}
+
+ha-button::part(base) {
+	--ha-button-border-radius: var(--md-sys-shape-corner-small);
+}
+
+/* Change styles of unselected buttons */
+ha-button::part(base) {
+	--ha-button-background-color: var(--md-sys-color-surface-container);
+	--ha-button-text-color: var(--md-sys-color-on-surface-variant);
+	--state-layer-color: var(--md-sys-color-on-surface-variant);
+}
+ha-button:first-of-type::part(base) {
+	--ha-button-start-border-radius: calc(var(--ha-button-height) / 2);
+}
+ha-button:last-of-type::part(base) {
+	--ha-button-end-border-radius: calc(var(--ha-button-height) / 2);
+}
+
+/* Change styles of selected button */
+ha-button[appearance~='accent']::part(base) {
+	--ha-button-start-border-radius: var(--ha-button-height);
+	--ha-button-end-border-radius: var(--ha-button-height);
+	--ha-button-background-color: var(--md-sys-color-primary);
+	--ha-button-text-color: var(--md-sys-color-on-primary);
+	--state-layer-color: var(--md-sys-color-on-primary);
+}
+
+/* Change styles when pressed */
+ha-button::part(base):focus-visible,
+ha-button::part(base):active {
+	--ha-button-start-border-radius: var(--md-sys-shape-corner-extra-small);
+	--ha-button-end-border-radius: var(--md-sys-shape-corner-extra-small);
+}
+ha-button:first-of-type::part(base):focus-visible,
+ha-button:first-of-type::part(base):active {
+	--ha-button-start-border-radius: var(--ha-button-height);
+	--ha-button-end-border-radius: var(--md-sys-shape-corner-extra-small);
+}
+ha-button:last-of-type::part(base):focus-visible,
+ha-button:last-of-type::part(base):active {
+	--ha-button-start-border-radius: var(--md-sys-shape-corner-extra-small);
+	--ha-button-end-border-radius: var(--ha-button-height);
+}

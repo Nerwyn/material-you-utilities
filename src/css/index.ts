@@ -1,5 +1,6 @@
 import haAssistChip from './ha-assist-chip.css';
 import haBottomSheet from './ha-bottom-sheet.css';
+import haButtonToggleGroup from './ha-button-toggle-group.css';
 import haButton from './ha-button.css';
 import haCardElevated from './ha-card-elevated.css';
 import haCardFilled from './ha-card-filled.css';
@@ -61,6 +62,7 @@ import waDrawer from './wa-drawer.css';
 export const implicitElements: Record<string, string> = {
 	'ha-assist-chip': haAssistChip,
 	'ha-button': haButton,
+	'ha-button-toggle-group': haButtonToggleGroup,
 	'ha-bottom-sheet': haBottomSheet,
 	'ha-card': haCard,
 	'ha-config-info': haConfigInfo,
