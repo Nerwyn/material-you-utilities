@@ -19,7 +19,7 @@ This module generates color themes using [Material Color Utilities](https://gith
 
 # Installation
 
-First time setup and installation of this module is a multistep process as this module must be configured in `configuration.yaml` to use use all features.
+First time setup and installation of this module is a multistep process as this module must be configured in `configuration.yaml` to use all features.
 
 ## Install the Module From HACS
 
