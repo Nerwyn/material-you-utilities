@@ -164,7 +164,7 @@ slot {
 	box-shadow: var(--md-sys-elevation-level3);
 }
 @media (hover: hover) {
-	.button:hover {
+	:host([slot='fab']) .button:hover {
 		box-shadow: var(--md-sys-elevation-level4);
 	}
 }
