@@ -1,3 +1,4 @@
+/* Default - small, Small - xsmall, Large - medium */
 /* Label */
 :host,
 .label {
@@ -7,13 +8,30 @@
 	line-height: var(--md-sys-typescale-label-large-line-height);
 	letter-spacing: var(--md-sys-typescale-label-large-tracking);
 }
+:host([size='l']),
+:host([size='large']),
+:host([size='l']) .label,
+:host([size='large']) .label {
+	font-size: var(--md-sys-typescale-title-medium-size);
+	font-weight: var(--md-sys-typescale-title-medium-weight);
+	line-height: var(--md-sys-typescale-title-medium-line-height);
+	letter-spacing: var(--md-sys-typescale-title-medium-tracking);
+}
 
-/* Icons */
+/* Icon spacing */
 .start::slotted(*) {
 	margin-inline-end: 8px;
 }
 .end::slotted(*) {
 	margin-inline-start: 8px;
+}
+:host([size='s']) .start::slotted(*),
+:host([size='small']) .start::slotted(*) {
+	margin-inline-end: 4px;
+}
+:host([size='s']) .end::slotted(*),
+:host([size='small']) .end::slotted(*) {
+	margin-inline-start: 4px;
 }
 
 /* Redefine colors to tokens, change border-radius on interaction, icon size */
@@ -53,6 +71,19 @@
 slot {
 	color: var(--inherited-text-color, var(--ha-button-text-color));
 	transition: color var(--md-sys-motion-expressive-effects-fast);
+}
+
+/* Fixed button sizes */
+:host([size='s']) .button,
+:host([size='small']) .button {
+	height: 32px;
+}
+:host(.button[size='l']) .button,
+:host(.button[size='large']) .button {
+	height: 56px;
+	padding: 0 24px;
+
+	--mdc-icon-size: var(--ha-button-mdc-icon-size, 24px);
 }
 
 /* State layer */
