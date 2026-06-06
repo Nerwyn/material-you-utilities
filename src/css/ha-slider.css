@@ -1,9 +1,15 @@
-/* Thumb size */
+/* Sizes */
 :host {
-	--thumb-height: var(--ha-slider-track-size);
+	--ha-slider-track-size: 24px;
+	--thumb-height: 24px;
 	--thumb-width: 12px;
 	--thumb-focus-ring-height: 54px;
 	--thumb-actual-height: 44px;
+}
+:host([size='s']),
+:host([size='small']) {
+	--ha-slider-track-size: 16px;
+	--thumb-height: 16px;
 }
 
 /* Fix cursor */
