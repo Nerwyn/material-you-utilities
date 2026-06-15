@@ -31,10 +31,12 @@ async function main() {
 	}
 	window.MaterialYouInit = true;
 
+	const funcs = [];
+
 	// Set styles on main window custom elements
 	// Do this before anything else because it's time sensitive
-	setStyles(window);
-	setExplicitStyles();
+	funcs.push(setStyles(window));
+	funcs.push(setExplicitStyles());
 
 	mdLog(
 		document.querySelector('html') as HTMLElement,
@@ -130,7 +132,7 @@ async function main() {
 			},
 		);
 	};
-	setOnFirstLoad();
+	funcs.push(setOnFirstLoad());
 
 	// Call handlers on visibility change
 	window.addEventListener('visibilitychange', async () => {
@@ -142,7 +144,7 @@ async function main() {
 		}
 	});
 
-	setupSubscriptions({});
+	funcs.push(setupSubscriptions({}));
 
 	const setupThemeChangeSubscriptions = async () => {
 		handleWhenReady(
@@ -167,7 +169,9 @@ async function main() {
 			},
 		);
 	};
-	setupThemeChangeSubscriptions();
+	funcs.push(setupThemeChangeSubscriptions());
+
+	await Promise.all(funcs);
 }
 
-main();
+await main();
