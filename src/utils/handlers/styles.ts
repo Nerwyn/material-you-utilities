@@ -187,7 +187,9 @@ function observeThenApplyStyles(
 function applyStylesOnTimeout(target: typeof globalThis, element: HTMLElement) {
 	handleWhenReady(
 		() => {
-			applyStylesToShadowRoot(target, element);
+			if (!hasStyles(element)) {
+				applyStylesToShadowRoot(target, element);
+			}
 		},
 		() => Boolean(element.shadowRoot),
 	);
