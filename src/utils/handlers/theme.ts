@@ -6,7 +6,7 @@ import {
 	MaterialDynamicColors,
 	Platform,
 } from '@material/material-color-utilities';
-import { applyStyles, buildStylesString, unset } from '.';
+import { applyStyleTag, buildStylesString, unset } from '.';
 import { materialDynamicColors, schemes } from '../../models/constants/colors';
 import { inputs } from '../../models/constants/inputs';
 import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
@@ -80,7 +80,7 @@ export async function setTheme(args: IHandlerArguments) {
 					}
 
 					for (const target of targets) {
-						applyStyles(target, STYLE_ID, buildStylesString(styles));
+						applyStyleTag(target, STYLE_ID, buildStylesString(styles));
 					}
 				}
 

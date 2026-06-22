@@ -8,7 +8,7 @@ import { InputField } from '../models/interfaces/Input';
 import { SpecVersion } from '../models/interfaces/Scheme';
 import { getEntityId } from '../utils/common';
 import {
-	applyStyles,
+	applyStyleTag,
 	buildStylesString,
 	setBaseColorFromImage,
 	setCardType,
@@ -474,7 +474,7 @@ export class MaterialYouConfigCard extends LitElement {
 				styles[`--${key}`] = value as string;
 			}
 
-			applyStyles(this, this.MODE_ID, buildStylesString(styles));
+			applyStyleTag(this, this.MODE_ID, buildStylesString(styles));
 		}
 	}
 
@@ -591,7 +591,7 @@ export class MaterialYouConfigCard extends LitElement {
 			'disk-color-picker',
 		) as HTMLElement;
 		if (colorPicker && !colorPicker.shadowRoot?.getElementById(styleId)) {
-			applyStyles(
+			applyStyleTag(
 				colorPicker,
 				styleId,
 				`

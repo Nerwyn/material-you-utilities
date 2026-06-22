@@ -6,7 +6,7 @@ import { IHandlerArguments } from '../../models/interfaces/Input';
 import { getEntityIdAndValue } from '../common';
 import { debugToast, mdLog } from '../logging';
 import { showAppbarTitle } from './appbarTitle';
-import { applyStyles, loadStyles } from './styles';
+import { applyStyleTag, loadStyles } from './styles';
 
 const STYLE_ID = `${THEME_TOKEN}-appbar`;
 
@@ -30,7 +30,7 @@ export async function hideAppbar(args: IHandlerArguments) {
 			}
 
 			const html = document.querySelector('html') as HTMLElement;
-			applyStyles(html, STYLE_ID, loadStyles(huiRootHideAppbar));
+			applyStyleTag(html, STYLE_ID, loadStyles(huiRootHideAppbar));
 
 			mdLog(html, 'Application bar hidden.', true);
 		} else {

@@ -1,9 +1,3 @@
-/* Selected colors */
-:host([aria-checked='true']) .control {
-	color: var(--md-sys-color-primary);
-	border-color: var(--md-sys-color-primary);
-}
-
 /* State layer */
 .control::after {
 	content: '';

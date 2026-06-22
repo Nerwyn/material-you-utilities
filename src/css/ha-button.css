@@ -1,3 +1,4 @@
+/* Default - small, Small - xsmall, Large - medium */
 /* Label */
 :host,
 .label {
@@ -7,13 +8,30 @@
 	line-height: var(--md-sys-typescale-label-large-line-height);
 	letter-spacing: var(--md-sys-typescale-label-large-tracking);
 }
+:host([size='l']),
+:host([size='large']),
+:host([size='l']) .label,
+:host([size='large']) .label {
+	font-size: var(--md-sys-typescale-title-medium-size);
+	font-weight: var(--md-sys-typescale-title-medium-weight);
+	line-height: var(--md-sys-typescale-title-medium-line-height);
+	letter-spacing: var(--md-sys-typescale-title-medium-tracking);
+}
 
-/* Icons */
+/* Icon spacing */
 .start::slotted(*) {
 	margin-inline-end: 8px;
 }
 .end::slotted(*) {
 	margin-inline-start: 8px;
+}
+:host([size='s']) .start::slotted(*),
+:host([size='small']) .start::slotted(*) {
+	margin-inline-end: 4px;
+}
+:host([size='s']) .end::slotted(*),
+:host([size='small']) .end::slotted(*) {
+	margin-inline-start: 4px;
 }
 
 /* Redefine colors to tokens, change border-radius on interaction, icon size */
@@ -23,7 +41,22 @@
 		--inherited-background-color,
 		var(--ha-button-background-color)
 	);
-	border-radius: var(--ha-button-border-radius);
+	border-start-start-radius: var(
+		--ha-button-start-border-radius,
+		var(--ha-button-border-radius)
+	);
+	border-end-start-radius: var(
+		--ha-button-start-border-radius,
+		var(--ha-button-border-radius)
+	);
+	border-start-end-radius: var(
+		--ha-button-end-border-radius,
+		var(--ha-button-border-radius)
+	);
+	border-end-end-radius: var(
+		--ha-button-end-border-radius,
+		var(--ha-button-border-radius)
+	);
 	transition:
 		border-radius var(--md-sys-motion-expressive-spatial-fast),
 		border-start-start-radius var(--md-sys-motion-expressive-spatial-fast),
@@ -38,6 +71,19 @@
 slot {
 	color: var(--inherited-text-color, var(--ha-button-text-color));
 	transition: color var(--md-sys-motion-expressive-effects-fast);
+}
+
+/* Fixed button sizes */
+:host([size='s']) .button,
+:host([size='small']) .button {
+	height: 32px;
+}
+:host([size='l']) .button,
+:host([size='large']) .button {
+	height: 56px;
+	padding: 0 24px;
+
+	--mdc-icon-size: var(--ha-button-mdc-icon-size, 24px);
 }
 
 /* State layer */
@@ -62,9 +108,15 @@ slot {
 		opacity: 0.08;
 	}
 }
-:host(:not(.wa-button-group__button)) .button:focus-visible,
-:host(:not(.wa-button-group__button)) .button:active {
+.button:focus-visible,
+.button:active {
 	--ha-button-border-radius: var(--md-sys-shape-corner-small);
+}
+:host([size='l']) .button:focus-visible,
+:host([size='l']) .button:active,
+:host([size='large']) .button:focus-visible,
+:host([size='large']) .button:active {
+	--ha-button-border-radius: var(--md-sys-shape-corner-medium);
 }
 .button:focus-visible::after,
 .button:active::after {
@@ -141,55 +193,6 @@ slot {
 	--state-layer-color: var(--on-error-color);
 }
 
-/* Toggle button groups */
-
-/* Change styles of unselected buttons */
-:host(.wa-button-group__button) .button {
-	--ha-button-background-color: var(--md-sys-color-surface-container);
-	--ha-button-text-color: var(--md-sys-color-on-surface-variant);
-	--state-layer-color: var(--md-sys-color-on-surface-variant);
-}
-:host(.wa-button-group__button-inner) .button {
-	border-radius: var(--md-sys-shape-corner-small);
-}
-:host(.wa-button-group__button-first) .button {
-	border-start-end-radius: var(--md-sys-shape-corner-small);
-	border-end-end-radius: var(--md-sys-shape-corner-small);
-	border-start-start-radius: calc(var(--ha-button-border-radius) / 2);
-	border-end-start-radius: calc(var(--ha-button-border-radius) / 2);
-}
-:host(.wa-button-group__button-last) .button {
-	border-start-start-radius: var(--md-sys-shape-corner-small);
-	border-end-start-radius: var(--md-sys-shape-corner-small);
-	border-start-end-radius: calc(var(--ha-button-border-radius) / 2);
-	border-end-end-radius: calc(var(--ha-button-border-radius) / 2);
-}
-
-/* Change styles of selected button */
-:host([appearance~='accent'].wa-button-group__button) .button {
-	border-radius: var(--ha-button-border-radius);
-
-	--ha-button-background-color: var(--md-sys-color-primary);
-	--ha-button-text-color: var(--md-sys-color-on-primary);
-	--state-layer-color: var(--md-sys-color-on-primary);
-}
-
-/* Change styles when pressed */
-:host(.wa-button-group__button-inner) .button:focus-visible,
-:host(.wa-button-group__button-inner) .button:active {
-	border-radius: var(--md-sys-shape-corner-extra-small);
-}
-:host(.wa-button-group__button-first) .button:focus-visible,
-:host(.wa-button-group__button-first) .button:active {
-	border-start-end-radius: var(--md-sys-shape-corner-extra-small);
-	border-end-end-radius: var(--md-sys-shape-corner-extra-small);
-}
-:host(.wa-button-group__button-last) .button:focus-visible,
-:host(.wa-button-group__button-last) .button:active {
-	border-start-start-radius: var(--md-sys-shape-corner-extra-small);
-	border-end-start-radius: var(--md-sys-shape-corner-extra-small);
-}
-
 /* FAB buttons */
 :host([slot='fab']) .button {
 	height: 56px;
@@ -198,9 +201,13 @@ slot {
 	box-shadow: var(--md-sys-elevation-level3);
 }
 @media (hover: hover) {
-	.button:hover {
+	:host([slot='fab']) .button:hover {
 		box-shadow: var(--md-sys-elevation-level4);
 	}
+}
+:host([slot='fab']),
+:host([slot='fab']) .label {
+	letter-spacing: 0px;
 }
 
 /* FAB Accent -> Tonal Secondary */

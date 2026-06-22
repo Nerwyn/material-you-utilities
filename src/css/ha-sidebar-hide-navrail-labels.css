@@ -1,5 +1,6 @@
 /* Hide sidebar label */
 html {
+	--navigation-rail-tooltip-display: block;
 	--navigation-rail-label-display: none;
 	--navigation-rail-indicator-width: 54px;
 	--navigation-rail-indicator-height: 54px;

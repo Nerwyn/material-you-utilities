@@ -29,12 +29,14 @@ function checkTheme() {
 }
 
 /**
- * Check if styles exist, returning them if they do
+ * Check if styles exist
  * @param {HTMLElement} element
- * @returns {HTMLStyleElement}
+ * @returns {boolean}
  */
-function hasStyles(element: HTMLElement): HTMLStyleElement {
-	return element.shadowRoot?.getElementById(THEME_TOKEN) as HTMLStyleElement;
+function hasStyles(element: HTMLElement): boolean {
+	return !!element.shadowRoot?.adoptedStyleSheets?.some(
+		(s) => s.title == THEME_TOKEN,
+	);
 }
 
 /**
@@ -47,7 +49,8 @@ export function loadStyles(styles: string): string {
 	let importantStyles = styles
 		.toString()
 		.replace(/ !important/g, '')
-		.replace(/;\n/g, ' !important;\n');
+		.replace(/;(\n|$)/g, ' !important;\n')
+		.trim();
 
 	// Remove !important from keyframes
 	// Initial check to avoid expensive regex for most user styles
@@ -85,32 +88,35 @@ export function loadStyles(styles: string): string {
  * @returns {string}
  */
 export function buildStylesString(styles: Record<string, string>): string {
-	return `:host,html,body,ha-card{${loadStyles(
+	return `:host, html, body, ha-card {\n${loadStyles(
 		Object.entries(styles)
 			.map(([key, value]) => `${key}: ${value};`)
 			.join('\n'),
-	)}}`;
+	)}\n}`;
 }
 
 /**
  * Apply styles to custom elements
  * @param {HTMLElement} element
  */
-function applyStylesToShadowRoot(element: HTMLElement) {
+function applyStylesToShadowRoot(
+	target: typeof globalThis,
+	element: HTMLElement,
+) {
 	checkTheme();
-	const shadowRoot = element.shadowRoot;
-	if (shouldSetStyles && shadowRoot && !hasStyles(element)) {
-		applyStyles(
-			shadowRoot,
-			THEME_TOKEN,
-			loadStyles(
-				elements[element.nodeName.toLowerCase()] || elements['hui-card'],
-			),
+	if (shouldSetStyles && element.shadowRoot) {
+		const sheet = new target.CSSStyleSheet();
+		const styles = loadStyles(
+			elements[element.nodeName.toLowerCase()] || elements['hui-card'],
 		);
+		sheet.replaceSync(styles);
+		Object.defineProperty(sheet, 'title', { value: THEME_TOKEN });
+		element.shadowRoot.adoptedStyleSheets ||= [];
+		element.shadowRoot.adoptedStyleSheets.push(sheet);
 	}
 }
 
-export function applyStyles(
+export function applyStyleTag(
 	target: HTMLElement | ShadowRoot,
 	id: string,
 	styles: string,
@@ -138,7 +144,10 @@ const HUI_CARD_CHILD_REGEX = /^HUI-.*-CARD$/;
  * Apply styles to custom elements when a mutation is observed and the shadow-root is present
  * @param {HTMLElement} element
  */
-function observeThenApplyStyles(element: HTMLElement) {
+function observeThenApplyStyles(
+	target: typeof globalThis,
+	element: HTMLElement,
+) {
 	const onObserve = (el: HTMLElement) => {
 		// No need to continue observing
 		if (hasStyles(el)) {
@@ -147,15 +156,9 @@ function observeThenApplyStyles(element: HTMLElement) {
 		}
 
 		if (el.shadowRoot) {
-			// Shadow-root exists and is populated, apply styles
-			if (el.shadowRoot.children.length) {
-				applyStylesToShadowRoot(el);
-				observer.disconnect();
-				return;
-			}
-
-			// Shadow-root exists but is empty, observe it
-			observer.observe(el.shadowRoot, observeAll);
+			applyStylesToShadowRoot(target, el);
+			observer.disconnect();
+			return;
 		}
 	};
 
@@ -181,12 +184,14 @@ function observeThenApplyStyles(element: HTMLElement) {
  * Apply styles to custom elements on a timeout
  * @param {HTMLElement} element
  */
-function applyStylesOnTimeout(element: HTMLElement) {
+function applyStylesOnTimeout(target: typeof globalThis, element: HTMLElement) {
 	handleWhenReady(
 		() => {
-			applyStylesToShadowRoot(element);
+			if (!hasStyles(element)) {
+				applyStylesToShadowRoot(target, element);
+			}
 		},
-		() => Boolean(element.shadowRoot?.children.length),
+		() => Boolean(element.shadowRoot),
 	);
 }
 
@@ -211,10 +216,10 @@ export async function setStyles(target: typeof globalThis) {
 					super(...args);
 
 					// Most efficient
-					observeThenApplyStyles(this);
+					observeThenApplyStyles(target, this);
 
 					// Most coverage
-					applyStylesOnTimeout(this);
+					applyStylesOnTimeout(target, this);
 				}
 			}
 
@@ -234,12 +239,12 @@ export async function setStyles(target: typeof globalThis) {
 					updated(args: unknown) {
 						updated?.call(this, args);
 
-						if (this.shadowRoot && !hasStyles(this)) {
+						if (!hasStyles(this)) {
 							// Most efficient
-							observeThenApplyStyles(this);
+							observeThenApplyStyles(target, this);
 
 							// Most coverage
-							applyStylesOnTimeout(this);
+							applyStylesOnTimeout(target, this);
 						}
 					}
 				}
@@ -263,9 +268,9 @@ export async function setExplicitStyles() {
 					haMain.shadowRoot as ShadowRoot,
 					'ha-drawer',
 				);
-				applyStylesToShadowRoot(ha);
-				applyStylesToShadowRoot(haMain);
-				applyStylesToShadowRoot(haDrawer);
+				applyStylesToShadowRoot(window, ha);
+				applyStylesToShadowRoot(window, haMain);
+				applyStylesToShadowRoot(window, haDrawer);
 			}
 		},
 		() => {

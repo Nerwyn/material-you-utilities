@@ -19,7 +19,7 @@ This module generates color themes using [Material Color Utilities](https://gith
 
 # Installation
 
-First time setup and installation of this module is a multistep process as this module must be configured in `configuration.yaml` to use use all features.
+First time setup and installation of this module is a multistep process as this module must be configured in `configuration.yaml` to use all features.
 
 ## Install the Module From HACS
 
@@ -504,7 +504,9 @@ Windows that appear to display information from the bottom of the screen, like m
 
 <img src="https://raw.githubusercontent.com/Nerwyn/material-you-utilities/main/assets/bottom-sheet.png" width="500"/>
 
-# Developing, Modifying, and Building
+# Developing, Building, and Contributing
+
+## Developing
 
 This repository requires npm and Node.js to develop. The JavaScript module is a minified file compiled using rspack. The source files are all written using TypeScript. After forking the repository and cloning to your machine, run the command `npm run setup` to setup the pre-commit hooks and install dependencies.
 
@@ -516,4 +518,14 @@ Helper methods can be found in `src/utils/handlers`. Not all handlers are trigge
 
 The configuration panel and settings card code can be found in `src/classes`. These generally do not have to be modified unless an input requires a custom user interface not provided by [`ha-selector`](https://github.com/home-assistant/frontend/blob/dev/src/data/selector.ts), like for the base color picker wheel.
 
-To build this module, either make a commit (to your own fork) or run the command `npm run build`. The compiled JavaScript module and a gzipped copy of it (which is ignored by git and is for local testing) can be found in the `dist` folder. Rspack can take a little bit of time to run, especially the first time you run it after opening the terminal. You can upload the gzipped file to your Home Assistant instance to overwrite the copy download from and created by HACS to test your changes. This file is located in your configuration folder at `www/community/material-you-utilities`.
+## Building
+
+To build this module, either make a commit (to your own fork) or run the command `npm run build`. The compiled JavaScript module and a gzipped copy of it (which is ignored by git and is for local testing) can be found in the `dist` folder. This command assumes you have `gzip` installed. Rspack can take a little bit of time to run, especially the first time you run it after opening the terminal. You can upload the gzipped file to your Home Assistant instance to overwrite the copy download from and created by HACS to test your changes. This file is located in your configuration folder at `www/community/material-you-utilities`. Be wary of [sticky cache](https://github.com/Nerwyn/material-you-utilities/discussions/12#:~:text=the%20old%20folder.-,Sticky%20cache,-The%20biggest%20issue), which can prevent your changes from loading.
+
+## Contributing
+
+Contributions are welcome, but understand that this is a personal project largely maintained by one person. Low quality issues and pull requests can end up wasting a lot of my time as they cause me to chase non-existent issues or try to validate hard to read code. This is especially true for AI generated issues and pull requests, which I have seen an uptick of on my own repositories. While you are welcome to use AI tooling to aid your coding, fully AI generated "vibe coded" contributions are not welcome.
+
+Bug fixes for monthly releases are normally fixed within a few days of the first monthly Home Assistant release or during the beta period. If there is not already a monthly beta fix released or matching issue, feel free to create an issue and I will get to it as soon as I can. You generally shouldn't attempt to create a bug fix fork/PR for monthly releases because chances are I'm already on it.
+
+This project is largely feature complete outside of implementing upstream changes to material color utilities. If there are new features you want to see added, you may want to create a feature request issue or discussion thread to discuss it first.

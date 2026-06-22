@@ -258,8 +258,8 @@ ha-list-item-button ha-icon {
 }
 
 /* Disable tooltip */
-.tooltip {
-	display: none;
+ha-tooltip {
+	display: var(--navigation-rail-tooltip-display, none);
 	pointer-events: none;
 }
 

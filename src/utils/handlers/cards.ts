@@ -5,7 +5,7 @@ import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments } from '../../models/interfaces/Input';
 import { getEntityIdAndValue, getTargets } from '../common';
 import { debugToast, mdLog } from '../logging';
-import { applyStyles, loadStyles } from './styles';
+import { applyStyleTag, loadStyles } from './styles';
 
 const STYLE_ID = `${THEME_TOKEN}-card-type`;
 
@@ -17,22 +17,17 @@ export async function setCardType(args: IHandlerArguments) {
 	try {
 		const themeName = hass?.themes?.theme ?? '';
 		if (themeName.includes(THEME_NAME)) {
-			const value = getEntityIdAndValue('card_type', args.id)
-				.value as string;
+			const value = getEntityIdAndValue('card_type', args.id).value as string;
 			if (!(value in cardTypes)) {
 				unsetCardType(args);
 				return;
 			}
 
 			for (const target of targets) {
-				applyStyles(target, STYLE_ID, loadStyles(cardTypes[value]));
+				applyStyleTag(target, STYLE_ID, loadStyles(cardTypes[value]));
 			}
 
-			mdLog(
-				targets[0],
-				`Material design card type set to ${value}.`,
-				true,
-			);
+			mdLog(targets[0], `Material design card type set to ${value}.`, true);
 		} else {
 			await unsetCardType(args);
 		}
