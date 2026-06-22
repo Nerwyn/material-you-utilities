@@ -6,8 +6,10 @@ labels: enhancement
 assignees: ''
 ---
 
-<!-- READ THIS FIRST:
+<!--
+READ THIS FIRST:
 - DO NOT DELETE THIS TEMPLATE. If you do not follow it or otherwise do not provide enough information your issue will be marked invalid and closed.
+- DO NOT REPLACE IT WITH AI SLOP. There has been an uptick of AI slop issues that are almost always full of misinformation and waste my time. If you use AI to write your issue, it will be marked as invalid and closed. If it is especially egregious you will be blocked.
 - Provide as many details as possible. Do not delete any text from this template!
 - Please check the README first to make sure that the feature you're requesting doesn't already exist or can be created using the existing options.
 - If you have a question instead of a feature request, use the discussions section or the community forum thread.
