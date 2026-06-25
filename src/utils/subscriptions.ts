@@ -90,7 +90,14 @@ export async function setupSubscriptions(
 										console.error(msg.error);
 										debugToast(msg.error);
 									}
-									subscription.handler(args);
+									const value = (msg as RenderTemplateResult).result;
+									if (value != 'unknown') {
+										subscription.handler({
+											...args,
+											entityId: entity,
+											value,
+										});
+									}
 								},
 								{
 									type: 'render_template',
