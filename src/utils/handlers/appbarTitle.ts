@@ -1,6 +1,6 @@
 import { huiRootShowAppbarTitle } from '../../css';
 import { inputs } from '../../models/constants/inputs';
-import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
+import { THEME, THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments } from '../../models/interfaces/Input';
 import { getEntityIdAndValue } from '../common';
@@ -20,12 +20,18 @@ export async function showAppbarTitle(args: IHandlerArguments) {
 	try {
 		const themeName = hass?.themes?.theme ?? '';
 		if (themeName.includes(THEME_NAME)) {
-			const value =
-				getEntityIdAndValue('appbar_title', args.id).value ||
-				inputs.appbar_title.default;
-			const appbar =
-				getEntityIdAndValue('appbar', args.id).value || inputs.appbar.default;
-			if (value == 'off' || appbar == 'off') {
+			let title = args.value || inputs.appbar_title.default;
+			let appbar = args.value || inputs.appbar.default;
+			if (
+				!args.entityId?.startsWith(
+					`${inputs.appbar_title.domain}.${THEME}_appbar_title`,
+				)
+			) {
+				title = getEntityIdAndValue('appbar_title', args.id).value;
+			} else {
+				appbar = getEntityIdAndValue('appbar', args.id).value;
+			}
+			if (title == 'off' || appbar == 'off') {
 				hideAppbarTitle();
 				return;
 			}

@@ -6,7 +6,7 @@ import {
 import { applyStyleTag, buildStylesString, unset } from '.';
 import { paletteColors, semanticColors } from '../../models/constants/colors';
 import { inputs } from '../../models/constants/inputs';
-import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
+import { THEME, THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments } from '../../models/interfaces/Input';
 import {
@@ -31,10 +31,14 @@ export async function harmonize(args: IHandlerArguments) {
 	try {
 		const themeName = hass?.themes?.theme ?? '';
 		if (themeName.includes(THEME_NAME)) {
-			const value =
-				getEntityIdAndValue('harmonize', args.id).value ||
-				inputs.harmonize.default;
-
+			let value = args.value || inputs.harmonize.default;
+			if (
+				!args.entityId?.startsWith(
+					`${inputs.harmonize.domain}.${THEME}_harmonize`,
+				)
+			) {
+				value = getEntityIdAndValue('harmonize', args.id).value;
+			}
 			if (value != 'on') {
 				dissonance(args);
 				return;

@@ -1,3 +1,5 @@
+import { Context, HassEntity } from 'home-assistant-js-websocket';
+
 export type InputDomain =
 	| 'input_text'
 	| 'input_select'
@@ -24,9 +26,29 @@ export type InputField =
 export interface IHandlerArguments {
 	targets?: HTMLElement[];
 	id?: string;
+	entityId?: string;
+	value?: string | number;
 }
 
 export type Handler = (args: IHandlerArguments) => Promise<void>;
+
+export interface SubscriptionResult {
+	variables: {
+		trigger: {
+			id: string;
+			idx: string;
+			alias?: string;
+			platform: string;
+			entity_id: string;
+			from_state: HassEntity;
+			to_state: HassEntity;
+			for?: string;
+			attribute?: string;
+			description: string;
+		};
+	};
+	context: Context;
+}
 
 export interface IInputInfo {
 	domain: InputDomain;

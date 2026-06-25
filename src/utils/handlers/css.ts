@@ -1,8 +1,9 @@
 import { unset } from '.';
+import { inputs } from '../../models/constants/inputs';
 import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments } from '../../models/interfaces/Input';
-import { getEntityIdAndValue, getTargets } from '../common';
+import { getTargets } from '../common';
 import { debugToast } from '../logging';
 import { harmonize } from './harmonize';
 import { applyStyleTag, loadStyles } from './styles';
@@ -17,7 +18,7 @@ export async function setCSSFromFile(args: IHandlerArguments) {
 		const themeName = hass?.themes?.theme ?? '';
 		if (themeName.includes(THEME_NAME)) {
 			// Do not fetch if no path/url is set
-			const url = getEntityIdAndValue('css_file', args.id).value as string;
+			const url = (args.value || inputs.css_file.default) as string;
 			if (!url) {
 				unsetCSSFromFile(args);
 				return;

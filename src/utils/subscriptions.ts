@@ -7,6 +7,7 @@ import {
 	IHandlerArguments,
 	InputField,
 	ISubscription,
+	SubscriptionResult,
 } from '../models/interfaces/Input';
 import { getHomeAssistantMainAsync } from './async';
 import { getEntityId } from './common';
@@ -62,8 +63,13 @@ export async function setupSubscriptions(
 				if (hass.user?.is_admin) {
 					// Trigger on input change using subscription
 					unsubscribers.push(
-						hass.connection.subscribeMessage(
-							() => subscription.handler(args),
+						hass.connection.subscribeMessage<SubscriptionResult>(
+							(r) =>
+								subscription.handler({
+									...args,
+									entityId: r.variables.trigger.entity_id,
+									value: r.variables.trigger.to_state.state,
+								}),
 							{
 								type: 'subscribe_trigger',
 								trigger: {

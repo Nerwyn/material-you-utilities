@@ -21,12 +21,12 @@ export function getEntityId(field: InputField, id?: string): string {
  * Get the highest priority entity ID and its value for a given field
  * @param {InputField} field
  * @param {string} id
- * @returns { entityId: string; value: string | number | boolean }
+ * @returns { entityId: string; value: string | number }
  */
 export function getEntityIdAndValue(
 	field: InputField,
 	id?: string,
-): { entityId: string; value: string | number | boolean } {
+): { entityId: string; value: string | number } {
 	const hass = (document.querySelector('home-assistant') as HassElement).hass;
 
 	const ids = [

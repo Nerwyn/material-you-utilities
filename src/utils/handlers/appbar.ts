@@ -3,7 +3,6 @@ import { inputs } from '../../models/constants/inputs';
 import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments } from '../../models/interfaces/Input';
-import { getEntityIdAndValue } from '../common';
 import { debugToast, mdLog } from '../logging';
 import { showAppbarTitle } from './appbarTitle';
 import { applyStyleTag, loadStyles } from './styles';
@@ -21,8 +20,7 @@ export async function hideAppbar(args: IHandlerArguments) {
 	try {
 		const themeName = hass?.themes?.theme ?? '';
 		if (themeName.includes(THEME_NAME)) {
-			const value =
-				getEntityIdAndValue('appbar', args.id).value || inputs.appbar.default;
+			const value = args.value || inputs.appbar.default;
 			if (value == 'on') {
 				showAppbar();
 				showAppbarTitle(args);

@@ -35,10 +35,15 @@ export async function setTheme(args: IHandlerArguments) {
 			const fields = ['base_color', 'scheme', 'contrast', 'spec', 'platform'];
 			const values: Partial<Record<InputField, string | number>> = {};
 			for (const field of fields) {
-				values[field as InputField] = getEntityIdAndValue(
+				const { entityId, value } = getEntityIdAndValue(
 					field as InputField,
 					args.id,
-				).value as string | number;
+				);
+				if (entityId == args.entityId) {
+					values[field as InputField] = args.value;
+				} else {
+					values[field as InputField] = value;
+				}
 			}
 
 			// Only update if one of the inputs is set

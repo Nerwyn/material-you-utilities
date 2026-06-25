@@ -3,7 +3,6 @@ import { inputs } from '../../models/constants/inputs';
 import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments } from '../../models/interfaces/Input';
-import { getEntityIdAndValue } from '../common';
 import { debugToast, mdLog } from '../logging';
 import { applyStyleTag, loadStyles } from './styles';
 
@@ -20,9 +19,7 @@ export async function hideNavbarLabels(args: IHandlerArguments) {
 	try {
 		const themeName = hass?.themes?.theme ?? '';
 		if (themeName.includes(THEME_NAME)) {
-			const value =
-				getEntityIdAndValue('navbar_labels', args.id).value ||
-				inputs.navbar_labels.default;
+			const value = args.value || inputs.navbar_labels.default;
 			if (value == 'on') {
 				showNavbarLabels();
 				return;

@@ -1,9 +1,10 @@
 import { unset } from '.';
 import { cardTypes } from '../../css';
+import { inputs } from '../../models/constants/inputs';
 import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments } from '../../models/interfaces/Input';
-import { getEntityIdAndValue, getTargets } from '../common';
+import { getTargets } from '../common';
 import { debugToast, mdLog } from '../logging';
 import { applyStyleTag, loadStyles } from './styles';
 
@@ -17,7 +18,7 @@ export async function setCardType(args: IHandlerArguments) {
 	try {
 		const themeName = hass?.themes?.theme ?? '';
 		if (themeName.includes(THEME_NAME)) {
-			const value = getEntityIdAndValue('card_type', args.id).value as string;
+			const value = args.value || inputs.card_type.default;
 			if (!(value in cardTypes)) {
 				unsetCardType(args);
 				return;
