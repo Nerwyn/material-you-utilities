@@ -64,12 +64,15 @@ export async function setupSubscriptions(
 					// Trigger on input change using subscription
 					unsubscribers.push(
 						hass.connection.subscribeMessage<SubscriptionResult>(
-							(r) =>
+							(r) => {
+								const entityId = r.variables.trigger.entity_id;
+								const value = r.variables.trigger.to_state?.state;
 								subscription.handler({
 									...args,
-									entityId: r.variables.trigger.entity_id,
-									value: r.variables.trigger.to_state.state,
-								}),
+									entityId,
+									value,
+								});
+							},
 							{
 								type: 'subscribe_trigger',
 								trigger: {
@@ -82,7 +85,7 @@ export async function setupSubscriptions(
 					);
 				} else {
 					// Trigger on input change using templates
-					for (const entity of entities) {
+					for (const entityId of entities) {
 						unsubscribers.push(
 							hass.connection.subscribeMessage(
 								(msg: RenderTemplateResult | RenderTemplateError) => {
@@ -94,15 +97,15 @@ export async function setupSubscriptions(
 									if (value != 'unknown') {
 										subscription.handler({
 											...args,
-											entityId: entity,
+											entityId,
 											value,
 										});
 									}
 								},
 								{
 									type: 'render_template',
-									template: `{{ states("${entity}") }}`,
-									entity_ids: entity,
+									template: `{{ states("${entityId}") }}`,
+									entity_ids: entityId,
 									report_errors: true,
 								},
 							),

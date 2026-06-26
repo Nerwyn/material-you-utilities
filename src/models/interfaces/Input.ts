@@ -40,8 +40,8 @@ export interface SubscriptionResult {
 			alias?: string;
 			platform: string;
 			entity_id: string;
-			from_state: HassEntity;
-			to_state: HassEntity;
+			from_state?: HassEntity;
+			to_state?: HassEntity;
 			for?: string;
 			attribute?: string;
 			description: string;

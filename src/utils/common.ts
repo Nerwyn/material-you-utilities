@@ -6,7 +6,7 @@ import { InputField } from '../models/interfaces/Input';
 import { getHomeAssistantMainAsync, querySelectorAsync } from './async';
 
 /**
- *
+ * Build input helper entity ID from field and ID
  * @param {InputField} field Field to get entity ID for
  * @param {string} [id] Specific user or device ID to get entity ID for
  * @returns {string}
