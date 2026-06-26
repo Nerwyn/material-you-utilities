@@ -93,14 +93,16 @@ export async function setupSubscriptions(
 										console.error(msg.error);
 										debugToast(msg.error);
 									}
-									const value = (msg as RenderTemplateResult).result;
-									if (value != 'unknown') {
-										subscription.handler({
-											...args,
-											entityId,
-											value,
-										});
+									let value: string | undefined = (msg as RenderTemplateResult)
+										.result;
+									if (value == 'unknown') {
+										value = undefined;
 									}
+									subscription.handler({
+										...args,
+										entityId,
+										value,
+									});
 								},
 								{
 									type: 'render_template',
