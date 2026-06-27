@@ -1,10 +1,8 @@
 import { unset } from '.';
 import { cardTypes } from '../../css';
-import { inputs } from '../../models/constants/inputs';
-import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
-import { HassElement } from '../../models/interfaces';
+import { THEME_TOKEN } from '../../models/constants/theme';
 import { IHandlerArguments } from '../../models/interfaces/Input';
-import { getTargets } from '../common';
+import { getTargets, isThemeValid } from '../common';
 import { debugToast, mdLog } from '../logging';
 import { applyStyleTag, loadStyles } from './styles';
 
@@ -12,13 +10,11 @@ const STYLE_ID = `${THEME_TOKEN}-card-type`;
 
 /** Change ha-card styles to match the selected card type */
 export async function setCardType(args: IHandlerArguments) {
-	const hass = (document.querySelector('home-assistant') as HassElement).hass;
 	const targets = args.targets ?? (await getTargets());
 
 	try {
-		const themeName = hass?.themes?.theme ?? '';
-		if (themeName.includes(THEME_NAME)) {
-			const value = args.value || inputs.card_type.default;
+		if (isThemeValid()) {
+			const value = args.value as keyof typeof cardTypes;
 			if (!(value in cardTypes)) {
 				unsetCardType(args);
 				return;

@@ -5,16 +5,9 @@ import {
 } from '@material/material-color-utilities';
 import { applyStyleTag, buildStylesString, unset } from '.';
 import { paletteColors, semanticColors } from '../../models/constants/colors';
-import { inputs } from '../../models/constants/inputs';
-import { THEME, THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
-import { HassElement } from '../../models/interfaces';
+import { THEME_TOKEN } from '../../models/constants/theme';
 import { IHandlerArguments } from '../../models/interfaces/Input';
-import {
-	getARGBColor,
-	getEntityIdAndValue,
-	getTargets,
-	getToken,
-} from '../common';
+import { getARGBColor, getTargets, getToken, isThemeValid } from '../common';
 import { debugToast, mdLog } from '../logging';
 import { setPalette, unsetPalette } from './palettes';
 
@@ -25,21 +18,11 @@ const STYLE_ID = `${THEME_TOKEN}-harmonized-colors`;
  * https://m3.material.io/blog/dynamic-color-harmony
  */
 export async function harmonize(args: IHandlerArguments) {
-	const hass = (document.querySelector('home-assistant') as HassElement).hass;
 	const targets = args.targets ?? (await getTargets());
 
 	try {
-		const themeName = hass?.themes?.theme ?? '';
-		if (themeName.includes(THEME_NAME)) {
-			let value = args.value || inputs.harmonize.default;
-			if (
-				!args.entityId?.startsWith(
-					`${inputs.harmonize.domain}.${THEME}_harmonize`,
-				)
-			) {
-				value = getEntityIdAndValue('harmonize', args.id).value;
-			}
-			if (value != 'on') {
+		if (isThemeValid()) {
+			if (args.value != 'on') {
 				dissonance(args);
 				return;
 			}

@@ -10,7 +10,11 @@ import {
 	SubscriptionResult,
 } from '../models/interfaces/Input';
 import { getHomeAssistantMainAsync } from './async';
-import { getEntityId } from './common';
+import {
+	getEntityId,
+	getEntityIdAndValue,
+	getFieldFromEntityIdAndInputs,
+} from './common';
 import { debugToast } from './logging';
 
 export async function setupSubscriptions(
@@ -65,13 +69,21 @@ export async function setupSubscriptions(
 					unsubscribers.push(
 						hass.connection.subscribeMessage<SubscriptionResult>(
 							(r) => {
-								const entityId = r.variables.trigger.entity_id;
-								const value = r.variables.trigger.to_state?.state;
-								subscription.handler({
-									...args,
-									entityId,
-									value,
-								});
+								const entityId0 = r.variables.trigger.entity_id;
+								const field = getFieldFromEntityIdAndInputs(
+									entityId0,
+									subscription.inputs,
+								);
+								const value =
+									r.variables.trigger.to_state?.state || inputs[field].default;
+								const { entityId } = getEntityIdAndValue(field, args.id);
+								if (entityId0 == entityId) {
+									subscription.handler({
+										...args,
+										entityId,
+										value,
+									});
+								}
 							},
 							{
 								type: 'subscribe_trigger',
@@ -85,7 +97,7 @@ export async function setupSubscriptions(
 					);
 				} else {
 					// Trigger on input change using templates
-					for (const entityId of entities) {
+					for (const entityId0 of entities) {
 						unsubscribers.push(
 							hass.connection.subscribeMessage(
 								(msg: RenderTemplateResult | RenderTemplateError) => {
@@ -93,21 +105,31 @@ export async function setupSubscriptions(
 										console.error(msg.error);
 										debugToast(msg.error);
 									}
-									let value: string | undefined = (msg as RenderTemplateResult)
-										.result;
-									if (value == 'unknown') {
-										value = undefined;
+
+									const field = getFieldFromEntityIdAndInputs(
+										entityId0,
+										subscription.inputs,
+									);
+									const { entityId } = getEntityIdAndValue(field, args.id);
+									if (entityId0 == entityId) {
+										let value: string | number | undefined = (
+											msg as RenderTemplateResult
+										).result;
+										if (value == 'unknown') {
+											value = undefined;
+										}
+										value ||= inputs[field].default;
+										subscription.handler({
+											...args,
+											entityId,
+											value,
+										});
 									}
-									subscription.handler({
-										...args,
-										entityId,
-										value,
-									});
 								},
 								{
 									type: 'render_template',
-									template: `{{ states("${entityId}") }}`,
-									entity_ids: entityId,
+									template: `{{ states("${entityId0}") }}`,
+									entity_ids: entityId0,
 									report_errors: true,
 								},
 							),

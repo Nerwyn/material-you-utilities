@@ -1,9 +1,7 @@
 import { huiRootShowAppbarTitle } from '../../css';
-import { inputs } from '../../models/constants/inputs';
-import { THEME, THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
-import { HassElement } from '../../models/interfaces';
+import { THEME_TOKEN } from '../../models/constants/theme';
 import { IHandlerArguments } from '../../models/interfaces/Input';
-import { getEntityIdAndValue } from '../common';
+import { getEntityIdAndValue, isThemeValid } from '../common';
 import { debugToast, mdLog } from '../logging';
 import { applyStyleTag, loadStyles } from './styles';
 
@@ -15,23 +13,10 @@ export async function showAppbarTitle(args: IHandlerArguments) {
 		return;
 	}
 
-	const hass = (document.querySelector('home-assistant') as HassElement)?.hass;
-
 	try {
-		const themeName = hass?.themes?.theme ?? '';
-		if (themeName.includes(THEME_NAME)) {
-			let title = args.value || inputs.appbar_title.default;
-			let appbar = args.value || inputs.appbar.default;
-			if (
-				!args.entityId?.startsWith(
-					`${inputs.appbar_title.domain}.${THEME}_appbar_title`,
-				)
-			) {
-				title = getEntityIdAndValue('appbar_title', args.id).value;
-			} else {
-				appbar = getEntityIdAndValue('appbar', args.id).value;
-			}
-			if (title == 'off' || appbar == 'off') {
+		if (isThemeValid()) {
+			const appbar = getEntityIdAndValue('appbar', args.id).value;
+			if (args.value == 'off' || appbar == 'off') {
 				hideAppbarTitle();
 				return;
 			}

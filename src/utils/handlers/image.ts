@@ -3,10 +3,9 @@ import {
 	QuantizerCelebi,
 	Score,
 } from '@material/material-color-utilities';
-import { inputs } from '../../models/constants/inputs';
-import { THEME_NAME } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments } from '../../models/interfaces/Input';
+import { getEntityIdAndValue, isThemeValid } from '../common';
 import { debugToast } from '../logging';
 
 /**
@@ -39,10 +38,9 @@ export async function setBaseColorFromImage(args: IHandlerArguments) {
 	const hass = (document.querySelector('home-assistant') as HassElement).hass;
 
 	try {
-		const themeName = hass?.themes?.theme ?? '';
-		if (themeName.includes(THEME_NAME)) {
+		if (isThemeValid()) {
 			// Do not fetch if no path/url is set
-			let url = (args.value || inputs.image_url.default) as string;
+			let url = args.value as string;
 			if (!url) {
 				return;
 			}
@@ -102,7 +100,10 @@ export async function setBaseColorFromImage(args: IHandlerArguments) {
 
 			// Set base color
 			const baseColor = hexFromArgb(colors[i]);
-			const output = args.entityId?.replace('image_url', 'base_color');
+			const output = getEntityIdAndValue(
+				'image_url',
+				args.id,
+			).entityId?.replace('image_url', 'base_color');
 			hass.callService('input_text', 'set_value', {
 				entity_id: output,
 				value: baseColor,

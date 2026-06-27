@@ -3,4 +3,5 @@ html {
 	--ha-menu-button-opacity: 0;
 	--toolbar-display: none;
 	--view-container-padding-override-top: 0px;
+	--appbar-title-display-none: none;
 }

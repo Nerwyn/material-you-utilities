@@ -1,10 +1,8 @@
 import { huiRootHideAppbar } from '../../css';
-import { inputs } from '../../models/constants/inputs';
-import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
-import { HassElement } from '../../models/interfaces';
+import { THEME_TOKEN } from '../../models/constants/theme';
 import { IHandlerArguments } from '../../models/interfaces/Input';
+import { isThemeValid } from '../common';
 import { debugToast, mdLog } from '../logging';
-import { showAppbarTitle } from './appbarTitle';
 import { applyStyleTag, loadStyles } from './styles';
 
 const STYLE_ID = `${THEME_TOKEN}-appbar`;
@@ -15,15 +13,10 @@ export async function hideAppbar(args: IHandlerArguments) {
 		return;
 	}
 
-	const hass = (document.querySelector('home-assistant') as HassElement).hass;
-
 	try {
-		const themeName = hass?.themes?.theme ?? '';
-		if (themeName.includes(THEME_NAME)) {
-			const value = args.value || inputs.appbar.default;
-			if (value == 'on') {
+		if (isThemeValid()) {
+			if (args.value == 'on') {
 				showAppbar();
-				showAppbarTitle(args);
 				return;
 			}
 
@@ -39,8 +32,6 @@ export async function hideAppbar(args: IHandlerArguments) {
 		debugToast(String(e));
 		showAppbar();
 	}
-
-	showAppbarTitle(args);
 }
 
 async function showAppbar() {

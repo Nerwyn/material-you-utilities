@@ -1,27 +1,18 @@
 import packageInfo from '../package.json';
 import { MaterialYouConfigCard } from './classes/material-you-config-card';
 import { MaterialYouPanel } from './classes/material-you-panel';
+import { inputs } from './models/constants/inputs';
 
 import { THEME_NAME, THEME_TOKEN } from './models/constants/theme';
+import { InputField } from './models/interfaces/Input';
 import {
 	getAsync,
 	getHomeAssistantMainAsync,
 	handleWhenReady,
 	querySelectorAsync,
 } from './utils/async';
-import {
-	hideAppbar,
-	hideNavbar,
-	hideNavbarLabels,
-	setBaseColorFromImage,
-	setCardType,
-	setCSSFromFile,
-	setExplicitStyles,
-	setStyles,
-	setTheme,
-	showAppbarTitle,
-} from './utils/handlers';
-import { hideNavrailLabels } from './utils/handlers/navrailLabels';
+import { getEntityIdAndValue } from './utils/common';
+import { setExplicitStyles, setStyles, setTheme } from './utils/handlers';
 import { mdLog } from './utils/logging';
 import { setupSubscriptions } from './utils/subscriptions';
 
@@ -62,9 +53,12 @@ async function main() {
 					)) as Document;
 					const body = await querySelectorAsync(document, 'body');
 					const args = { targets: [body] };
-					const handlers = [setTheme, setCardType, setCSSFromFile];
-					for (const handler of handlers) {
-						await handler(args);
+					const fields: InputField[] = ['base_color', 'card_type', 'css_file'];
+					for (const field of fields) {
+						await inputs[field].handler({
+							...args,
+							...getEntityIdAndValue(field),
+						});
 					}
 				}
 			}
@@ -88,19 +82,22 @@ async function main() {
 				if (theme.includes(THEME_NAME)) {
 					const html = await querySelectorAsync(document, 'html');
 					const args = { targets: [html] };
-					const handlers = [
-						setBaseColorFromImage,
-						setTheme,
-						setCardType,
-						setCSSFromFile,
-						hideAppbar,
-						showAppbarTitle,
-						hideNavbar,
-						hideNavbarLabels,
-						hideNavrailLabels,
+					const fields: InputField[] = [
+						'image_url',
+						'base_color',
+						'card_type',
+						'css_file',
+						'appbar',
+						'appbar_title',
+						'navbar',
+						'navbar_labels',
+						'navrail_labels',
 					];
-					for (const handler of handlers) {
-						await handler(args);
+					for (const field of fields) {
+						await inputs[field].handler({
+							...args,
+							...getEntityIdAndValue(field),
+						});
 					}
 
 					// Fix html background color
@@ -137,9 +134,11 @@ async function main() {
 	// Call handlers on visibility change
 	window.addEventListener('visibilitychange', async () => {
 		if (!document.hidden) {
-			const handlers = [setTheme, setCardType, setCSSFromFile];
-			for (const handler of handlers) {
-				await handler({});
+			const fields: InputField[] = ['base_color', 'card_type', 'css_file'];
+			for (const field of fields) {
+				await inputs[field].handler({
+					...getEntityIdAndValue(field),
+				});
 			}
 		}
 	});

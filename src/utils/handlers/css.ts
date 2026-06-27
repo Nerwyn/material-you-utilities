@@ -1,9 +1,9 @@
 import { unset } from '.';
 import { inputs } from '../../models/constants/inputs';
-import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
+import { THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments } from '../../models/interfaces/Input';
-import { getTargets } from '../common';
+import { getEntityIdAndValue, getTargets, isThemeValid } from '../common';
 import { debugToast } from '../logging';
 import { harmonize } from './harmonize';
 import { applyStyleTag, loadStyles } from './styles';
@@ -11,12 +11,10 @@ import { applyStyleTag, loadStyles } from './styles';
 const STYLE_ID = `${THEME_TOKEN}-user-styles`;
 
 export async function setCSSFromFile(args: IHandlerArguments) {
-	const hass = (document.querySelector('home-assistant') as HassElement).hass;
 	const targets = args.targets ?? (await getTargets());
 
 	try {
-		const themeName = hass?.themes?.theme ?? '';
-		if (themeName.includes(THEME_NAME)) {
+		if (isThemeValid()) {
 			// Do not fetch if no path/url is set
 			const url = (args.value || inputs.css_file.default) as string;
 			if (!url) {
@@ -29,6 +27,8 @@ export async function setCSSFromFile(args: IHandlerArguments) {
 			if (url.includes('://')) {
 				r = await fetch(url, { mode: 'cors' });
 			} else {
+				const hass = (document.querySelector('home-assistant') as HassElement)
+					.hass;
 				r = await hass.fetchWithAuth(url, { mode: 'cors' });
 			}
 			if (!r.ok) {
@@ -46,10 +46,13 @@ export async function setCSSFromFile(args: IHandlerArguments) {
 				styles.includes('--primary-color') ||
 				styles.includes('--md-sys-color-primary')
 			) {
-				harmonize(args);
+				await harmonize({
+					...args,
+					...getEntityIdAndValue('harmonize', args.id),
+				});
 			}
 		} else {
-			unsetCSSFromFile(args);
+			await unsetCSSFromFile(args);
 		}
 	} catch (e) {
 		console.error(e);
@@ -60,5 +63,5 @@ export async function setCSSFromFile(args: IHandlerArguments) {
 
 async function unsetCSSFromFile(args: IHandlerArguments) {
 	await unset(args, STYLE_ID, 'CSS styles from file removed.');
-	await harmonize(args);
+	await harmonize({ ...args, ...getEntityIdAndValue('harmonize', args.id) });
 }

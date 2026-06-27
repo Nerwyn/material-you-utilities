@@ -18,7 +18,7 @@
 
 /* Hide single tab view dashboard title */
 ha-menu-button + .main-title {
-	display: var(--appbar-title-display, none);
+	display: var(--appbar-title-display-none, var(--appbar-title-display, none));
 }
 
 /* App bar title font and transition */
@@ -40,7 +40,7 @@ ha-tab-group-tab[active]::before {
 }
 ha-tab-group-tab[active]::before {
 	content: attr(aria-label);
-	display: var(--appbar-title-display, none);
+	display: var(--appbar-title-display-none, var(--appbar-title-display, none));
 	visibility: visible;
 	top: calc(
 		(var(--header-height) - var(--md-sys-typescale-title-large-line-height)) / 2
