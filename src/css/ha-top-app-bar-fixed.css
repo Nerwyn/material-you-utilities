@@ -1,12 +1,21 @@
-/* Add left padding and translate to header to help hide rail transition */
-.top-app-bar {
-	width: calc(var(--ha-top-app-bar-width, 100%) + 128px);
-	padding-inline-start: 128px;
-	translate: -128px 0;
-	inset-inline-end: -128px;
+/* Fix rail transition gap */
+:host {
+	overflow: visible;
 }
-.top-app-bar:dir(rtl) {
-	translate: 128px 0;
+.top-app-bar::before {
+	content: '';
+	position: absolute;
+	height: 100%;
+	width: 128px;
+	bottom: 0;
+	background: var(--app-header-background-color);
+}
+.top-app-bar::before {
+	left: -128px;
+}
+.top-app-bar:dir(rtl)::before {
+	left: unset;
+	right: -128px;
 }
 
 /* Remove bottom border */
