@@ -524,7 +524,7 @@ To build this module, either make a commit (to your own fork) or run the command
 
 ## Contributing
 
-Contributions are welcome, but understand that this is a personal project largely maintained by one person. Low quality issues and pull requests can end up wasting a lot of my time as they cause me to chase non-existent issues or try to validate hard to read code. This is especially true for AI generated issues and pull requests, which I have seen an uptick of on my own repositories. While you are welcome to use AI tooling to aid your coding, fully AI generated "vibe coded" contributions are not welcome.
+Contributions are welcome, but understand that this is a personal project largely maintained by one person. Low quality issues and pull requests can end up wasting a lot of my time as they cause me to chase non-existent issues or try to validate hard to read code. This is especially true for AI generated issues and pull requests, which I have seen an uptick of on my own repositories. While you are welcome to use AI tooling to aid your coding, AI generated "vibe coded" contributions are not welcome.
 
 Bug fixes for monthly releases are normally fixed within a few days of the first monthly Home Assistant release or during the beta period. If there is not already a monthly beta fix released or matching issue, feel free to create an issue and I will get to it as soon as I can. You generally shouldn't attempt to create a bug fix fork/PR for monthly releases because chances are I'm already on it.
 

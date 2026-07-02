@@ -3,10 +3,9 @@ import {
 	QuantizerCelebi,
 	Score,
 } from '@material/material-color-utilities';
-import { THEME_NAME } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments } from '../../models/interfaces/Input';
-import { getEntityIdAndValue } from '../common';
+import { getEntityIdAndValue, isThemeValid } from '../common';
 import { debugToast } from '../logging';
 
 /**
@@ -39,11 +38,9 @@ export async function setBaseColorFromImage(args: IHandlerArguments) {
 	const hass = (document.querySelector('home-assistant') as HassElement).hass;
 
 	try {
-		const themeName = hass?.themes?.theme ?? '';
-		if (themeName.includes(THEME_NAME)) {
+		if (isThemeValid()) {
 			// Do not fetch if no path/url is set
-			const info = getEntityIdAndValue('image_url', args.id);
-			let url = info.value as string;
+			let url = args.value as string;
 			if (!url) {
 				return;
 			}
@@ -76,23 +73,13 @@ export async function setBaseColorFromImage(args: IHandlerArguments) {
 			ctx?.drawImage(img, 0, 0, xy, xy);
 
 			// Get image data and convert to ARGB array
-			const imageData = ctx?.getImageData(
-				0,
-				0,
-				canvas.width,
-				canvas.height,
-			);
+			const imageData = ctx?.getImageData(0, 0, canvas.width, canvas.height);
 			const pixels = imageData?.data ?? [];
 			URL.revokeObjectURL(img.src);
 			const a = [];
 			for (let i = 0; i < pixels.length - 3; i += 4) {
 				a.push(
-					argbFromRgba(
-						pixels[i],
-						pixels[i + 1],
-						pixels[i + 2],
-						pixels[i + 3],
-					),
+					argbFromRgba(pixels[i], pixels[i + 1], pixels[i + 2], pixels[i + 3]),
 				);
 			}
 
@@ -113,7 +100,10 @@ export async function setBaseColorFromImage(args: IHandlerArguments) {
 
 			// Set base color
 			const baseColor = hexFromArgb(colors[i]);
-			const output = info.entityId.replace('image_url', 'base_color');
+			const output = getEntityIdAndValue(
+				'image_url',
+				args.id,
+			).entityId?.replace('image_url', 'base_color');
 			hass.callService('input_text', 'set_value', {
 				entity_id: output,
 				value: baseColor,

@@ -9,11 +9,16 @@ import {
 import { applyStyleTag, buildStylesString, unset } from '.';
 import { materialDynamicColors, schemes } from '../../models/constants/colors';
 import { inputs } from '../../models/constants/inputs';
-import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
+import { THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments, InputField } from '../../models/interfaces/Input';
 import { IScheme, SpecVersion } from '../../models/interfaces/Scheme';
-import { getEntityIdAndValue, getTargets, getToken } from '../common';
+import {
+	getEntityIdAndValue,
+	getTargets,
+	getToken,
+	isThemeValid,
+} from '../common';
 import { debugToast, mdLog } from '../logging';
 import { harmonize } from './harmonize';
 import { setPalette, unsetPalette } from './palettes';
@@ -22,29 +27,31 @@ const STYLE_ID = `${THEME_TOKEN}-theme`;
 
 /* Generate and set theme colors based on user defined inputs */
 export async function setTheme(args: IHandlerArguments) {
-	const hass = (document.querySelector('home-assistant') as HassElement).hass;
 	const targets = args.targets ?? (await getTargets());
 
 	try {
-		const themeName = hass?.themes?.theme ?? '';
-		if (themeName.includes(THEME_NAME)) {
+		if (isThemeValid()) {
 			// Setup input values
 			const fields = ['base_color', 'scheme', 'contrast', 'spec', 'platform'];
 			const values: Partial<Record<InputField, string | number>> = {};
 			for (const field of fields) {
-				values[field as InputField] = getEntityIdAndValue(
+				const { entityId, value } = getEntityIdAndValue(
 					field as InputField,
 					args.id,
-				).value as string | number;
+				);
+				if (entityId == args.entityId) {
+					values[field as InputField] = args.value;
+				} else {
+					values[field as InputField] = value;
+				}
 			}
 
-			// Only update if one of the inputs is set
+			// Only update if at least one of the inputs is set
 			if (fields.some((field) => values[field as InputField] != '')) {
 				for (const field in values) {
 					values[field as InputField] ||= inputs[field as InputField].default;
 				}
 
-				// const schemeInfo = getSchemeInfo(values.scheme as string);
 				const schemeInfo =
 					schemes.find((scheme) => scheme.value == values.scheme) ||
 					(schemes.find(
@@ -85,7 +92,10 @@ export async function setTheme(args: IHandlerArguments) {
 				}
 
 				await setPalette(args, ['primary']);
-				await harmonize(args);
+				await harmonize({
+					...args,
+					...getEntityIdAndValue('harmonize', args.id),
+				});
 
 				mdLog(
 					targets[0] as HTMLElement,
@@ -103,6 +113,7 @@ export async function setTheme(args: IHandlerArguments) {
 	}
 
 	// Update companion app app and navigation bar colors
+	const hass = (document.querySelector('home-assistant') as HassElement).hass;
 	hass.auth.external?.fireMessage({ type: 'theme-update' });
 }
 

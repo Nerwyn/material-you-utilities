@@ -1,9 +1,7 @@
 import { haSidebarHideNavrailLabels } from '../../css';
-import { inputs } from '../../models/constants/inputs';
-import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
-import { HassElement } from '../../models/interfaces';
+import { THEME_TOKEN } from '../../models/constants/theme';
 import { IHandlerArguments } from '../../models/interfaces/Input';
-import { getEntityIdAndValue } from '../common';
+import { isThemeValid } from '../common';
 import { debugToast, mdLog } from '../logging';
 import { applyStyleTag, loadStyles } from './styles';
 
@@ -15,15 +13,9 @@ export async function hideNavrailLabels(args: IHandlerArguments) {
 		return;
 	}
 
-	const hass = (document.querySelector('home-assistant') as HassElement).hass;
-
 	try {
-		const themeName = hass?.themes?.theme ?? '';
-		if (themeName.includes(THEME_NAME)) {
-			const value =
-				getEntityIdAndValue('navrail_labels', args.id).value ||
-				inputs.navrail_labels.default;
-			if (value == 'on') {
+		if (isThemeValid()) {
+			if (args.value == 'on') {
 				showNavrailLabels();
 				return;
 			}

@@ -1,12 +1,21 @@
 import { argbFromHex, argbFromRgb } from '@material/material-color-utilities';
 import { inputs } from '../models/constants/inputs';
-import { THEME } from '../models/constants/theme';
+import { THEME, THEME_NAME } from '../models/constants/theme';
 import { HassElement } from '../models/interfaces';
 import { InputField } from '../models/interfaces/Input';
 import { getHomeAssistantMainAsync, querySelectorAsync } from './async';
 
 /**
- *
+ * Check if theme is valid for this module
+ * @returns {boolean}
+ */
+export function isThemeValid() {
+	const hass = (document.querySelector('home-assistant') as HassElement).hass;
+	return hass.themes.theme == THEME_NAME;
+}
+
+/**
+ * Build input helper entity ID from field and ID
  * @param {InputField} field Field to get entity ID for
  * @param {string} [id] Specific user or device ID to get entity ID for
  * @returns {string}
@@ -18,15 +27,30 @@ export function getEntityId(field: InputField, id?: string): string {
 }
 
 /**
+ * Determine which field an entity ID is for
+ * @param {string} entityId
+ * @param {InputField[]} inputs
+ * @returns {InputField}
+ */
+export function getFieldFromEntityIdAndInputs(
+	entityId: string,
+	inputs: InputField[],
+): InputField {
+	return inputs.length == 1
+		? inputs[0]
+		: inputs.filter((field) => entityId.includes(field))[0];
+}
+
+/**
  * Get the highest priority entity ID and its value for a given field
  * @param {InputField} field
  * @param {string} id
- * @returns { entityId: string; value: string | number | boolean }
+ * @returns { entityId: string; value: string | number }
  */
 export function getEntityIdAndValue(
 	field: InputField,
 	id?: string,
-): { entityId: string; value: string | number | boolean } {
+): { entityId: string; value: string | number } {
 	const hass = (document.querySelector('home-assistant') as HassElement).hass;
 
 	const ids = [

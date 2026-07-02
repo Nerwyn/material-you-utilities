@@ -18,8 +18,9 @@ let shouldSetStyles = false;
  */
 function checkTheme() {
 	if (!theme) {
-		const ha = document.querySelector('home-assistant') as HassElement;
-		theme = ha?.hass?.themes?.theme;
+		const hass = (document.querySelector('home-assistant') as HassElement)
+			?.hass;
+		theme = hass?.themes?.theme;
 		if (theme) {
 			shouldSetStyles =
 				theme.includes(THEME_NAME) &&

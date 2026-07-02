@@ -7,9 +7,14 @@ import {
 	IHandlerArguments,
 	InputField,
 	ISubscription,
+	SubscriptionResult,
 } from '../models/interfaces/Input';
 import { getHomeAssistantMainAsync } from './async';
-import { getEntityId } from './common';
+import {
+	getEntityId,
+	getEntityIdAndValue,
+	getFieldFromEntityIdAndInputs,
+} from './common';
 import { debugToast } from './logging';
 
 export async function setupSubscriptions(
@@ -62,8 +67,24 @@ export async function setupSubscriptions(
 				if (hass.user?.is_admin) {
 					// Trigger on input change using subscription
 					unsubscribers.push(
-						hass.connection.subscribeMessage(
-							() => subscription.handler(args),
+						hass.connection.subscribeMessage<SubscriptionResult>(
+							(r) => {
+								const entityId0 = r.variables.trigger.entity_id;
+								const field = getFieldFromEntityIdAndInputs(
+									entityId0,
+									subscription.inputs,
+								);
+								const value =
+									r.variables.trigger.to_state?.state || inputs[field].default;
+								const { entityId } = getEntityIdAndValue(field, args.id);
+								if (entityId0 == entityId) {
+									subscription.handler({
+										...args,
+										entityId,
+										value,
+									});
+								}
+							},
 							{
 								type: 'subscribe_trigger',
 								trigger: {
@@ -76,7 +97,7 @@ export async function setupSubscriptions(
 					);
 				} else {
 					// Trigger on input change using templates
-					for (const entity of entities) {
+					for (const entityId0 of entities) {
 						unsubscribers.push(
 							hass.connection.subscribeMessage(
 								(msg: RenderTemplateResult | RenderTemplateError) => {
@@ -84,12 +105,31 @@ export async function setupSubscriptions(
 										console.error(msg.error);
 										debugToast(msg.error);
 									}
-									subscription.handler(args);
+
+									const field = getFieldFromEntityIdAndInputs(
+										entityId0,
+										subscription.inputs,
+									);
+									const { entityId } = getEntityIdAndValue(field, args.id);
+									if (entityId0 == entityId) {
+										let value: string | number | undefined = (
+											msg as RenderTemplateResult
+										).result;
+										if (value == 'unknown') {
+											value = undefined;
+										}
+										value ||= inputs[field].default;
+										subscription.handler({
+											...args,
+											entityId,
+											value,
+										});
+									}
 								},
 								{
 									type: 'render_template',
-									template: `{{ states("${entity}") }}`,
-									entity_ids: entity,
+									template: `{{ states("${entityId0}") }}`,
+									entity_ids: entityId0,
 									report_errors: true,
 								},
 							),

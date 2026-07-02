@@ -6,15 +6,8 @@ import { THEME, THEME_NAME, THEME_TOKEN } from '../models/constants/theme';
 import { HomeAssistant } from '../models/interfaces';
 import { InputField } from '../models/interfaces/Input';
 import { SpecVersion } from '../models/interfaces/Scheme';
-import { getEntityId } from '../utils/common';
-import {
-	applyStyleTag,
-	buildStylesString,
-	setBaseColorFromImage,
-	setCardType,
-	setCSSFromFile,
-	setTheme,
-} from '../utils/handlers';
+import { getEntityId, getEntityIdAndValue } from '../utils/common';
+import { applyStyleTag, buildStylesString } from '../utils/handlers';
 import { showToast } from '../utils/logging';
 import {
 	buildAlertBox,
@@ -570,14 +563,17 @@ export class MaterialYouConfigCard extends LitElement {
 
 		// Initial handler calls
 		const args = { targets: [this], id: this.dataId ?? '' };
-		const handlers = [
-			setBaseColorFromImage,
-			setTheme,
-			setCardType,
-			setCSSFromFile,
+		const fields: InputField[] = [
+			'image_url',
+			'base_color',
+			'card_type',
+			'css_file',
 		];
-		for (const handler of handlers) {
-			handler(args);
+		for (const field of fields) {
+			inputs[field].handler({
+				...args,
+				...getEntityIdAndValue(field),
+			});
 		}
 	}
 
