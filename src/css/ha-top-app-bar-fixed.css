@@ -1,3 +1,23 @@
+/* Fix rail transition gap */
+:host {
+	overflow: visible;
+}
+.top-app-bar::before {
+	content: '';
+	position: absolute;
+	height: 100%;
+	width: 128px;
+	bottom: 0;
+	background: var(--app-header-background-color);
+}
+.top-app-bar::before {
+	left: -128px;
+}
+.top-app-bar:dir(rtl)::before {
+	left: unset;
+	right: -128px;
+}
+
 /* Remove bottom border */
 .row {
 	border-bottom: none;
