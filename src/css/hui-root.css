@@ -160,7 +160,9 @@ ha-tab-group {
 
 /* Fix rail transition gap */
 ha-tab-group::before,
-ha-tab-group::after {
+ha-tab-group::after,
+:host([scrolled]) .header:has(ha-icon-button-arrow-prev ~ .main-title)::before,
+:host([scrolled]) .header:has(ha-icon-button-arrow-prev ~ .main-title)::after {
 	content: '';
 	position: absolute;
 	height: 100%;
@@ -168,10 +170,12 @@ ha-tab-group::after {
 	bottom: 0;
 	background: var(--navbar-background);
 }
-ha-tab-group::before {
+ha-tab-group::before,
+:host([scrolled]) .header:has(ha-icon-button-arrow-prev ~ .main-title)::before {
 	left: -128px;
 }
-ha-tab-group::after {
+ha-tab-group::after,
+:host([scrolled]) .header:has(ha-icon-button-arrow-prev ~ .main-title)::after {
 	right: -128px;
 }
 
