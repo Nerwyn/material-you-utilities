@@ -35,7 +35,13 @@ export async function setTheme(args: IHandlerArguments) {
 	try {
 		if (isThemeValid()) {
 			// Setup input values
-			const fields = ['base_color', 'scheme', 'contrast', 'spec', 'platform'];
+			const fields: InputField[] = [
+				'base_color',
+				'scheme',
+				'contrast',
+				'spec',
+				'platform',
+			];
 			const values: Partial<Record<InputField, string | number>> = {};
 			for (const field of fields) {
 				const { entityId, value } = getEntityIdAndValue(
@@ -50,11 +56,7 @@ export async function setTheme(args: IHandlerArguments) {
 			}
 
 			// Only update if at least one of the inputs is set
-			if (fields.some((field) => values[field as InputField] != '')) {
-				for (const field in values) {
-					values[field as InputField] ||= inputs[field as InputField].default;
-				}
-
+			if (fields.some((field) => values[field] != '')) {
 				const schemeInfo =
 					schemes.find((scheme) => scheme.value == values.scheme) ||
 					(schemes.find(
