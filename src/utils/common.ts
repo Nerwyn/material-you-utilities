@@ -21,7 +21,7 @@ export function isThemeValid() {
  * @returns {string}
  */
 export function getEntityId(field: InputField, id?: string): string {
-	return `${inputs[field as InputField].domain}.${THEME}_${field}${id ? `_${id}` : ''}`
+	return `${inputs[field].domain}.${THEME}_${field}${id ? `_${id}` : ''}`
 		.toLowerCase()
 		.replace(/ |-/g, '_');
 }
@@ -59,7 +59,7 @@ export function getEntityIdAndValue(
 		hass.user?.id,
 		'',
 	];
-	const result = {
+	const result: { entityId: string; value: string | number } = {
 		entityId: '',
 		value: '',
 	};
@@ -76,6 +76,7 @@ export function getEntityIdAndValue(
 			result.value = value;
 			break;
 		}
+		result.value ||= inputs[field].default;
 	}
 
 	return result;
