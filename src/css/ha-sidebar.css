@@ -95,6 +95,16 @@ ha-list-item-button.selected {
 	width: calc(var(--ha-sidebar-width) - env(safe-area-inset-left) - 20px);
 }
 
+/* Sidebar organizer grid item fix */
+:host([expanded]) ha-list-item-button[grid-item] {
+	height: 48px;
+	margin: auto auto;
+}
+:host([expanded]) ha-list-item-button[grid-item]::part(base) {
+	width: unset;
+	padding-inline: 12px;
+}
+
 /* Make collapsed navigation rail items vertical */
 :host(:not([expanded])) ha-list-item-button::part(base) {
 	border-radius: 0;
