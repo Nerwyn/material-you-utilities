@@ -41,7 +41,6 @@ ha-list-item-button {
 	width: var(--ha-sidebar-width);
 	transition: all var(--md-sys-motion-expressive-spatial-default);
 	margin: 0;
-	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
