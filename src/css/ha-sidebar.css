@@ -41,8 +41,6 @@ ha-list-item-button {
 	width: var(--ha-sidebar-width);
 	transition: all var(--md-sys-motion-expressive-spatial-default);
 	margin: 0;
-	flex-direction: column;
-	justify-content: center;
 }
 
 /* Expanded rail indicator should fit content width */
@@ -106,6 +104,7 @@ ha-list-item-button.selected {
 
 /* Make collapsed navigation rail items vertical */
 :host(:not([expanded])) ha-list-item-button::part(base) {
+	height: 100%;
 	border-radius: 0;
 	padding-top: 4px;
 	padding-bottom: 6px;
