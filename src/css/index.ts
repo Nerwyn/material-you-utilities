@@ -21,6 +21,7 @@ import haIconButton from './ha-icon-button.css';
 import haInputChip from './ha-input-chip.css';
 import haListItem from './ha-list-item.css';
 import haMarkdown from './ha-markdown.css';
+import haMediaPlayerBrowse from './ha-media-player-browse.css';
 import haMdDialog from './ha-md-dialog.css';
 import haMdListItem from './ha-md-list-item.css';
 import haMdMenuItem from './ha-md-menu-item.css';
@@ -78,6 +79,7 @@ export const implicitElements: Record<string, string> = {
 	'ha-input-chip': haInputChip,
 	'ha-list-item': haListItem,
 	'ha-markdown': haMarkdown,
+	'ha-media-player-browse': haMediaPlayerBrowse,
 	'ha-md-list-item': haMdListItem,
 	'ha-md-menu-item': haMdMenuItem,
 	'ha-menu-button': haMenuButton,

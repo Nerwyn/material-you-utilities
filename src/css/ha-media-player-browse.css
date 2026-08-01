@@ -1,0 +1,4 @@
+/* Fix play button top offset for 56px icon size */
+.child .play:not(.can_expand) {
+	top: calc(50% - 28px);
+}
