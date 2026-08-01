@@ -1,4 +1,5 @@
-/* Fix play button top offset for 56px icon size */
+/* Fix play button top offset */
 .child .play:not(.can_expand) {
-	top: calc(50% - 28px);
+	top: calc(50% - var(--ha-icon-button-size) / 2);
+	right: calc(50% - var(--ha-icon-button-size) / 2);
 }
