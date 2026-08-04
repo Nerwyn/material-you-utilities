@@ -21,10 +21,10 @@ import haIconButton from './ha-icon-button.css';
 import haInputChip from './ha-input-chip.css';
 import haListItem from './ha-list-item.css';
 import haMarkdown from './ha-markdown.css';
-import haMediaPlayerBrowse from './ha-media-player-browse.css';
 import haMdDialog from './ha-md-dialog.css';
 import haMdListItem from './ha-md-list-item.css';
 import haMdMenuItem from './ha-md-menu-item.css';
+import haMediaPlayerBrowse from './ha-media-player-browse.css';
 import haMenuButton from './ha-menu-button.css';
 import haPickerComboBox from './ha-picker-combo-box.css';
 import haRadioOption from './ha-radio-option.css';
@@ -47,6 +47,7 @@ import huiEntitiesCardEditor from './hui-entities-card-editor.css';
 import huiEntitiesToggle from './hui-entities-toggle.css';
 import huiGridSection from './hui-grid-section.css';
 import huiLegacyView from './hui-legacy-view.css';
+import huiMediaControlCard from './hui-media-control-card.css';
 import huiRootHideAppbar from './hui-root-hide-appbar.css';
 import huiRootHideNavbarLabels from './hui-root-hide-navbar-labels.css';
 import huiRootHideNavbar from './hui-root-hide-navbar.css';
@@ -97,6 +98,7 @@ export const implicitElements: Record<string, string> = {
 	'ha-tooltip': haTooltip,
 	'ha-user-badge': haUserBadge,
 	'hui-card': huiCardChild, // applied to child hui-*-card
+	'hui-media-control-card': huiMediaControlCard,
 	'hui-entities-toggle': huiEntitiesToggle,
 	'hui-entities-card-editor': huiEntitiesCardEditor,
 	'hui-grid-section': huiGridSection,

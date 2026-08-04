@@ -1,0 +1,33 @@
+/* Media position slider */
+ha-slider::part(slider) {
+	/* Reduce position slider heights */
+	--ha-slider-track-size: 4px;
+	--track-size: var(--ha-slider-track-size);
+	--thumb-height: 8px;
+	--thumb-width: 0px;
+	--thumb-actual-height: 24px;
+	--thumb-focus-ring-height: 28px;
+	--md-slider-transition: none;
+}
+ha-slider::part(indicator)::after {
+	/* Remove thumb negative area */
+	display: none;
+}
+ha-slider::part(indicator),
+ha-slider::part(thumb),
+ha-slider::part(thumb)::after {
+	/* Disable transition and fix thumb display */
+	display: block;
+	transition: none;
+}
+ha-slider::part(indicator) {
+	mask-image: var(--md-sys-progress-bar-mask);
+	mask-position: 0 50%;
+	mask-repeat: repeat-x;
+	mask-size: auto 100%;
+
+	height: 10px;
+	top: -3px;
+
+	--md-slider-indicator-margin-inline-end: -4px;
+}
