@@ -44,7 +44,7 @@
 
 /* Active track */
 #indicator {
-	background: var(--md-sys-color-primary);
+	background: var(--ha-slider-indicator-color, var(--md-sys-color-primary));
 	border-top-left-radius: var(--md-sys-shape-corner-small);
 	border-bottom-left-radius: var(--md-sys-shape-corner-small);
 	border-top-right-radius: 2px;
@@ -83,7 +83,10 @@
 	inset-inline-start: 4px;
 }
 #thumb::before {
-	background: var(--md-sys-color-primary);
+	background: var(
+		--ha-slider-thumb-color,
+		var(--ha-slider-indicator-color, var(--md-sys-color-primary))
+	);
 }
 #thumb::after {
 	transition: outline-width var(--md-sys-motion-expressive-spatial-default);
@@ -104,7 +107,7 @@
 }
 #slider:focus-visible #indicator,
 #slider:has(~ #tooltip[open]) #indicator {
-	margin-inline-end: 4px;
+	margin-inline-end: var(--md-slider-indicator-margin-inline-end, 4px);
 }
 #slider:focus-visible #indicator::after,
 #slider:has(~ #tooltip[open]) #indicator::after {
