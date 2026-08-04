@@ -1,6 +1,6 @@
 {
 	"name": "material-you-utilities",
-	"version": "2.1.22",
+	"version": "2.1.23",
 	"description": "Material You Utilities - Material Design 3 Color Theme Generation and Component Modification",
 	"main": "dist/material-you-utilities.js",
 	"type": "module",
@@ -26,29 +26,28 @@
 	"homepage": "https://github.com/Nerwyn/material-you-utilities#readme",
 	"dependencies": {
 		"@material/material-color-utilities": "npm:@ktibow/material-color-utilities-nightly@latest",
-		"disk-color-picker": "latest",
-		"lit": "latest"
+		"disk-color-picker": "^0.2.3",
+		"lit": "^3.3.3"
 	},
 	"devDependencies": {
-		"@eslint/js": "latest",
-		"@rspack/cli": "latest",
-		"@rspack/core": "latest",
-		"@types/node": "latest",
-		"@typescript-eslint/eslint-plugin": "latest",
-		"@typescript-eslint/parser": "latest",
-		"css-loader": "latest",
-		"eslint": "latest",
-		"eslint-config-prettier": "latest",
-		"eslint-plugin-prettier": "latest",
+		"@eslint/js": "^10.0.1",
+		"@rspack/cli": "^2.1.8",
+		"@rspack/core": "^2.1.8",
+		"@types/node": "^26.1.2",
+		"@typescript-eslint/eslint-plugin": "^8.66.0",
+		"@typescript-eslint/parser": "^8.66.0",
+		"css-loader": "^7.1.4",
+		"eslint": "^10.8.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-prettier": "^5.5.6",
 		"home-assistant-js-websocket": "latest",
-		"js-yaml": "latest",
-		"lint-staged": "latest",
-		"minify-html-literals-loader": "latest",
-		"prettier": "latest",
-		"prettier-plugin-organize-imports": "latest",
-		"ts-loader": "latest",
+		"lint-staged": "^17.3.0",
+		"minify-html-literals-loader": "^1.1.1",
+		"prettier": "^3.9.6",
+		"prettier-plugin-organize-imports": "^4.3.0",
+		"ts-loader": "^9.6.2",
 		"typescript": "latest",
-		"typescript-eslint": "latest",
-		"typescript-plugin-css-modules": "latest"
+		"typescript-eslint": "^8.66.0",
+		"typescript-plugin-css-modules": "^5.2.0"
 	}
 }
