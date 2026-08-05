@@ -1,7 +1,8 @@
-/* Fix button and icon size */
+/* Fix button and icon size, and allow inherited text color passthrough */
 :host {
 	--ha-icon-button-size: 40px;
-	--ha-button-mdc-icon-size: 24px;
+	--ha-button-mdc-icon-size: var(--inherited-icon-size, 24px);
+	--super-inherited-text-color: var(--inherited-text-color);
 }
 
 /* Medium filled play button */
@@ -12,18 +13,30 @@
 
 /* Fix plain/standard icon color */
 ha-button[appearance~='plain'] {
-	--inherited-text-color: var(--md-sys-color-on-surface-variant);
+	--inherited-text-color: var(
+		--super-inherited-text-color,
+		var(--md-sys-color-on-surface-variant)
+	);
 }
 
 /* Fix status variant colors */
 ha-button[variant~='success'] {
-	--inherited-text-color: var(--wa-color-on-loud);
+	--inherited-text-color: var(
+		--super-inherited-text-color,
+		var(--wa-color-on-loud)
+	);
 }
 ha-button[variant~='warning'] {
-	--inherited-text-color: var(--wa-color-on-loud);
+	--inherited-text-color: var(
+		--super-inherited-text-color,
+		var(--wa-color-on-loud)
+	);
 }
 ha-button[variant~='danger'] {
-	--inherited-text-color: var(--on-error-color);
+	--inherited-text-color: var(
+		--super-inherited-text-color,
+		var(--on-error-color)
+	);
 }
 
 /* Remove default state layer */

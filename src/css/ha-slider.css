@@ -26,7 +26,10 @@
 
 /* Inactive track */
 #track {
-	background: var(--md-sys-color-secondary-container);
+	background: var(
+		--ha-slider-track-color,
+		var(--md-sys-color-secondary-container)
+	);
 	border-radius: var(--md-sys-shape-corner-small);
 }
 

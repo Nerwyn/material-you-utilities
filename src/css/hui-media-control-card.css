@@ -8,6 +8,9 @@ ha-slider::part(slider) {
 	--thumb-actual-height: 24px;
 	--thumb-focus-ring-height: 28px;
 	--md-slider-transition: none;
+	--ha-slider-track-color: rgba(
+		from var(--ha-slider-indicator-color, #fff) r g b / 0.4
+	);
 }
 ha-slider::part(indicator)::after {
 	/* Remove thumb negative area */
@@ -30,4 +33,22 @@ ha-slider::part(indicator) {
 	top: -3px;
 
 	--md-slider-indicator-margin-inline-end: -4px;
+}
+
+/* Media buttons */
+ha-icon-button {
+	--inherited-text-color: currentColor;
+}
+.controls ha-icon-button {
+	--inherited-icon-size: 30px;
+}
+ha-icon-button[action='media_play'],
+ha-icon-button[action='media_play_pause'],
+ha-icon-button[action='media_pause'],
+ha-icon-button[action='media_stop'] {
+	--inherited-icon-size: 40px;
+}
+ha-icon-button.browse-media,
+ha-icon-button.join-media {
+	--inherited-icon-size: 24px;
 }
