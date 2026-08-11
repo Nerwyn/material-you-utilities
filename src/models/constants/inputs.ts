@@ -35,7 +35,7 @@ It usually does not appear in the theme itself.`,
 				max: 9,
 			},
 		},
-		card: { config: {}, tabBarIndex: 0, resetButton: true },
+		card: { config: { text: {} }, tabBarIndex: 0 },
 		handler: setTheme,
 	},
 	contrast: {

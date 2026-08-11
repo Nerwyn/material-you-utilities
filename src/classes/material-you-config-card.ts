@@ -279,20 +279,6 @@ export class MaterialYouConfigCard extends LitElement {
 		this.requestUpdate();
 	}
 
-	buildResetButton(field: InputField) {
-		return html`
-			<div class="reset button">
-				<ha-icon
-					@click=${this.handleResetClick}
-					@keydown=${this.handleKeyDown}
-					tabindex="0"
-					field="${field}"
-					.icon="${'mdi:restore'}"
-				></ha-icon>
-			</div>
-		`;
-	}
-
 	handleMoreInfoClick(e: MouseEvent, target: HTMLElement) {
 		const field = ((e.target as HTMLElement) || target).getAttribute(
 			'field',
@@ -334,70 +320,6 @@ export class MaterialYouConfigCard extends LitElement {
 		}
 
 		let value: string | number | boolean = this.hass.states[entityId]?.state;
-		if (field == 'base_color') {
-			let timeout: ReturnType<typeof setTimeout>;
-			const handleChange = (e: Event) => {
-				clearTimeout(timeout);
-				const target = e.target as EventTarget & Record<'value', string>;
-				const value = target.value;
-				timeout = setTimeout(() => {
-					const event = new Event('value-changed');
-					event.detail = { value };
-					target.dispatchEvent(event);
-				}, 100);
-			};
-
-			return html`<div class="column">
-				<disk-color-picker
-					field="${field}"
-					value="${value}"
-					@change=${handleChange}
-					@keyup=${handleChange}
-					@value-changed=${this.handleSelectorChange}
-				></disk-color-picker>
-				<div class="subrow">
-					<div class="row">
-						${this.buildMoreInfoButton(field)}
-						<div class="label">${inputs[field].name}</div>
-					</div>
-					<div class="row">
-						<div class="label secondary">${value || inputs[field].default}</div>
-						${this.buildResetButton(field)}
-					</div>
-				</div>
-			</div>`;
-		}
-
-		let extra: TemplateResult | string = '';
-		if (field == 'harmonize') {
-			extra = html`<div class="row semantic-colors">
-				${[
-					'pink',
-					'red',
-					'deep-orange',
-					'orange',
-					'amber',
-					'yellow',
-					'lime',
-					'light-green',
-					'green',
-					'teal',
-					'cyan',
-					'light-blue',
-					'blue',
-					'indigo',
-					'deep-purple',
-					'purple',
-				].map(
-					(color) =>
-						html`<div
-							class="semantic-color"
-							style="background: var(--${color}-color)"
-						></div>`,
-				)}
-			</div>`;
-		}
-
 		const config = inputs[field].card.config;
 		if (inputs[field].domain == 'input_number') {
 			config.min =
@@ -413,9 +335,70 @@ export class MaterialYouConfigCard extends LitElement {
 			value = value == 'on';
 		}
 
-		return html`${this.buildMoreInfoButton(field)}
-		${this.buildSelector(inputs[field].name, field, config, value)}${extra}
-		${inputs[field].card.resetButton ? this.buildResetButton(field) : ''}`;
+		let extra: TemplateResult;
+		switch (field) {
+			case 'base_color': {
+				let timeout: ReturnType<typeof setTimeout>;
+				const handleChange = (e: Event) => {
+					clearTimeout(timeout);
+					const target = e.target as EventTarget & Record<'value', string>;
+					const value = target.value;
+					timeout = setTimeout(() => {
+						const event = new Event('value-changed');
+						event.detail = { value };
+						target.dispatchEvent(event);
+					}, 100);
+				};
+
+				extra = html`<disk-color-picker
+					field="${field}"
+					value="${value}"
+					@change=${handleChange}
+					@keyup=${handleChange}
+					@value-changed=${this.handleSelectorChange}
+				></disk-color-picker>`;
+				break;
+			}
+			case 'harmonize':
+				extra = html`<div class="row semantic-colors">
+					${[
+						'pink',
+						'red',
+						'deep-orange',
+						'orange',
+						'amber',
+						'yellow',
+						'lime',
+						'light-green',
+						'green',
+						'teal',
+						'cyan',
+						'light-blue',
+						'blue',
+						'indigo',
+						'deep-purple',
+						'purple',
+					].map(
+						(color) =>
+							html`<div
+								class="semantic-color"
+								style="background: var(--${color}-color)"
+							></div>`,
+					)}
+				</div>`;
+				break;
+			default:
+				extra = html``;
+				break;
+		}
+
+		return html`<div class="column">
+			${extra}
+			<div class="row ${field}">
+				${this.buildMoreInfoButton(field)}
+				${this.buildSelector(inputs[field].name, field, config, value)}
+			</div>
+		</div>`;
 	}
 
 	setupIds() {
@@ -490,29 +473,32 @@ export class MaterialYouConfigCard extends LitElement {
 
 		return html`
 			<ha-card .hass=${this.hass} .header=${title}>
-				${this.personEntityId
-					? html`<div class="subtitle">ID: ${this.dataId}</div>`
-					: ''}
+				${
+					this.personEntityId
+						? html`<div class="subtitle">ID: ${this.dataId}</div>`
+						: ''
+				}
 				${this.buildTabBar(this.tabBarIndex, this.handleTabBar, this.tabs)}
 				<div class="card-content">
-					${Object.keys(rows).length != rowNames.length
-						? buildAlertBox(
-								this.hass.user?.is_admin
-									? 'Press Create Helpers to create and initialize inputs.'
-									: 'Some or all input helpers not setup! Ask an Home Assistant administrator to do so.',
-								this.hass.user?.is_admin ? 'info' : 'error',
-							)
-						: ''}
-					${Object.keys(rows).map(
-						(name) =>
-							html`<div class="row ${name}">${rows[name as InputField]}</div>`,
-					)}
+					${
+						Object.keys(rows).length != rowNames.length
+							? buildAlertBox(
+									this.hass.user?.is_admin
+										? 'Press Create Helpers to create and initialize inputs.'
+										: 'Some or all input helpers not setup! Ask an Home Assistant administrator to do so.',
+									this.hass.user?.is_admin ? 'info' : 'error',
+								)
+							: ''
+					}
+					${Object.keys(rows).map((name) => rows[name as InputField])}
 				</div>
-				${this.hass.user?.is_admin
-					? html`<div class="card-actions">
-							${this.buildDeleteHelpersButton()}${this.buildCreateHelpersButton()}
-						</div>`
-					: ''}
+				${
+					this.hass.user?.is_admin
+						? html`<div class="card-actions">
+								${this.buildDeleteHelpersButton()}${this.buildCreateHelpersButton()}
+							</div>`
+						: ''
+				}
 			</ha-card>
 			<style id="${this.MODE_ID}"></style>
 		`;
@@ -566,7 +552,6 @@ export class MaterialYouConfigCard extends LitElement {
 				`
 				/* Shift color picker down */
 				:host {
-					height: 248px;
 					translate: 0 -16px;
 				}
 
@@ -662,37 +647,16 @@ export class MaterialYouConfigCard extends LitElement {
 			.row {
 				display: flex;
 				align-items: center;
+				width: 100%;
 			}
 			.row:empty {
 				display: none;
-			}
-			.label {
-				width: fit-content;
-				text-align: center;
-				align-content: center;
-				margin: auto 0;
-			}
-			.secondary {
-				color: var(--secondary-text-color);
 			}
 			.column {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
 				width: 100%;
-			}
-			.row.base_color {
-				justify-content: center;
-				align-items: center;
-			}
-			.subrow {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				width: 100%;
-			}
-			.subrow .row {
-				margin-bottom: 0;
 			}
 
 			.card-actions {
@@ -833,10 +797,6 @@ export class MaterialYouConfigCard extends LitElement {
 			}
 
 			.semantic-colors {
-				position: absolute;
-				width: calc(100% - 44px);
-				margin: 0 6px;
-				translate: 0 32px;
 				border-radius: 4px;
 				overflow: hidden;
 			}
