@@ -41,6 +41,7 @@ ha-list-item-button {
 	width: var(--ha-sidebar-width);
 	transition: all var(--md-sys-motion-expressive-spatial-default);
 	margin: 0;
+	-webkit-tap-highlight-color: transparent;
 }
 
 /* Expanded rail indicator should fit content width */
