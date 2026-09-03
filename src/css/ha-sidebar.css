@@ -8,7 +8,7 @@
 	color: transparent;
 }
 :host([narrow]) .menu:not(:has(mwc-button, ha-icon-button)) {
-	height: calc(12px + env(safe-area-inset-top));
+	height: calc(12px + var(--safe-area-inset-top));
 }
 
 /* Modal sidebar panels list height */
@@ -47,7 +47,7 @@ ha-list-item-button {
 /* Expanded rail indicator should fit content width */
 :host([expanded]) ha-list-item-button {
 	height: 56px;
-	width: calc(var(--ha-sidebar-width) - 40px - env(safe-area-inset-left));
+	width: calc(var(--ha-sidebar-width) - 40px - var(--safe-area-inset-left));
 	max-width: fit-content;
 	margin: 0 20px;
 	border-radius: var(--md-sys-shape-corner-full);
@@ -90,7 +90,7 @@ ha-list-item-button.selected {
 	top: 0;
 	left: 0;
 	height: 100%;
-	width: calc(var(--ha-sidebar-width) - env(safe-area-inset-left) - 20px);
+	width: calc(var(--ha-sidebar-width) - var(--safe-area-inset-left) - 20px);
 }
 
 /* Sidebar organizer grid item fix */
