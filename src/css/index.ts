@@ -55,6 +55,7 @@ import huiRootShowAppbarTitle from './hui-root-show-appbar-title.css';
 import huiRoot from './hui-root.css';
 import huiSectionsView from './hui-sections-view.css';
 import huiViewHeader from './hui-view-header.css';
+import supervisorAppInfo from './supervisor-app-info.css';
 import waDialog from './wa-dialog.css';
 import waDrawer from './wa-drawer.css';
 
@@ -113,6 +114,7 @@ export const implicitElements: Record<string, string> = {
 	'grid-layout': huiLegacyView,
 	'hui-view-header': huiViewHeader,
 	'hue-like-light-card': hueLikeLightCard,
+	'supervisor-app-info': supervisorAppInfo,
 	'wa-dialog': waDialog,
 	'wa-drawer': waDrawer,
 };
