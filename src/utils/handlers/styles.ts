@@ -1,5 +1,4 @@
 import { elements, implicitElements } from '../../css';
-import { inputs } from '../../models/constants/inputs';
 import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import {
@@ -24,7 +23,7 @@ function checkTheme() {
 		if (theme) {
 			shouldSetStyles =
 				theme.includes(THEME_NAME) &&
-				(getEntityIdAndValue('styles').value || inputs.styles.default) == 'on';
+				getEntityIdAndValue('styles').value == 'on';
 		}
 	}
 }

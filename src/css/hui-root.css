@@ -151,7 +151,7 @@ ha-tab-group {
 	width: calc(100% - var(--ha-sidebar-width, 0px));
 	background: var(--navbar-background);
 	box-shadow: var(--md-sys-elevation-level2);
-	padding-bottom: env(safe-area-inset-bottom);
+	padding-bottom: var(--safe-area-inset-bottom);
 	pointer-events: all;
 }
 .edit-mode ha-tab-group {
@@ -342,9 +342,9 @@ ha-tab-group-tab[active]::after {
 	bottom: calc(
 		var(--add-view-fab-bottom, 84px) +
 			var(--kiosk-header-height, var(--footer-height)) +
-			env(safe-area-inset-bottom)
+			var(--safe-area-inset-bottom)
 	);
-	inset-inline-end: calc(16px + env(safe-area-inset-right));
+	inset-inline-end: calc(16px + var(--safe-area-inset-right));
 	border-radius: var(--md-sys-shape-corner-large);
 	height: var(--add-view-fab-size);
 	width: var(--add-view-fab-size);
@@ -385,38 +385,38 @@ ha-menu-button {
 	--view-container-padding-override-bottom: 0px;
 }
 .edit-mode #view {
-	--view-container-padding-override-bottom: var(
-		--kiosk-header-height,
-		calc(
-			var(--footer-height) + env(safe-area-inset-bottom) +
-				var(--view-container-padding-bottom)
-		)
+	--view-container-padding-override-bottom: calc(
+		var(--safe-area-inset-bottom) +
+			var(
+				--kiosk-header-height,
+				calc(var(--footer-height) + var(--view-container-padding-bottom, 0px))
+			)
 	);
 }
 #view {
-	padding-top: var(
-		--view-container-padding-override-top,
-		var(
-			--kiosk-header-height,
-			calc(
-				var(--header-height) + env(safe-area-inset-top) +
-					var(--view-container-padding-top, 0px)
+	padding-top: calc(
+		var(--safe-area-inset-top) +
+			var(
+				--view-container-padding-override-top,
+				var(
+					--kiosk-header-height,
+					calc(var(--header-height) + var(--view-container-padding-top, 0px))
+				)
 			)
-		)
 	);
-	padding-bottom: var(
-		--view-container-padding-override-bottom,
-		var(
-			--kiosk-header-height,
-			calc(
-				var(--footer-height) + env(safe-area-inset-bottom) +
-					var(--view-container-padding-bottom, 0px)
+	padding-bottom: calc(
+		var(--safe-area-inset-bottom) +
+			var(
+				--view-container-padding-override-bottom,
+				var(
+					--kiosk-header-height,
+					calc(var(--footer-height) + var(--view-container-padding-bottom, 0px))
+				)
 			)
-		)
 	);
 	margin-top: 0px;
 
-	--fab-offset: calc(var(--footer-height) + env(safe-area-inset-bottom));
+	--fab-offset: calc(var(--footer-height) + var(--safe-area-inset-bottom));
 }
 
 /* Fix edit mode view top padding and buttons */

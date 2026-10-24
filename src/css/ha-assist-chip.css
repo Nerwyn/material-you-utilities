@@ -1,3 +1,10 @@
+/* Fix icon color */
+::slotted(state-badge),
+::slotted(ha-icon),
+::slotted(ha-svg-icon) {
+	color: var(--md-assist-chip-leading-icon-color);
+}
+
 /* Fix label font family, weight, and letter spacing */
 .label {
 	font-family: var(--font-family);
@@ -15,6 +22,8 @@
 	/* Cannot reference primary directly, overwritten by host */
 	color: var(--primary-color);
 	fill: var(--primary-color);
+
+	--md-assist-chip-leading-icon-color: var(--primary-color);
 }
 .outline ~ #button .label {
 	color: var(--md-sys-color-on-surface);
@@ -26,16 +35,10 @@
 	--md-ripple-pressed-color: var(--md-sys-color-on-surface);
 }
 
-/* Fix filled container color, but not when given an explicit color */
-.filled {
-	background-color: var(--md-sys-color-secondary-container);
-}
-:host(.red) .filled {
-	background-color: var(--label-badge-red, #df4c1e);
-}
-:host(.green) .filled {
-	background-color: var(--label-badge-green, #0da035);
-}
-:host(.yellow) .filled {
-	background-color: var(--label-badge-yellow, #f4b400);
+/* Fix explicit colors */
+:host(.red),
+:host(.yellow),
+:host(.green) {
+	--ha-chip-label-color: #fff;
+	--md-assist-chip-leading-icon-color: var(--ha-chip-label-color);
 }

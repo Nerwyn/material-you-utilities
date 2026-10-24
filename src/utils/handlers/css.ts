@@ -1,5 +1,4 @@
 import { unset } from '.';
-import { inputs } from '../../models/constants/inputs';
 import { THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import { IHandlerArguments } from '../../models/interfaces/Input';
@@ -16,8 +15,8 @@ export async function setCSSFromFile(args: IHandlerArguments) {
 	try {
 		if (isThemeValid()) {
 			// Do not fetch if no path/url is set
-			const url = (args.value || inputs.css_file.default) as string;
-			if (!url) {
+			const url = args.value as string;
+			if (!args.value) {
 				unsetCSSFromFile(args);
 				return;
 			}

@@ -7,7 +7,7 @@
 	gap: 12px;
 	border-radius: var(--md-sys-shape-corner-extra-small);
 	inset-block-end: calc(
-		8px + var(--footer-height) + env(safe-area-inset-bottom)
+		8px + var(--footer-height) + var(--safe-area-inset-bottom)
 	);
 
 	--inherited-background-color: transparent;

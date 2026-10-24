@@ -8,7 +8,7 @@
 :host(.period-selector) {
 	bottom: calc(
 		var(--kiosk-header-height, var(--footer-height, 0px)) +
-			var(--ha-space-4, 16px) + env(safe-area-inset-bottom)
+			var(--ha-space-4, 16px) + var(--safe-area-inset-bottom)
 	);
 }
 

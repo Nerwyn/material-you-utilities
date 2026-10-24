@@ -146,47 +146,52 @@ export class MaterialYouPanel extends LitElement {
 		}
 
 		const warnings = html`
-			${this.hass.themes.themes['Material Rounded']
-				? buildAlertBox(
-						`Your theme install is corrupted! The legacy Material Rounded theme was not properly removed and is possibly overwriting ${THEME_NAME} Theme. Delete the config/themes/material_rounded folder from your Home Assistant server.`,
-						'error',
-					)
-				: ''}
-			${!this.hass.themes.themes[THEME_NAME]
-				? buildAlertBox(
-						`You do not have ${THEME_NAME} Theme installed! This module is made to work with ${THEME_NAME} Theme and will not function properly otherwise. Install it using HACS.`,
-						'error',
-					)
-				: !this.hass.themes.theme.includes(THEME_NAME)
+			${
+				this.hass.themes.themes['Material Rounded']
 					? buildAlertBox(
-							`You are not using ${THEME_NAME} Theme! Switch to it using the floating action button at the bottom of the page.`,
-							'warning',
+							`Your theme install is corrupted! The legacy Material Rounded theme was not properly removed and is possibly overwriting ${THEME_NAME} Theme. Delete the config/themes/material_rounded folder from your Home Assistant server.`,
+							'error',
 						)
-					: ''}
+					: ''
+			}
+			${
+				!this.hass.themes.themes[THEME_NAME]
+					? buildAlertBox(
+							`You do not have ${THEME_NAME} Theme installed! This module is made to work with ${THEME_NAME} Theme and will not function properly otherwise. Install it using HACS.`,
+							'error',
+						)
+					: !this.hass.themes.theme.includes(THEME_NAME)
+						? buildAlertBox(
+								`You are not using ${THEME_NAME} Theme! Switch to it using the floating action button at the bottom of the page.`,
+								'warning',
+							)
+						: ''
+			}
 		`;
 
 		let page: TemplateResult;
 		switch (this.tabBarIndex) {
 			case 2:
 				page = html`
-					${window.browser_mod
-						? html`${buildAlertBox(
-									'Remember to register devices with Brower Mod!',
-								)}
-								${this.buildSectionHeader(
+					${
+						window.browser_mod
+							? html`${buildAlertBox(
+										'Remember to register devices with Brower Mod!',
+									)}
+									${this.buildSectionHeader(
 									'This Device',
 									'Your settings for this device, prioritized over all other settings.',
 								)}
-								<material-you-config-card
-									.hass=${this.hass}
-									.dataId=${window.browser_mod?.browserID}
-								></material-you-config-card>
-								${this.buildSectionHeader(
+									<material-you-config-card
+										.hass=${this.hass}
+										.dataId=${window.browser_mod?.browserID}
+									></material-you-config-card>
+									${this.buildSectionHeader(
 									'Other Devices',
 									'Other devices registered with Browser Mod.',
 								)}
-								<div class="section">
-									${this.devices.map(
+									<div class="section">
+										${this.devices.map(
 										(id) => html`
 											<material-you-config-card
 												.hass=${this.hass}
@@ -194,11 +199,12 @@ export class MaterialYouPanel extends LitElement {
 											></material-you-config-card>
 										`,
 									)}
-								</div>`
-						: buildAlertBox(
-								'Device settings requires Browser Mod, which can be installed using HACS.',
-								'error',
-							)}
+									</div>`
+							: buildAlertBox(
+									'Device settings requires Browser Mod, which can be installed using HACS.',
+									'error',
+								)
+					}
 				`;
 				break;
 			case 1:
@@ -237,18 +243,20 @@ export class MaterialYouPanel extends LitElement {
 						.hass=${this.hass}
 						.dataId=${this.hass.user?.id}
 					></material-you-config-card>
-					${window.browser_mod && !this.hass.user?.is_admin
-						? html`
-								${this.buildSectionHeader(
+					${
+						window.browser_mod && !this.hass.user?.is_admin
+							? html`
+									${this.buildSectionHeader(
 									'This Device',
 									'Settings for this device.',
 								)}
-								<material-you-config-card
-									.hass=${this.hass}
-									.dataId=${window.browser_mod?.browserID}
-								></material-you-config-card>
-							`
-						: ''}
+									<material-you-config-card
+										.hass=${this.hass}
+										.dataId=${window.browser_mod?.browserID}
+									></material-you-config-card>
+								`
+							: ''
+					}
 				`;
 				break;
 		}
@@ -256,9 +264,11 @@ export class MaterialYouPanel extends LitElement {
 		return html`
 			${this.buildHeader()}
 			<div class="content">
-				${this.hass.user?.is_admin
-					? this.buildTabBar(this.tabBarIndex, this.handleTabBar, this.tabs)
-					: ''}
+				${
+					this.hass.user?.is_admin
+						? this.buildTabBar(this.tabBarIndex, this.handleTabBar, this.tabs)
+						: ''
+				}
 				${warnings}
 				<div class="page-header">
 					<div class="title">${THEME_NAME} Utilities</div>
@@ -391,8 +401,8 @@ export class MaterialYouPanel extends LitElement {
 
 			.theme-mode-fab {
 				position: fixed;
-				inset-block-end: calc(env(safe-area-inset-bottom) + 16px);
-				inset-inline-end: calc(env(safe-area-inset-right) + 16px);
+				inset-block-end: calc(var(--safe-area-inset-bottom) + 16px);
+				inset-inline-end: calc(var(--safe-area-inset-right) + 16px);
 				display: flex;
 				justify-content: center;
 				align-items: center;

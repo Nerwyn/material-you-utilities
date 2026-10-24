@@ -8,7 +8,7 @@
 	color: transparent;
 }
 :host([narrow]) .menu:not(:has(mwc-button, ha-icon-button)) {
-	height: calc(12px + env(safe-area-inset-top));
+	height: calc(12px + var(--safe-area-inset-top));
 }
 
 /* Modal sidebar panels list height */
@@ -41,15 +41,13 @@ ha-list-item-button {
 	width: var(--ha-sidebar-width);
 	transition: all var(--md-sys-motion-expressive-spatial-default);
 	margin: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	-webkit-tap-highlight-color: transparent;
 }
 
 /* Expanded rail indicator should fit content width */
 :host([expanded]) ha-list-item-button {
 	height: 56px;
-	width: calc(var(--ha-sidebar-width) - 40px - env(safe-area-inset-left));
+	width: calc(var(--ha-sidebar-width) - 40px - var(--safe-area-inset-left));
 	max-width: fit-content;
 	margin: 0 20px;
 	border-radius: var(--md-sys-shape-corner-full);
@@ -92,11 +90,22 @@ ha-list-item-button.selected {
 	top: 0;
 	left: 0;
 	height: 100%;
-	width: calc(var(--ha-sidebar-width) - env(safe-area-inset-left) - 20px);
+	width: calc(var(--ha-sidebar-width) - var(--safe-area-inset-left) - 20px);
+}
+
+/* Sidebar organizer grid item fix */
+:host([expanded]) ha-list-item-button[grid-item] {
+	height: 48px;
+	margin: auto auto;
+}
+:host([expanded]) ha-list-item-button[grid-item]::part(base) {
+	width: unset;
+	padding-inline: 12px;
 }
 
 /* Make collapsed navigation rail items vertical */
 :host(:not([expanded])) ha-list-item-button::part(base) {
+	height: 100%;
 	border-radius: 0;
 	padding-top: 4px;
 	padding-bottom: 6px;
@@ -135,7 +144,7 @@ ha-list-item-button.selected {
 :host(:not([expanded])) ha-list-item-button ha-svg-icon,
 :host(:not([expanded])) ha-list-item-button ha-icon {
 	position: relative;
-	top: 4px;
+	top: var(--navigaiton-rail-icon-top, 4px);
 }
 
 /* Change background of current destination icon and add scale transition */

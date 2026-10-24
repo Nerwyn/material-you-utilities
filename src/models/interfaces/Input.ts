@@ -1,10 +1,7 @@
 import { Context, HassEntity } from 'home-assistant-js-websocket';
 
 export type InputDomain =
-	| 'input_text'
-	| 'input_select'
-	| 'input_number'
-	| 'input_boolean';
+	'input_text' | 'input_select' | 'input_number' | 'input_boolean';
 
 export type InputField =
 	| 'base_color'
@@ -61,7 +58,6 @@ export interface IInputInfo {
 	card: {
 		tabBarIndex: number;
 		config: Record<string, unknown>;
-		resetButton?: boolean;
 	};
 	handler: Handler;
 }

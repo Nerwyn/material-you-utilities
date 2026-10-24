@@ -1,0 +1,5 @@
+/* Fix ha-assist-chip default icon/text color */
+ha-assist-chip {
+	--ha-chip-label-color: var(--md-sys-color-on-primary);
+	--md-assist-chip-leading-icon-color: var(--ha-chip-label-color);
+}

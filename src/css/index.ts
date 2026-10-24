@@ -24,6 +24,7 @@ import haMarkdown from './ha-markdown.css';
 import haMdDialog from './ha-md-dialog.css';
 import haMdListItem from './ha-md-list-item.css';
 import haMdMenuItem from './ha-md-menu-item.css';
+import haMediaPlayerBrowse from './ha-media-player-browse.css';
 import haMenuButton from './ha-menu-button.css';
 import haPickerComboBox from './ha-picker-combo-box.css';
 import haRadioOption from './ha-radio-option.css';
@@ -46,6 +47,7 @@ import huiEntitiesCardEditor from './hui-entities-card-editor.css';
 import huiEntitiesToggle from './hui-entities-toggle.css';
 import huiGridSection from './hui-grid-section.css';
 import huiLegacyView from './hui-legacy-view.css';
+import huiMediaControlCard from './hui-media-control-card.css';
 import huiRootHideAppbar from './hui-root-hide-appbar.css';
 import huiRootHideNavbarLabels from './hui-root-hide-navbar-labels.css';
 import huiRootHideNavbar from './hui-root-hide-navbar.css';
@@ -53,6 +55,7 @@ import huiRootShowAppbarTitle from './hui-root-show-appbar-title.css';
 import huiRoot from './hui-root.css';
 import huiSectionsView from './hui-sections-view.css';
 import huiViewHeader from './hui-view-header.css';
+import supervisorAppInfo from './supervisor-app-info.css';
 import waDialog from './wa-dialog.css';
 import waDrawer from './wa-drawer.css';
 
@@ -78,6 +81,7 @@ export const implicitElements: Record<string, string> = {
 	'ha-input-chip': haInputChip,
 	'ha-list-item': haListItem,
 	'ha-markdown': haMarkdown,
+	'ha-media-player-browse': haMediaPlayerBrowse,
 	'ha-md-list-item': haMdListItem,
 	'ha-md-menu-item': haMdMenuItem,
 	'ha-menu-button': haMenuButton,
@@ -95,6 +99,7 @@ export const implicitElements: Record<string, string> = {
 	'ha-tooltip': haTooltip,
 	'ha-user-badge': haUserBadge,
 	'hui-card': huiCardChild, // applied to child hui-*-card
+	'hui-media-control-card': huiMediaControlCard,
 	'hui-entities-toggle': huiEntitiesToggle,
 	'hui-entities-card-editor': huiEntitiesCardEditor,
 	'hui-grid-section': huiGridSection,
@@ -109,6 +114,7 @@ export const implicitElements: Record<string, string> = {
 	'grid-layout': huiLegacyView,
 	'hui-view-header': huiViewHeader,
 	'hue-like-light-card': hueLikeLightCard,
+	'supervisor-app-info': supervisorAppInfo,
 	'wa-dialog': waDialog,
 	'wa-drawer': waDrawer,
 };

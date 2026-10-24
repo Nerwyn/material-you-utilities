@@ -450,7 +450,7 @@ Numerical inputs optimized for human interaction. Uses the small variant, which 
 
 #### [Progress Indicators](https://m3.material.io/components/progress-indicators/overview)
 
-Sliders with ID `#position-slider` will receive alternate wavy progress indicator styles. At time of writing this slider is only present in the media player more info dialog.
+Media position sliders will receive alternate wavy progress indicator styles, like those found in the media player more info dialog and media control card.
 
 <img src="https://raw.githubusercontent.com/Nerwyn/material-you-utilities/main/assets/progress-indicator.png" width="500"/>
 
