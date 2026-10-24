@@ -104,7 +104,11 @@ function applyStylesToShadowRoot(
 	element: HTMLElement,
 ) {
 	checkTheme();
-	if (shouldSetStyles && element.shadowRoot) {
+	if (
+		shouldSetStyles &&
+		element.shadowRoot &&
+		!element.shadowRoot.adoptedStyleSheets.find((s) => s.title == THEME_TOKEN)
+	) {
 		const sheet = new target.CSSStyleSheet();
 		const styles = loadStyles(
 			elements[element.nodeName.toLowerCase()] || elements['hui-card'],
@@ -114,6 +118,25 @@ function applyStylesToShadowRoot(
 		element.shadowRoot.adoptedStyleSheets ||= [];
 		element.shadowRoot.adoptedStyleSheets.push(sheet);
 	}
+}
+
+/**
+ * Toggle injected theme styles on custom elements
+ * @param {HTMLElement} element
+ * @param {boolean} value
+ */
+export function toggleShadowRootStyles(element: HTMLElement, value?: boolean) {
+	const sheet = element.shadowRoot?.adoptedStyleSheets.find(
+		(s) => s.title == THEME_TOKEN,
+	);
+	if (!sheet) {
+		return;
+	}
+	if (value == undefined) {
+		sheet.disabled = !sheet.disabled;
+		return;
+	}
+	sheet.disabled = value;
 }
 
 export function applyStyleTag(

@@ -335,7 +335,7 @@ export class MaterialYouConfigCard extends LitElement {
 			value = value == 'on';
 		}
 
-		let extra: TemplateResult;
+		let extra: TemplateResult = html``;
 		switch (field) {
 			case 'base_color': {
 				let timeout: ReturnType<typeof setTimeout>;
@@ -387,8 +387,10 @@ export class MaterialYouConfigCard extends LitElement {
 					)}
 				</div>`;
 				break;
+			case 'spec':
+				// falls through
+				break;
 			default:
-				extra = html``;
 				break;
 		}
 
