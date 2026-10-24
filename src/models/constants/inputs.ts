@@ -26,8 +26,8 @@ export const inputs: Record<InputField, IInputInfo> = {
 		domain: 'input_text',
 		default: '#4C5C92',
 		name: 'Base Color',
-		description: `The color from which the theme is derived.
-It usually does not appear in the theme itself.`,
+		description: `The color from which the theme is derived
+It usually does not appear in the theme itself`,
 		init: {
 			config: {
 				icon: 'mdi:palette',
@@ -42,7 +42,7 @@ It usually does not appear in the theme itself.`,
 		domain: 'input_number',
 		default: 0,
 		name: 'Contrast Level',
-		description: 'The contrast/brightness of the theme colors.',
+		description: 'The contrast/brightness of the theme colors',
 		init: {
 			config: {
 				icon: 'mdi:contrast-circle',
@@ -69,7 +69,7 @@ It usually does not appear in the theme itself.`,
 		domain: 'input_select',
 		default: 'tonalspot',
 		name: 'Scheme Name',
-		description: 'The color palette used to generate the theme.',
+		description: 'The color palette used to generate the theme',
 		init: {
 			config: {
 				icon: 'mdi:palette-advanced',
@@ -91,10 +91,10 @@ It usually does not appear in the theme itself.`,
 		domain: 'input_select',
 		default: '2025',
 		name: 'Specification',
-		description: `The palette rules to use for the scheme.
-2021 - Material You.
-2025 - Material Expressive.
-2026 - For CMF Scheme.`,
+		description: `The palette rules to use for the scheme
+2021 - Material You
+2025 - Material Expressive
+2026 - Exclusive to the scheme CMF`,
 		init: {
 			config: {
 				icon: 'mdi:calendar-multiple',
@@ -115,8 +115,7 @@ It usually does not appear in the theme itself.`,
 		domain: 'input_select',
 		default: 'phone',
 		name: 'Platform',
-		description: `The target platform for the theme.
-Not available for the 2021 specification.`,
+		description: `The target platform for the theme`,
 		init: {
 			config: {
 				icon: 'mdi:devices',
@@ -143,7 +142,7 @@ Not available for the 2021 specification.`,
 		default: 'on',
 		name: 'Style Upgrades',
 		description:
-			'Enable global style upgrades for components to follow the Material Design 3 specifications.',
+			'Enable global style upgrades for components to follow the Material Design 3 specifications',
 		init: {
 			config: {
 				icon: 'mdi:material-design',
@@ -161,8 +160,8 @@ Not available for the 2021 specification.`,
 		domain: 'input_select',
 		default: 'elevated',
 		name: 'Card Type',
-		description: `Which card variant to use as the default for Home Assistant cards.
-Does not apply to cards that are explicitly set to outlined like in settings.`,
+		description: `Which card variant to use as the default for Home Assistant cards
+Does not apply to cards that are explicitly set to outlined like in settings`,
 		init: {
 			config: {
 				icon: 'mdi:card',
@@ -196,7 +195,7 @@ Does not apply to cards that are explicitly set to outlined like in settings.`,
 		domain: 'input_boolean',
 		default: 'on',
 		name: 'Show Application Bar',
-		description: 'Show/hide the application bar at the top of views.',
+		description: 'Show/hide the application bar at the top of views',
 		init: {
 			config: {
 				icon: 'mdi:page-layout-header',
@@ -215,7 +214,7 @@ Does not apply to cards that are explicitly set to outlined like in settings.`,
 		default: 'off',
 		name: 'Show Application Bar Title',
 		description:
-			'Show/hide the view title in the application bar at the top of views.',
+			'Show/hide the view title in the application bar at the top of views',
 		init: {
 			config: {
 				icon: 'mdi:view-headline',
@@ -233,8 +232,8 @@ Does not apply to cards that are explicitly set to outlined like in settings.`,
 		domain: 'input_boolean',
 		default: 'on',
 		name: 'Show Navigation Bar',
-		description: `Show/hide the navigation bar at the bottom of views.
-Does not restore the default Home Assistant view tabs.`,
+		description: `Show/hide the navigation bar at the bottom of views
+Does not restore the default Home Assistant view tabs`,
 		init: {
 			config: {
 				icon: 'mdi:page-layout-footer',
@@ -253,7 +252,7 @@ Does not restore the default Home Assistant view tabs.`,
 		default: 'on',
 		name: 'Show Navigation Bar Labels',
 		description:
-			'Show/hide the view labels in the navigation bar at the bottom of views.',
+			'Show/hide the view labels in the navigation bar at the bottom of views',
 		init: {
 			config: {
 				icon: 'mdi:label-multiple',
@@ -271,8 +270,8 @@ Does not restore the default Home Assistant view tabs.`,
 		domain: 'input_boolean',
 		default: 'on',
 		name: 'Show Navigation Rail Labels',
-		description: `Show/hide the destination rail item labels in the navigation rail on the leading side of the screen.
-Does not affect the expanded navigation rail.`,
+		description: `Show/hide the destination rail item labels in the navigation rail on the leading side of the screen
+Does not affect the expanded navigation rail`,
 		init: {
 			config: {
 				icon: 'mdi:page-layout-sidebar-left',
@@ -293,7 +292,7 @@ Does not affect the expanded navigation rail.`,
 		default: 'on',
 		name: 'Harmonize Semantic Colors',
 		description:
-			'Adjust static/semantic colors to be closer in hue to the theme primary color.',
+			'Adjust static/semantic colors to be closer in hue to the theme primary color',
 		init: {
 			config: {
 				icon: 'mdi:palette-swatch',
@@ -311,8 +310,8 @@ Does not affect the expanded navigation rail.`,
 		domain: 'input_text',
 		default: '',
 		name: 'Base Color Source Image Path/URL',
-		description: `Path/URL to an image to extract the base color from.
-Use a query string like ?i=1 (between 0 and 3 inclusive) to choose alternate color options.`,
+		description: `Path/URL to an image to extract the base color from
+Use a query string like ?i=1 (between 0 and 3 inclusive) to choose alternate color options`,
 		init: {
 			config: {
 				icon: 'mdi:image',
@@ -332,7 +331,7 @@ Use a query string like ?i=1 (between 0 and 3 inclusive) to choose alternate col
 		domain: 'input_text',
 		default: '',
 		name: 'CSS Path/URL',
-		description: `Path/URL to a CSS file to apply to the page and iframe roots for defining custom properties.`,
+		description: `Path/URL to a CSS file to apply to the page and iframe roots for defining custom properties`,
 		init: {
 			config: {
 				icon: 'mdi:language-css3',

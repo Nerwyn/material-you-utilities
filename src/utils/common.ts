@@ -9,7 +9,7 @@ import { getHomeAssistantMainAsync, querySelectorAsync } from './async';
  * Check if theme is valid for this module
  * @returns {boolean}
  */
-export function isThemeValid() {
+export function isThemeValid(): boolean {
 	const hass = (document.querySelector('home-assistant') as HassElement).hass;
 	return hass.themes.theme == THEME_NAME;
 }
