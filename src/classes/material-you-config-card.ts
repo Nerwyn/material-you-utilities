@@ -1,9 +1,11 @@
 import { css, html, LitElement, TemplateResult } from 'lit';
 import { property, state } from 'lit/decorators.js';
+import { schemes } from '../models/constants/colors';
 import { inputs, services } from '../models/constants/inputs';
 import { THEME, THEME_NAME, THEME_TOKEN } from '../models/constants/theme';
 import { HomeAssistant } from '../models/interfaces';
 import { InputField } from '../models/interfaces/Input';
+import { SpecVersion } from '../models/interfaces/Scheme';
 import { getEntityId, getEntityIdAndValue } from '../utils/common';
 import { applyStyleTag, buildStylesString } from '../utils/handlers';
 import { showToast } from '../utils/logging';
@@ -184,6 +186,25 @@ export class MaterialYouConfigCard extends LitElement {
 		}
 
 		await this.hass.callService(domain, service, data);
+
+		// Fix spec if no longer valid for scheme
+		if (field == 'scheme') {
+			const validSpecVersions = schemes.find(
+				(s) => s.value == value,
+			)?.spec_versions;
+			const spec = getEntityIdAndValue('spec', this.dataId);
+			if (!validSpecVersions?.includes(spec.value as SpecVersion)) {
+				this.hass.callService(
+					inputs.spec.domain,
+					services[inputs.spec.domain],
+					{
+						entity_id: spec.entityId,
+						option: validSpecVersions?.[0],
+					},
+				);
+			}
+		}
+
 		this.requestUpdate();
 	}
 
@@ -320,7 +341,7 @@ export class MaterialYouConfigCard extends LitElement {
 		}
 
 		let value: string | number | boolean = this.hass.states[entityId]?.state;
-		const config = inputs[field].card.config;
+		let config = inputs[field].card.config;
 		if (inputs[field].domain == 'input_number') {
 			config.min =
 				this.hass.states[entityId]?.attributes?.min ??
@@ -387,9 +408,16 @@ export class MaterialYouConfigCard extends LitElement {
 					)}
 				</div>`;
 				break;
-			case 'spec':
-				// falls through
+			case 'spec': {
+				config = structuredClone(config); // Fixes HA use of memoize-one not detecting selector config change
+				const currentScheme = getEntityIdAndValue('scheme', this.dataId)?.value;
+				const validSpecVersions = schemes.find((s) => s.value == currentScheme)
+					?.spec_versions as string[];
+				(
+					config as Record<string, Record<string, string[]>>
+				).button_toggle.options = validSpecVersions;
 				break;
+			}
 			default:
 				break;
 		}

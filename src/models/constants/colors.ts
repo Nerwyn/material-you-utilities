@@ -178,7 +178,8 @@ export const schemes: IScheme[] = [
 	{
 		value: 'cmf',
 		label: 'CMF',
-		secondary: 'Uses two source colors.',
+		secondary:
+			'Uses two source colors in a comma separated list in the Base Color field.',
 		class: SchemeCmf,
 		spec_versions: ['2026'],
 	},
