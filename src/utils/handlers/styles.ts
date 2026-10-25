@@ -8,6 +8,7 @@ import {
 	querySelectorAsync,
 } from '../async';
 import { getEntityIdAndValue } from '../common';
+import { mdLog } from '../logging';
 
 let theme = '';
 let stylesDisabled: boolean | undefined;
@@ -159,6 +160,12 @@ export async function toggleStyles(args: IHandlerArguments) {
 	elements.forEach(async (element) => {
 		toggleShadowRootStyles(element, stylesDisabled);
 	});
+	const html = document.querySelector('html') as HTMLElement;
+	mdLog(
+		html,
+		`Style upgrades ${stylesDisabled ? 'disabled' : 'enabled'}.`,
+		true,
+	);
 }
 
 /**
