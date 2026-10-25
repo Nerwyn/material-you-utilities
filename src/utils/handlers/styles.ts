@@ -1,9 +1,5 @@
 import { elements, implicitElements } from '../../css';
-import {
-	THEME_NAME,
-	THEME_TOKEN,
-	THEME_UTILS,
-} from '../../models/constants/theme';
+import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import {
 	getHomeAssistantMainAsync,
@@ -12,8 +8,10 @@ import {
 } from '../async';
 import { getEntityIdAndValue } from '../common';
 
-// Theme check variables
 let theme = '';
+let stylesDisabled: boolean | undefined;
+const styledElements: Set<HTMLElement> = new Set();
+const definedElements = new Set<string>();
 
 /**
  * Check if theme is a "Material You" variant and set should set styles flag
@@ -24,7 +22,7 @@ function checkTheme() {
 			?.hass;
 		theme = hass?.themes?.theme;
 		if (theme) {
-			window[THEME_UTILS].disabled = !(
+			stylesDisabled = !(
 				theme.includes(THEME_NAME) &&
 				getEntityIdAndValue('styles').value == 'on'
 			);
@@ -113,7 +111,7 @@ function applyStylesToShadowRoot(
 		!element.shadowRoot.adoptedStyleSheets.find((s) => s.title == THEME_TOKEN)
 	) {
 		const sheet = new target.CSSStyleSheet({
-			disabled: window[THEME_UTILS].disabled,
+			disabled: stylesDisabled,
 		});
 		const styles = loadStyles(
 			elements[element.nodeName.toLowerCase()] || elements['hui-card'],
@@ -149,14 +147,14 @@ export function toggleShadowRootStyles(
 
 /**
  * Toggle injected theme styles for all elements
- * @param disabled
+ * @param {boolean} disabled
  */
 export function toggleStyles(disabled?: boolean) {
 	// TODO - trigger on styles helper toggle
-	window[THEME_UTILS].disabled = disabled ?? !window[THEME_UTILS].disabled;
-	const elements = Array.from(window[THEME_UTILS].elements as Set<HTMLElement>);
+	stylesDisabled = disabled ?? !stylesDisabled;
+	const elements = Array.from(styledElements);
 	elements.forEach(async (element) => {
-		toggleShadowRootStyles(element, window[THEME_UTILS].disabled);
+		toggleShadowRootStyles(element, stylesDisabled);
 	});
 }
 
@@ -246,8 +244,6 @@ function applyStylesOnTimeout(target: typeof globalThis, element: HTMLElement) {
 	);
 }
 
-const definedElements = new Set<string>();
-
 /**
  * Modify targets custom element registry define function to intercept constructors to use custom styles
  * Style are redundantly added in multiple places to ensure speed and consistency
@@ -271,13 +267,17 @@ export async function setStyles(target: typeof globalThis) {
 
 					// Most coverage
 					applyStylesOnTimeout(target, this);
+				}
 
-					window[THEME_UTILS].elements.add(this);
+				connectedCallback() {
+					super.connectedCallback?.();
+					styledElements.add(this);
+					toggleShadowRootStyles(this, stylesDisabled);
 				}
 
 				disconnectedCallback() {
 					super.disconnectedCallback?.();
-					window[THEME_UTILS].elements.delete(this);
+					styledElements.delete(this);
 				}
 
 				toggleStyles(value?: boolean) {
@@ -308,13 +308,17 @@ export async function setStyles(target: typeof globalThis) {
 							// Most coverage
 							applyStylesOnTimeout(target, this);
 						}
+					}
 
-						window[THEME_UTILS].elements.add(this);
+					connectedCallback() {
+						super.connectedCallback?.();
+						styledElements.add(this);
+						toggleShadowRootStyles(this, stylesDisabled);
 					}
 
 					disconnectedCallback() {
 						super.disconnectedCallback?.();
-						window[THEME_UTILS].elements.delete(this);
+						styledElements.delete(this);
 					}
 
 					toggleStyles(value?: boolean) {
@@ -323,6 +327,8 @@ export async function setStyles(target: typeof globalThis) {
 				}
 
 				cls.prototype.updated = PatchedElement.prototype.updated;
+				cls.prototype.connectedCallback =
+					PatchedElement.prototype.connectedCallback;
 				cls.prototype.disconnectedCallback =
 					PatchedElement.prototype.disconnectedCallback;
 				cls.prototype.toggleStyles = PatchedElement.prototype.toggleStyles;
@@ -347,11 +353,11 @@ export async function setExplicitStyles() {
 			const elements = [ha, haMain, haDrawer];
 			elements.forEach(async (element) => {
 				applyStylesToShadowRoot(window, element);
-				window[THEME_UTILS].elements.add(element);
+				styledElements.add(element);
 			});
 		},
 		() => {
-			return window[THEME_UTILS]?.disabled != undefined;
+			return stylesDisabled != undefined;
 		},
 	);
 }

@@ -1,15 +1,10 @@
-import { THEME_UTILS } from '../constants/theme';
 import { CardHelpers } from '../interfaces';
 
 export {};
 
 declare global {
 	interface Window {
-		[THEME_UTILS]: {
-			disabled?: boolean;
-			elements: Set<HTMLElement>;
-			toggleStyles: (value?: boolean) => void;
-		};
+		MaterialYouInit?: boolean;
 		browser_mod?: {
 			browserID?: string;
 			browsers?: Record<string, Record<string, unknown>>;
