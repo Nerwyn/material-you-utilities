@@ -3,7 +3,7 @@ import { MaterialYouConfigCard } from './classes/material-you-config-card';
 import { MaterialYouPanel } from './classes/material-you-panel';
 import { inputs } from './models/constants/inputs';
 
-import { THEME_NAME, THEME_TOKEN } from './models/constants/theme';
+import { THEME_NAME, THEME_TOKEN, THEME_UTILS } from './models/constants/theme';
 import { InputField } from './models/interfaces/Input';
 import {
 	getAsync,
@@ -12,15 +12,20 @@ import {
 	querySelectorAsync,
 } from './utils/async';
 import { getEntityIdAndValue } from './utils/common';
-import { setExplicitStyles, setStyles, setTheme } from './utils/handlers';
+import {
+	setExplicitStyles,
+	setStyles,
+	setTheme,
+	toggleStyles,
+} from './utils/handlers';
 import { mdLog } from './utils/logging';
 import { setupSubscriptions } from './utils/subscriptions';
 
 async function main() {
-	if (window.MaterialYouInit) {
+	if (window[THEME_UTILS]) {
 		return;
 	}
-	window.MaterialYouInit = true;
+	window[THEME_UTILS] = { elements: new Set(), toggleStyles };
 
 	const funcs = [];
 

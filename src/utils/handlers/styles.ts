@@ -1,5 +1,9 @@
 import { elements, implicitElements } from '../../css';
-import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
+import {
+	THEME_NAME,
+	THEME_TOKEN,
+	THEME_UTILS,
+} from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
 import {
 	getHomeAssistantMainAsync,
@@ -10,7 +14,6 @@ import { getEntityIdAndValue } from '../common';
 
 // Theme check variables
 let theme = '';
-let shouldSetStyles = false;
 
 /**
  * Check if theme is a "Material You" variant and set should set styles flag
@@ -21,9 +24,10 @@ function checkTheme() {
 			?.hass;
 		theme = hass?.themes?.theme;
 		if (theme) {
-			shouldSetStyles =
+			window[THEME_UTILS].disabled = !(
 				theme.includes(THEME_NAME) &&
-				getEntityIdAndValue('styles').value == 'on';
+				getEntityIdAndValue('styles').value == 'on'
+			);
 		}
 	}
 }
@@ -105,11 +109,12 @@ function applyStylesToShadowRoot(
 ) {
 	checkTheme();
 	if (
-		shouldSetStyles &&
 		element.shadowRoot &&
 		!element.shadowRoot.adoptedStyleSheets.find((s) => s.title == THEME_TOKEN)
 	) {
-		const sheet = new target.CSSStyleSheet();
+		const sheet = new target.CSSStyleSheet({
+			disabled: window[THEME_UTILS].disabled,
+		});
 		const styles = loadStyles(
 			elements[element.nodeName.toLowerCase()] || elements['hui-card'],
 		);
@@ -123,22 +128,44 @@ function applyStylesToShadowRoot(
 /**
  * Toggle injected theme styles on custom elements
  * @param {HTMLElement} element
- * @param {boolean} value
+ * @param {boolean} disabled
  */
-export function toggleShadowRootStyles(element: HTMLElement, value?: boolean) {
+export function toggleShadowRootStyles(
+	element: HTMLElement,
+	disabled?: boolean,
+) {
 	const sheet = element.shadowRoot?.adoptedStyleSheets.find(
 		(s) => s.title == THEME_TOKEN,
 	);
 	if (!sheet) {
 		return;
 	}
-	if (value == undefined) {
+	if (disabled == undefined) {
 		sheet.disabled = !sheet.disabled;
 		return;
 	}
-	sheet.disabled = value;
+	sheet.disabled = disabled;
 }
 
+/**
+ * Toggle injected theme styles for all elements
+ * @param disabled
+ */
+export function toggleStyles(disabled?: boolean) {
+	// TODO - trigger on styles helper toggle
+	window[THEME_UTILS].disabled = disabled ?? !window[THEME_UTILS].disabled;
+	const elements = Array.from(window[THEME_UTILS].elements as Set<HTMLElement>);
+	elements.forEach(async (element) => {
+		toggleShadowRootStyles(element, window[THEME_UTILS].disabled);
+	});
+}
+
+/**
+ * Apply styles using a style tag
+ * @param {HTMLElement | ShadowRoot} target
+ * @param {string} id attribute for style tag
+ * @param {string} styles CSS converted to string
+ */
 export function applyStyleTag(
 	target: HTMLElement | ShadowRoot,
 	id: string,
@@ -149,6 +176,7 @@ export function applyStyleTag(
 	if (!style) {
 		style = document.createElement('style');
 		style.id = id;
+		style.className = THEME_TOKEN;
 		target.appendChild(style);
 	}
 	style.textContent = styles;
@@ -243,6 +271,17 @@ export async function setStyles(target: typeof globalThis) {
 
 					// Most coverage
 					applyStylesOnTimeout(target, this);
+
+					window[THEME_UTILS].elements.add(this);
+				}
+
+				disconnectedCallback() {
+					super.disconnectedCallback?.();
+					window[THEME_UTILS].elements.delete(this);
+				}
+
+				toggleStyles(value?: boolean) {
+					toggleShadowRootStyles(this, value);
 				}
 			}
 
@@ -254,7 +293,7 @@ export async function setStyles(target: typeof globalThis) {
 	};
 
 	// Update already defined element constructors
-	for (const element in implicitElements) {
+	Object.keys(implicitElements).forEach(async (element) => {
 		target.customElements.whenDefined(element).then((cls) => {
 			if (!definedElements.has(element)) {
 				const updated = cls.prototype.updated;
@@ -269,13 +308,27 @@ export async function setStyles(target: typeof globalThis) {
 							// Most coverage
 							applyStylesOnTimeout(target, this);
 						}
+
+						window[THEME_UTILS].elements.add(this);
+					}
+
+					disconnectedCallback() {
+						super.disconnectedCallback?.();
+						window[THEME_UTILS].elements.delete(this);
+					}
+
+					toggleStyles(value?: boolean) {
+						toggleShadowRootStyles(this, value);
 					}
 				}
 
 				cls.prototype.updated = PatchedElement.prototype.updated;
+				cls.prototype.disconnectedCallback =
+					PatchedElement.prototype.disconnectedCallback;
+				cls.prototype.toggleStyles = PatchedElement.prototype.toggleStyles;
 			}
 		});
-	}
+	});
 }
 
 /**
@@ -284,21 +337,21 @@ export async function setStyles(target: typeof globalThis) {
 export async function setExplicitStyles() {
 	handleWhenReady(
 		async () => {
-			if (shouldSetStyles) {
-				const haMain = await getHomeAssistantMainAsync();
-				const ha = await querySelectorAsync(document, 'home-assistant');
-				const haDrawer = await querySelectorAsync(
-					haMain.shadowRoot as ShadowRoot,
-					'ha-drawer',
-				);
-				applyStylesToShadowRoot(window, ha);
-				applyStylesToShadowRoot(window, haMain);
-				applyStylesToShadowRoot(window, haDrawer);
-			}
+			const haMain = await getHomeAssistantMainAsync();
+			const ha = await querySelectorAsync(document, 'home-assistant');
+			const haDrawer = await querySelectorAsync(
+				haMain.shadowRoot as ShadowRoot,
+				'ha-drawer',
+			);
+
+			const elements = [ha, haMain, haDrawer];
+			elements.forEach(async (element) => {
+				applyStylesToShadowRoot(window, element);
+				window[THEME_UTILS].elements.add(element);
+			});
 		},
 		() => {
-			checkTheme();
-			return Boolean(theme);
+			return window[THEME_UTILS]?.disabled != undefined;
 		},
 	);
 }
