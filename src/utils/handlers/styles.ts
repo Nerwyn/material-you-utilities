@@ -282,10 +282,6 @@ export async function setStyles(target: typeof globalThis) {
 					super.disconnectedCallback?.();
 					styledElements.delete(this);
 				}
-
-				toggleStyles(value?: boolean) {
-					toggleShadowRootStyles(this, value);
-				}
 			}
 
 			constructor = PatchedElement;
@@ -300,6 +296,9 @@ export async function setStyles(target: typeof globalThis) {
 		target.customElements.whenDefined(element).then((cls) => {
 			if (!definedElements.has(element)) {
 				const updated = cls.prototype.updated;
+				const connectedCallback = cls.prototype.connectedCallback;
+				const disconnectedCallback = cls.prototype.disconnectedCallback;
+
 				class PatchedElement extends cls {
 					updated(args: unknown) {
 						updated?.call(this, args);
@@ -314,18 +313,14 @@ export async function setStyles(target: typeof globalThis) {
 					}
 
 					connectedCallback() {
-						super.connectedCallback?.();
+						connectedCallback?.call(this);
 						styledElements.add(this);
 						toggleShadowRootStyles(this, stylesDisabled);
 					}
 
 					disconnectedCallback() {
-						super.disconnectedCallback?.();
+						disconnectedCallback?.call(this);
 						styledElements.delete(this);
-					}
-
-					toggleStyles(value?: boolean) {
-						toggleShadowRootStyles(this, value);
 					}
 				}
 
@@ -334,7 +329,6 @@ export async function setStyles(target: typeof globalThis) {
 					PatchedElement.prototype.connectedCallback;
 				cls.prototype.disconnectedCallback =
 					PatchedElement.prototype.disconnectedCallback;
-				cls.prototype.toggleStyles = PatchedElement.prototype.toggleStyles;
 			}
 		});
 	});
