@@ -1,6 +1,7 @@
 import { elements, implicitElements } from '../../css';
 import { THEME_NAME, THEME_TOKEN } from '../../models/constants/theme';
 import { HassElement } from '../../models/interfaces';
+import { IHandlerArguments } from '../../models/interfaces/Input';
 import {
 	getHomeAssistantMainAsync,
 	handleWhenReady,
@@ -147,11 +148,13 @@ export function toggleShadowRootStyles(
 
 /**
  * Toggle injected theme styles for all elements
- * @param {boolean} disabled
+ * @param {IHandlerArguments} args
  */
-export function toggleStyles(disabled?: boolean) {
-	// TODO - trigger on styles helper toggle
-	stylesDisabled = disabled ?? !stylesDisabled;
+export async function toggleStyles(args: IHandlerArguments) {
+	if (args.targets?.some((target) => target.nodeName.includes('CONFIG-CARD'))) {
+		return;
+	}
+	stylesDisabled = args.value != 'on';
 	const elements = Array.from(styledElements);
 	elements.forEach(async (element) => {
 		toggleShadowRootStyles(element, stylesDisabled);

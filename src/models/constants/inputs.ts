@@ -9,6 +9,7 @@ import {
 	setCSSFromFile,
 	setTheme,
 	showAppbarTitle,
+	toggleStyles,
 } from '../../utils/handlers';
 import { IInputInfo, InputDomain, InputField } from '../interfaces/Input';
 import { schemes } from './colors';
@@ -154,7 +155,7 @@ It usually does not appear in the theme itself`,
 			},
 			tabBarIndex: 1,
 		},
-		handler: async (_args) => {},
+		handler: toggleStyles,
 	},
 	card_type: {
 		domain: 'input_select',
