@@ -12,7 +12,7 @@ import { mdLog } from '../logging';
 
 let theme = '';
 let stylesDisabled: boolean | undefined;
-const styledElements: Set<HTMLElement> = new Set();
+const styledElements = new Set<HTMLElement>();
 const definedElements = new Set<string>();
 
 /**
@@ -108,10 +108,7 @@ function applyStylesToShadowRoot(
 	element: HTMLElement,
 ) {
 	checkTheme();
-	if (
-		element.shadowRoot &&
-		!element.shadowRoot.adoptedStyleSheets.find((s) => s.title == THEME_TOKEN)
-	) {
+	if (element.shadowRoot && !hasStyles(element)) {
 		const sheet = new target.CSSStyleSheet({
 			disabled: stylesDisabled,
 		});
