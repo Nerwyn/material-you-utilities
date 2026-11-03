@@ -192,7 +192,7 @@ ha-list-item-button.selected {
 :host(:not([expanded])) ha-user-badge::after {
 	height: 56px;
 	top: 0px;
-	left: 22px;
+	left: 21px;
 	z-index: 0;
 }
 :host(:not([expanded])) ha-svg-icon::before,
@@ -274,11 +274,11 @@ ha-tooltip {
 
 /* Fix user badge position */
 :host(:not([expanded])) ha-user-badge {
-	margin-inline-start: -3px;
-	margin-block-start: 4px;
+	margin-inline-start: -6px;
+	margin-block-start: 8px;
 }
 :host([expanded]) ha-user-badge {
-	margin-inline-start: -8px;
+	margin-inline-start: -3px;
 }
 
 /* Fix notifications and user badge size */
