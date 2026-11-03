@@ -1,13 +1,13 @@
 [![GitHub Release](https://img.shields.io/github/release/Nerwyn/material-you-utilities.svg?style=for-the-badge)](https://github.com/nerwyn/material-you-utilities/releases)
 [![License](https://img.shields.io/github/license/Nerwyn/material-you-utilities.svg?style=for-the-badge)](LICENSE)
-[![hacs_badge](https://img.shields.io/badge/HACS-Default-blue.svg?style=for-the-badge)](https://github.com/hacs/default)
+[![marketplace_badge](https://img.shields.io/badge/Marketplace-Default-blue.svg?style=for-the-badge)](https://github.com/hacs/default)
 [![Project Maintenance](https://img.shields.io/badge/maintainer-Nerwyn-blue.svg?style=for-the-badge)](https://github.com/Nerwyn)
 ![Github](https://img.shields.io/github/followers/Nerwyn.svg?style=for-the-badge)
 [![GitHub Activity](https://img.shields.io/github/last-commit/Nerwyn/material-you-utilities?style=for-the-badge)](https://github.com/Nerwyn/material-you-utilities/commits/main)
 [![Community Forum](https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge)](https://community.home-assistant.io/t/material-you-theme-a-fully-featured-implementation-of-material-design-3-for-home-assistant/623242)
 [![Buy Me A Coffee](https://img.shields.io/badge/donate-☕buy_me_a_coffee-yellow.svg?style=for-the-badge)](https://www.buymeacoffee.com/nerwyn)
 
-[![My Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?repository=material-you-utilities&owner=Nerwyn&category=Plugin)
+[![My Home Assistant](https://my.home-assistant.io/badges/marketplace_repository.svg)](https://my.home-assistant.io/redirect/marketplace_repository/?repository=material-you-utilities&owner=Nerwyn&category=Plugin)
 
 # Material Design 3 Color Theme Generation and Component Modification
 
@@ -19,13 +19,11 @@ This module generates color themes using [Material Color Utilities](https://gith
 
 # Installation
 
-First time setup and installation of this module is a multistep process as this module must be configured in `configuration.yaml` to use all features.
+## Install the Module From the Marketplace
 
-## Install the Module From HACS
-
-1. Navigate to HACS (install from [here](https://hacs.xyz/) if you do not have it yet).
+1. Navigate to the Marketplace.
 2. Search for `Material You Utilities`.
-3. Open this repository in HACS and click `Download`.
+3. Open this repository in the Marketplace and click `Download`.
 
 ## Add the Module as a Frontend Module and Custom Panel
 
@@ -62,7 +60,7 @@ Once Home Assistant has finished restarting, you should see the upgraded Materia
 
 ## Updating and Troubleshooting
 
-While this module should be automatically updated through HACS after initial installation, you may run into issues with updates not loading due to sticky cache issues. [**See this thread**](https://github.com/Nerwyn/material-you-utilities/discussions/12) for troubleshooting steps, help, and discussion.
+While this module should be automatically updated through the Marketplace after initial installation, you may run into issues with updates not loading due to sticky cache issues. [**See this thread**](https://github.com/Nerwyn/material-you-utilities/discussions/12) for troubleshooting steps, help, and discussion.
 
 # The Configuration Panel
 
@@ -405,7 +403,7 @@ Small button-like elements that can be used to display information or fire actio
 
 ### [Outlined Chips](https://m3.material.io/components/chips/specs#a144389c-9478-4fe4-9bd8-ca9f7dd830eb)
 
-Follows the Assist Chip specification. Used in configuration menus and HACS.
+Follows the Assist Chip specification. Used in configuration menus.
 
 <img src="https://raw.githubusercontent.com/Nerwyn/material-you-utilities/main/assets/outlined-chip.png" width="500"/>
 
