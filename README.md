@@ -138,22 +138,22 @@ The scheme defines the color palette used to generate your theme. By default, th
 
 In addition to the modern Android color scheme, [Material Color Utilities](https://github.com/material-foundation/material-color-utilities) offers several alternate schemes. Each scheme only supports certain specification versions.
 
-| Name        | Specification Versions | Description                                                             |
-| ----------- | ---------------------- | ----------------------------------------------------------------------- |
-| Content     | 2021                   | Places the source color in the primary container.                       |
-| Fidelity    | 2021                   | Places the source color in the primary container.                       |
-| Fruit Salad | 2021                   | Playfully does not use the source color hue.                            |
-| Rainbow     | 2021                   | Playfully does not use the source color hue.                            |
-| Monochrome  | 2021                   | Grayscale.                                                              |
-| Tonal Spot  | 2021, 2025             | Mid-low colorfulness with a hue related to the source color.            |
-| Expressive  | 2021, 2025             | Intentionally detached from the source color.                           |
-| Vibrant     | 2021, 2025             | Maxes out colorfulness in the primary palette.                          |
-| Neutral     | 2021, 2025             | Near grayscale.                                                         |
-| CMF         | 2026                   | Accepts a second, comma separated, base color for the tertiary palette. |
+| Name        | Specifications | Description                                                             |
+| ----------- | -------------- | ----------------------------------------------------------------------- |
+| Content     | 2021           | Places the source color in the primary container.                       |
+| Fidelity    | 2021           | Places the source color in the primary container.                       |
+| Fruit Salad | 2021           | Playfully does not use the source color hue.                            |
+| Rainbow     | 2021           | Playfully does not use the source color hue.                            |
+| Monochrome  | 2021           | Grayscale.                                                              |
+| Tonal Spot  | 2021, 2025     | Mid-low colorfulness with a hue related to the source color.            |
+| Expressive  | 2021, 2025     | Intentionally detached from the source color.                           |
+| Vibrant     | 2021, 2025     | Maxes out colorfulness in the primary palette.                          |
+| Neutral     | 2021, 2025     | Near grayscale.                                                         |
+| CMF         | 2026           | Accepts a second, comma separated, base color for the tertiary palette. |
 
 #### Specification Version
 
-With the Material Expressive update, Material Design 3 now has new specifications for color themes. Different schemes support different specification versions. For some schemes you can choose between the original `2021` color specification, or the updated `2025` specification. Combine the `2025` specification with the `Expressive` scheme to use the new Material Expressive palette. `CMF` scheme only supports the 2026 specification palette.
+With the Material Expressive update, Material Design 3 now has new specifications for color themes. Different schemes support different specification versions. For some schemes you can choose between the original `2021` color specification, or the updated `2025` specification. Combine the `2025` specification with the `Expressive` scheme to use the new Material Expressive palette. `CMF` scheme only supports the 2026 specification version.
 
 #### Platform
 
