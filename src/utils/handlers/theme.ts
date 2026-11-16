@@ -45,7 +45,7 @@ export async function setTheme(args: IHandlerArguments) {
 					field as InputField,
 					args.id,
 				);
-				if (entityId == args.entityId) {
+				if (entityId && entityId == args.entityId) {
 					values[field as InputField] = args.value;
 				} else {
 					values[field as InputField] = value;
