@@ -217,6 +217,7 @@ export class MaterialYouConfigCard extends LitElement {
 		// https://github.com/home-assistant/frontend/tree/dev/src/components/ha-selector
 		// https://github.com/home-assistant/frontend/blob/dev/src/data/selector.ts
 
+		const selectorType = Object.keys(selector)[0];
 		const entityId = getEntityId(field, this.dataId);
 		const state = this.hass.states[entityId]?.state;
 		let value: string | number | number[] | boolean;
@@ -241,6 +242,7 @@ export class MaterialYouConfigCard extends LitElement {
 			.placeholder=${placeholder}
 			.required=${false}
 			field="${field}"
+			data-selector="${selectorType}"
 			@value-changed=${this.handleSelectorChange}
 		></ha-selector>`;
 	}
@@ -673,6 +675,9 @@ export class MaterialYouConfigCard extends LitElement {
 
 			ha-selector {
 				width: 100%;
+			}
+			ha-selector[data-selector='boolean'] {
+				height: 32px;
 			}
 			.row {
 				display: flex;
