@@ -98,6 +98,8 @@ You can click on the icons to the left of each settings card row to open their m
 
 Material color themes are built around a base color, from which all other theme colors are derived depending on the scheme rules. This color defaults to `#4C5C92` (a shade of blue), but can be set to any other color using the color wheel.
 
+When using `CMF` scheme, you can optionally include a second base color for the tertiary palette (which is rarely used within Home Assistant), e.g. `#34618D,#AC7A15`.
+
 ##### Home Assistant Android App Color Sensor
 
 If you are using the Home Assistant Android companion app, you can enable the accent color sensor in the companion app settings to use your phones Material Design accent color as the theme base color:
@@ -134,23 +136,24 @@ The contrast level is a number from -1 to 1 which defines how much colors in the
 
 The scheme defines the color palette used to generate your theme. By default, this theme will use the `Tonal Spot` color scheme. This scheme is the default color scheme used by Android 12.
 
-In addition to the modern Android color scheme, [Material Color Utilities](https://github.com/material-foundation/material-color-utilities) offers several alternate schemes.
+In addition to the modern Android color scheme, [Material Color Utilities](https://github.com/material-foundation/material-color-utilities) offers several alternate schemes. Each scheme only supports certain specification versions.
 
-| Name        | Description                                                                                                                                                                                                                                                                                                                                                                                                             |
-| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Tonal Spot  | Dynamic Color theme with low to medium colorfulness and a Tertiary TonalPalette with a hue related to the source color.<br> The default Material You theme on Android 12.                                                                                                                                                                                                                                               |
-| Content     | A scheme that places the source color in `Scheme.primaryContainer`.<br> Primary Container is the source color, adjusted for color relativity.<br> It maintains constant appearance in light mode and dark mode.<br> This adds ~5 tone in light mode, and subtracts ~5 tone in dark mode.<br> Tertiary Container is the complement to the source color, using `TemperatureCache`. It also maintains constant appearance. |
-| Fidelity    | A scheme that places the source color in `Scheme.primaryContainer`.<br> Primary Container is the source color, adjusted for color relativity.<br> It maintains constant appearance in light mode and dark mode.<br> This adds ~5 tone in light mode, and subtracts ~5 tone in dark mode.<br> Tertiary Container is the complement to the source color, using `TemperatureCache`. It also maintains constant appearance. |
-| Expressive  | A Dynamic Color theme that is intentionally detached from the source color.                                                                                                                                                                                                                                                                                                                                             |
-| Fruit Salad | A playful theme - the source color's hue does not appear in the theme.                                                                                                                                                                                                                                                                                                                                                  |
-| Rainbow     | A playful theme - the source color's hue does not appear in the theme.                                                                                                                                                                                                                                                                                                                                                  |
-| Vibrant     | A Dynamic Color theme that maxes out colorfulness at each position in the Primary Tonal Palette.                                                                                                                                                                                                                                                                                                                        |
-| Neutral     | A Dynamic Color theme that is near grayscale.                                                                                                                                                                                                                                                                                                                                                                           |
-| Monochrome  | A Dynamic Color theme that is grayscale.                                                                                                                                                                                                                                                                                                                                                                                |
+| Name        | Specification Versions | Description                                                             |
+| ----------- | ---------------------- | ----------------------------------------------------------------------- |
+| Content     | 2021                   | Places the source color in the primary container.                       |
+| Fidelity    | 2021                   | Places the source color in the primary container.                       |
+| Fruit Salad | 2021                   | Playfully does not use the source color hue.                            |
+| Rainbow     | 2021                   | Playfully does not use the source color hue.                            |
+| Monochrome  | 2021                   | Grayscale.                                                              |
+| Tonal Spot  | 2021, 2025             | Mid-low colorfulness with a hue related to the source color.            |
+| Expressive  | 2021, 2025             | Intentionally detached from the source color.                           |
+| Vibrant     | 2021, 2025             | Maxes out colorfulness in the primary palette.                          |
+| Neutral     | 2021, 2025             | Near grayscale.                                                         |
+| CMF         | 2026                   | Accepts a second, comma separated, base color for the tertiary palette. |
 
 #### Specification Version
 
-With the Material Expressive update, Material Design 3 now has new specifications for color themes. You can choose between the original `2021` color specification, or the updated `2025` specification. Combine the `2025` specification with the `Expressive` scheme to use the new Material Expressive palette.
+With the Material Expressive update, Material Design 3 now has new specifications for color themes. Different schemes support different specification versions. For some schemes you can choose between the original `2021` color specification, or the updated `2025` specification. Combine the `2025` specification with the `Expressive` scheme to use the new Material Expressive palette. `CMF` scheme only supports the 2026 specification palette.
 
 #### Platform
 
@@ -160,7 +163,7 @@ The 2025 color specification has two platform options - `Phone` and `Watch`. Whi
 
 #### Style Upgrades
 
-If you want to disable the Material Design 3 component upgrades, toggle Style Upgrades off. Doing so will still allow you to set most other options. A refresh is required for this to apply.
+If you want to disable the Material Design 3 component upgrades, toggle Style Upgrades off. Doing so will still allow you to set most other options.
 
 #### Card Type
 
