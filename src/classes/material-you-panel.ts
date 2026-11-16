@@ -179,26 +179,26 @@ export class MaterialYouPanel extends LitElement {
 										'Remember to register devices with Brower Mod!',
 									)}
 									${this.buildSectionHeader(
-									'This Device',
-									'Your settings for this device, prioritized over all other settings.',
-								)}
+										'This Device',
+										'Your settings for this device, prioritized over all other settings.',
+									)}
 									<material-you-config-card
 										.hass=${this.hass}
 										.dataId=${window.browser_mod?.browserID}
 									></material-you-config-card>
 									${this.buildSectionHeader(
-									'Other Devices',
-									'Other devices registered with Browser Mod.',
-								)}
+										'Other Devices',
+										'Other devices registered with Browser Mod.',
+									)}
 									<div class="section">
 										${this.devices.map(
-										(id) => html`
-											<material-you-config-card
-												.hass=${this.hass}
-												.dataId=${id}
-											></material-you-config-card>
-										`,
-									)}
+											(id) => html`
+												<material-you-config-card
+													.hass=${this.hass}
+													.dataId=${id}
+												></material-you-config-card>
+											`,
+										)}
 									</div>`
 							: buildAlertBox(
 									'Device settings requires Browser Mod, which can be installed using HACS.',
@@ -247,9 +247,9 @@ export class MaterialYouPanel extends LitElement {
 						window.browser_mod && !this.hass.user?.is_admin
 							? html`
 									${this.buildSectionHeader(
-									'This Device',
-									'Settings for this device.',
-								)}
+										'This Device',
+										'Settings for this device.',
+									)}
 									<material-you-config-card
 										.hass=${this.hass}
 										.dataId=${window.browser_mod?.browserID}
@@ -354,7 +354,7 @@ export class MaterialYouPanel extends LitElement {
 				gap: 24px;
 				padding-bottom: 80px;
 				background-color: inherit;
-				min-height: calc(100% - 88px);
+				min-height: calc(100vh - 144px);
 			}
 
 			ha-tab-group {
