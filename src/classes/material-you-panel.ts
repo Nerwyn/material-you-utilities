@@ -157,7 +157,7 @@ export class MaterialYouPanel extends LitElement {
 			${
 				!this.hass.themes.themes[THEME_NAME]
 					? buildAlertBox(
-							`You do not have ${THEME_NAME} Theme installed! This module is made to work with ${THEME_NAME} Theme and will not function properly otherwise. Install it using HACS.`,
+							`You do not have ${THEME_NAME} Theme installed! This module is made to work with ${THEME_NAME} Theme and will not function properly otherwise. Install it using the Marketplace.`,
 							'error',
 						)
 					: !this.hass.themes.theme.includes(THEME_NAME)
@@ -201,7 +201,7 @@ export class MaterialYouPanel extends LitElement {
 										)}
 									</div>`
 							: buildAlertBox(
-									'Device settings requires Browser Mod, which can be installed using HACS.',
+									'Device settings requires Browser Mod, which can be installed using the Marketplace.',
 									'error',
 								)
 					}

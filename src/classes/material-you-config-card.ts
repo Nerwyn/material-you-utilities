@@ -19,7 +19,7 @@ import {
 } from '../utils/panel';
 import { setupSubscriptions } from '../utils/subscriptions';
 if (!customElements.get('disk-color-picker')) {
-	// HACS install causes this module to be defined twice, this squashes the error
+	// Marketplace install causes this module to be defined twice, this squashes the error
 	// eslint-disable-next-line @typescript-eslint/no-require-imports
 	require('disk-color-picker');
 }

@@ -100,7 +100,7 @@ export async function getTargets(): Promise<HTMLElement[]> {
 		(await querySelectorAsync(document, 'html')) as HTMLElement,
 	];
 
-	// Add-ons and HACS iframe
+	// HA themed iframes, largely obsolete
 	const ha = await getHomeAssistantMainAsync();
 	const iframe = ha.shadowRoot
 		?.querySelector('iframe')
