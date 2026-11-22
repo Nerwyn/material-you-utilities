@@ -1,6 +1,6 @@
 /* Fix button and icon size, and allow inherited text color passthrough */
 :host {
-	--ha-icon-button-size: 40px;
+	--ha-icon-button-size: var(--inherited-icon-button-size, 40px);
 	--ha-button-mdc-icon-size: var(--inherited-icon-size, 24px);
 	--super-inherited-text-color: var(--inherited-text-color);
 }

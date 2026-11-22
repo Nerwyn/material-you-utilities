@@ -17,6 +17,7 @@ import haDrawer from './ha-drawer.css';
 import haDropdownItem from './ha-dropdown-item.css';
 import haDropdown from './ha-dropdown.css';
 import haGridLayoutSlider from './ha-grid-layout-slider.css';
+import haIconButtonGroup from './ha-icon-button-group.css';
 import haIconButton from './ha-icon-button.css';
 import haInputChip from './ha-input-chip.css';
 import haListItem from './ha-list-item.css';
@@ -78,6 +79,7 @@ export const implicitElements: Record<string, string> = {
 	'ha-dropdown-item': haDropdownItem,
 	'ha-grid-layout-slider': haGridLayoutSlider,
 	'ha-icon-button': haIconButton,
+	'ha-icon-button-group': haIconButtonGroup,
 	'ha-input-chip': haInputChip,
 	'ha-list-item': haListItem,
 	'ha-markdown': haMarkdown,
