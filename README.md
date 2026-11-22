@@ -38,7 +38,7 @@ The component design upgrades performed by this module are very time sensitive, 
 frontend:
   themes: !include_dir_merge_named themes
   extra_module_url:
-    - /hacsfiles/material-you-utilities/material-you-utilities.min.js
+    - /local/community/material-you-utilities/material-you-utilities.min.js
 ```
 
 3. Add the following to the `panel_custom` key in `configuration.yaml`, creating it if it does not exist. This will allow you to access the Material You Utilities configuration panel.
@@ -51,7 +51,7 @@ panel_custom:
     url_path: material-you-configuration
     sidebar_title: Material You Utilities
     sidebar_icon: mdi:material-design
-    module_url: /hacsfiles/material-you-utilities/material-you-utilities.min.js
+    module_url: /local/community/material-you-utilities/material-you-utilities.min.js
 ```
 
 4. Restart Home Assistant.
