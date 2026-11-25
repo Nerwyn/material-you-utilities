@@ -21,9 +21,6 @@ import haIconButtonGroup from './ha-icon-button-group.css';
 import haIconButton from './ha-icon-button.css';
 import haInputChip from './ha-input-chip.css';
 import haMarkdown from './ha-markdown.css';
-import haMdDialog from './ha-md-dialog.css';
-import haMdListItem from './ha-md-list-item.css';
-import haMdMenuItem from './ha-md-menu-item.css';
 import haMediaPlayerBrowse from './ha-media-player-browse.css';
 import haMenuButton from './ha-menu-button.css';
 import haPickerComboBox from './ha-picker-combo-box.css';
@@ -72,7 +69,6 @@ export const implicitElements: Record<string, string> = {
 	'ha-config-navigation-list': haConfigNavigationList,
 	'ha-config-section-updates': haConfigSectionUpdates,
 	'ha-dialog': haDialog,
-	'ha-md-dialog': haMdDialog,
 	'ha-dialog-header': haDialogHeader,
 	'ha-dropdown': haDropdown,
 	'ha-dropdown-item': haDropdownItem,
@@ -83,8 +79,6 @@ export const implicitElements: Record<string, string> = {
 	'ha-list-selectable-virtualized': haPickerComboBox, // Appears within ha-picker-combo-box
 	'ha-markdown': haMarkdown,
 	'ha-media-player-browse': haMediaPlayerBrowse,
-	'ha-md-list-item': haMdListItem,
-	'ha-md-menu-item': haMdMenuItem,
 	'ha-menu-button': haMenuButton,
 	'ha-picker-combo-box': haPickerComboBox,
 	'ha-radio-option': haRadioOption,
@@ -93,7 +87,6 @@ export const implicitElements: Record<string, string> = {
 	'ha-settings-row': haSettingsRow,
 	'ha-sidebar': haSidebar,
 	'ha-slider': haSlider,
-	'md-slider': haSlider,
 	'ha-switch': haSwitch,
 	'ha-top-app-bar-fixed': haTopAppBarFixed,
 	'ha-toast': haToast,

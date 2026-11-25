@@ -1,8 +1,0 @@
-/* Focus state layer */
-md-item:has(md-focus-ring[visible]) {
-	--state-layer-opacity: 0.18;
-}
-md-item:has(md-focus-ring[visible]) ha-ripple {
-	background: var(--md-sys-color-on-secondary-container);
-	opacity: 0.18;
-}
