@@ -1,6 +1,6 @@
 {
 	"name": "material-you-utilities",
-	"version": "2.2.1",
+	"version": "2.2.2",
 	"description": "Material You Utilities - Material Design 3 Color Theme Generation and Component Modification",
 	"main": "dist/material-you-utilities.js",
 	"type": "module",
@@ -49,5 +49,8 @@
 		"typescript": "^6.0.3",
 		"typescript-eslint": "^8.72.1",
 		"typescript-plugin-css-modules": "^5.3.0"
+	},
+	"allowScripts": {
+		"@parcel/watcher@2.6.0": true
 	}
 }

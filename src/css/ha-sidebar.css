@@ -140,11 +140,14 @@ ha-list-item-button.selected {
 	line-height: var(--md-sys-typescale-label-medium-line-height);
 	letter-spacing: var(--md-sys-typescale-label-small-tracking);
 }
+:host(:not([expanded])) ha-list-item-button::part(content) {
+	align-items: center;
+}
 
 :host(:not([expanded])) ha-list-item-button ha-svg-icon,
 :host(:not([expanded])) ha-list-item-button ha-icon {
 	position: relative;
-	top: var(--navigaiton-rail-icon-top, 4px);
+	top: var(--navigation-rail-icon-top, 4px);
 }
 
 /* Change background of current destination icon and add scale transition */
@@ -183,6 +186,9 @@ ha-list-item-button.selected {
 	border-radius: var(--md-sys-shape-corner-full);
 	z-index: -1;
 }
+:host(:not([expanded])) .notifications ha-svg-icon {
+	top: 10px;
+}
 :host(:not([expanded])) .notifications ha-svg-icon::after {
 	height: 54px;
 	width: 54px;
@@ -191,8 +197,8 @@ ha-list-item-button.selected {
 }
 :host(:not([expanded])) ha-user-badge::after {
 	height: 56px;
-	top: 0px;
-	left: 21px;
+	top: -12px;
+	left: -12px;
 	z-index: 0;
 }
 :host(:not([expanded])) ha-svg-icon::before,
