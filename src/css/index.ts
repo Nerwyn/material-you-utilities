@@ -20,7 +20,6 @@ import haGridLayoutSlider from './ha-grid-layout-slider.css';
 import haIconButtonGroup from './ha-icon-button-group.css';
 import haIconButton from './ha-icon-button.css';
 import haInputChip from './ha-input-chip.css';
-import haListItem from './ha-list-item.css';
 import haMarkdown from './ha-markdown.css';
 import haMdDialog from './ha-md-dialog.css';
 import haMdListItem from './ha-md-list-item.css';
@@ -81,7 +80,7 @@ export const implicitElements: Record<string, string> = {
 	'ha-icon-button': haIconButton,
 	'ha-icon-button-group': haIconButtonGroup,
 	'ha-input-chip': haInputChip,
-	'ha-list-item': haListItem,
+	'ha-list-selectable-virtualized': haPickerComboBox, // Appears within ha-picker-combo-box
 	'ha-markdown': haMarkdown,
 	'ha-media-player-browse': haMediaPlayerBrowse,
 	'ha-md-list-item': haMdListItem,

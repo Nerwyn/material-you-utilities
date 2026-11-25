@@ -1,11 +1,11 @@
 /* Menu colors */
-:host {
+/* :host {
 	background-color: var(--md-sys-color-surface-container-low);
 	padding: 16px 8px 0;
-}
+} */
 
 /* Item styles */
-.combo-box-row {
+ha-combo-box-item {
 	min-height: 44px;
 	border-radius: var(--md-sys-shape-corner-extra-small);
 	overflow: hidden;
@@ -16,34 +16,35 @@
 	--ha-ripple-hover-opacity: 0.08;
 	--ha-ripple-pressed-opacity: 0.1;
 	--ha-ripple-color: var(--md-sys-color-on-surface);
-}
-.combo-box-row:first-of-type {
-	border-start-start-radius: var(--md-sys-shape-corner-medium);
-	border-start-end-radius: var(--md-sys-shape-corner-medium);
-}
-.combo-box-row:nth-last-of-type(2) {
-	border-end-start-radius: var(--md-sys-shape-corner-medium);
-	border-end-end-radius: var(--md-sys-shape-corner-medium);
-}
-.combo-box-row ha-combo-box-item {
 	--md-list-item-one-line-container-height: 44px;
 	--md-list-item-two-line-container-height: 60px;
 	--md-list-item-top-space: 8px;
 	--md-list-item-bottom-space: 8px;
 }
+ha-combo-box-item:first-of-type {
+	border-start-start-radius: var(--md-sys-shape-corner-medium);
+	border-start-end-radius: var(--md-sys-shape-corner-medium);
+}
+ha-combo-box-item:nth-last-of-type(2) {
+	border-end-start-radius: var(--md-sys-shape-corner-medium);
+	border-end-end-radius: var(--md-sys-shape-corner-medium);
+}
+ha-combo-box-item::part(base) {
+	border-top: none;
+}
 
 /* Item colors */
-.combo-box-row span {
+ha-combo-box-item span {
 	color: var(--md-sys-color-on-surface-variant);
 }
-.combo-box-row span[slot='headline'] {
+ha-combo-box-item span[slot='headline'] {
 	color: var(--md-sys-color-on-surface);
 	font-size: var(--md-sys-typescale-label-large-size);
 	font-weight: var(--md-sys-typescale-label-large-weight);
 	line-height: var(--md-sys-typescale-label-large-line-height);
 	letter-spacing: var(--md-sys-typescale-label-large-tracking);
 }
-.combo-box-row span[slot='supporting-text'] {
+ha-combo-box-item span[slot='supporting-text'] {
 	font-size: var(--md-sys-typescale-body-small-size);
 	font-weight: var(--md-sys-typescale-body-small-weight);
 	line-height: var(--md-sys-typescale-body-small-line-height);
@@ -51,7 +52,7 @@
 }
 
 /* Selected item colors */
-.combo-box-row.current-value {
+ha-list-item-option[selected] ha-combo-box-item {
 	background-color: var(--md-sys-color-tertiary-container);
 	border-radius: var(--md-sys-shape-corner-medium);
 
@@ -59,6 +60,6 @@
 	--ha-ripple-color: var(--md-sys-color-on-tertiary-container);
 	--md-list-item-label-text-color: var(--md-sys-color-on-tertiary-container);
 }
-.combo-box-row.current-value span {
+ha-list-item-option[selected] ha-combo-box-item span {
 	color: var(--md-sys-color-on-tertiary-container);
 }
